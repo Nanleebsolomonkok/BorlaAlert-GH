@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#15803D">
+  <title>Collector Profile — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .collector-hero {
+      background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
+      color: white;
+      padding: 24px 16px 20px;
+      text-align: center;
+      position: relative;
+    }
+    .collector-avatar-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 10px;
+    }
+    .collector-avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: white;
+      color: var(--green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      border: 3.5px solid white;
+      box-shadow: var(--shadow-md);
+    }
+    .collector-cam-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    .badge-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .prof-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+    }
+    .prof-row:first-child {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+    .prof-row:last-child {
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      border-bottom: none;
+    }
+    .prof-row:hover {
+      background: #F8FAFC;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <h1 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark); margin: 0;">
+      Collector Profile
+    </h1>
+
+    <button type="button" onclick="alert('Profile settings')" class="nav-icon-btn" aria-label="Settings">
+      <span class="material-icons-round" style="font-size: 20px;">settings</span>
+    </button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-top: var(--nav-height); padding-bottom: calc(var(--bottom-nav) + 20px);">
+
+    <!-- HERO HEADER -->
+    <div class="collector-hero">
+      <div class="collector-avatar-wrap">
+        <div class="collector-avatar-img">
+          <span class="material-icons-round" style="font-size: 40px; color: var(--green-primary);">electric_rickshaw</span>
+        </div>
+        <div class="collector-cam-badge">
+          <span class="material-icons-round" style="font-size: 13px;">photo_camera</span>
+        </div>
+      </div>
+
+      <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: white; margin: 0;">
+        Emmanuel Mensah
+      </h2>
+      <div style="font-size: 13px; color: rgba(255,255,255,0.95); margin-top: 4px;">
+        Aboboyaa Operator • East Legon Zone 3
+      </div>
+      <div style="font-size: 11.5px; color: rgba(255,255,255,0.8); margin-top: 2px;">
+        Member since Aug 2026
+      </div>
+
+      <!-- Quick Metrics -->
+      <div style="margin: 12px 0 4px; font-size: 12px; font-weight: 700; background: rgba(0,0,0,0.18); display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px; border-radius: 20px;">
+        <span>342 Pickups</span>
+        <span>•</span>
+        <span style="display: flex; align-items: center; gap: 2px;">
+          <span class="material-icons-round" style="font-size: 13px; color: #FCD34D;">star</span>
+          <span>4.9 Rating</span>
+        </span>
+        <span>•</span>
+        <span>98% Accept</span>
+      </div>
+
+      <!-- Verification Badges Row -->
+      <div class="badge-strip">
+        <span class="badge badge-green" style="display: inline-flex; align-items: center; gap: 3px;">
+          <span class="material-icons-round" style="font-size: 12px;">badge</span> Ghana Card Verified
+        </span>
+        <span class="badge badge-green" style="display: inline-flex; align-items: center; gap: 3px;">
+          <span class="material-icons-round" style="font-size: 12px;">verified_user</span> Background Checked
+        </span>
+        <span class="badge badge-green" style="display: inline-flex; align-items: center; gap: 3px;">
+          <span class="material-icons-round" style="font-size: 12px;">health_and_safety</span> Safety Certified
+        </span>
+        <span class="badge badge-amber" style="display: inline-flex; align-items: center; gap: 3px;">
+          <span class="material-icons-round" style="font-size: 12px;">workspace_premium</span> Top Collector
+        </span>
+      </div>
+    </div>
+
+    <!-- SECTION 1: MY DETAILS -->
+    <div style="padding: 14px 16px 4px;">
+      <div class="section-title" style="margin-bottom: 6px;">MY DETAILS</div>
+      <div class="card" style="padding: 0; margin: 0 0 14px; border: 1px solid var(--border);">
+        <div class="prof-row" onclick="alert('Personal Information')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">person</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Personal Information</div>
+              <div style="font-size: 11px; color: var(--text-grey);">Emmanuel Mensah • 024 ••• •892</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <div class="prof-row" onclick="alert('Vehicle documentation')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">electric_rickshaw</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Vehicle Details</div>
+              <div style="font-size: 11px; color: var(--green-primary); font-weight: 600;">Aboboyaa • GW-4921-24</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <div class="prof-row" onclick="alert('Operating zones configuration')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">location_on</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Operating Zone</div>
+              <div style="font-size: 11px; color: var(--text-grey);">East Legon Zone 3 (AMA Permit Active)</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: PERFORMANCE -->
+    <div style="padding: 0 16px 4px;">
+      <div class="section-title" style="margin-bottom: 6px;">PERFORMANCE</div>
+      <div class="card" style="padding: 0; margin: 0 0 14px; border: 1px solid var(--border);">
+        <a href="./jobs.html" class="prof-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">insights</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">My Stats</div>
+              <div style="font-size: 11px; color: var(--text-grey);">342 pickups • 98% acceptance</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+
+        <a href="./ratings.html" class="prof-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--amber);">star</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">My Reviews</div>
+              <div style="font-size: 11px; color: var(--amber-dark); font-weight: 600;">4.9 average • 342 household ratings</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- SECTION 3: SUPPORT -->
+    <div style="padding: 0 16px 4px;">
+      <div class="section-title" style="margin-bottom: 6px;">SUPPORT</div>
+      <div class="card" style="padding: 0; margin: 0 0 14px; border: 1px solid var(--border);">
+        <div class="prof-row" onclick="alert('Opening Help Center')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">help_outline</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Help Center</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <a href="tel:0800267524" class="prof-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">call</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Call Support</div>
+              <div style="font-size: 11px; color: var(--text-grey);">0800-BORLA-GH (Toll Free)</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+
+        <div class="prof-row" onclick="alert('Driver issue reported')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--amber);">report_problem</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Report an Issue</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <div class="prof-row" onclick="alert('AMA Waste Safety and PPE Guidelines 2026')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">assignment</span>
+            <div style="font-size: 13.5px; font-weight: 600;">AMA Compliance Guide</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: ACCOUNT -->
+    <div style="padding: 0 16px 4px;">
+      <div class="section-title" style="margin-bottom: 6px;">ACCOUNT</div>
+      <div class="card" style="padding: 0; margin: 0 0 18px; border: 1px solid var(--border);">
+        <div class="prof-row" onclick="alert('Password change dialog')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">lock</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Change Password</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <div class="prof-row" onclick="alert('Update phone number verification')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">smartphone</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Update Phone</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGN OUT -->
+    <div style="text-align: center; margin-bottom: 24px;">
+      <a href="../../index.html" style="color: var(--red); font-size: 14px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        <span class="material-icons-round" style="font-size: 18px;">logout</span> Sign Out
+      </a>
+      <div style="font-size: 11px; color: var(--text-grey); margin-top: 8px;">
+        BorlaAlert GH Operator v1.0 • Made in Ghana
+      </div>
+    </div>
+
+  </main>
+
+  <!-- COLLECTOR BOTTOM NAVIGATION -->
+  <nav class="bottom-nav bottom-nav-4" aria-label="Collector navigation">
+    <a href="./home.html" class="nav-tab">
+      <span class="nav-tab-icon material-icons-round">home</span>
+      <span class="nav-tab-label">Home</span>
+    </a>
+    <a href="./jobs.html" class="nav-tab">
+      <span class="nav-tab-icon material-icons-round">assignment</span>
+      <span class="nav-tab-label">Jobs</span>
+    </a>
+    <a href="./ratings.html" class="nav-tab">
+      <span class="nav-tab-icon material-icons-round">star</span>
+      <span class="nav-tab-label">Ratings</span>
+    </a>
+    <a href="./profile.html" class="nav-tab active">
+      <span class="nav-tab-icon material-icons-round">person</span>
+      <span class="nav-tab-label">Profile</span>
+    </a>
+  </nav>
+
+</body>
+</html>

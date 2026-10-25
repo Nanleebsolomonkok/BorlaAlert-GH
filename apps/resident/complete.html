@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>Borla Cleared — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    /* Confetti animation */
+    .confetti-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--green-primary);
+      opacity: 0.8;
+      animation: fall 2.5s infinite linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(180px) rotate(720deg); opacity: 0; }
+    }
+
+    .check-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: var(--green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px auto 12px;
+      color: white;
+      box-shadow: 0 8px 24px rgba(22,163,74,0.3);
+      animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes bounce {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .star-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      color: #F59E0B;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    .star-row .material-icons-round {
+      font-size: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONFETTI -->
+  <div class="confetti-container">
+    <div class="confetti" style="left: 10%; animation-delay: 0.1s; background: #16A34A;"></div>
+    <div class="confetti" style="left: 25%; animation-delay: 0.4s; background: #F59E0B; width: 6px; height: 10px;"></div>
+    <div class="confetti" style="left: 55%; animation-delay: 0.2s; background: #3B82F6;"></div>
+    <div class="confetti" style="left: 75%; animation-delay: 0.5s; background: #10B981; width: 10px; height: 6px;"></div>
+    <div class="confetti" style="left: 90%; animation-delay: 0.3s; background: #EC4899;"></div>
+  </div>
+
+  <main style="padding: 24px 16px; max-width: 430px; margin: 0 auto; text-align: center;">
+
+    <!-- CHECKMARK ANIMATION -->
+    <div class="check-circle">
+      <span class="material-icons-round" style="font-size: 42px; color: white;">check</span>
+    </div>
+
+    <!-- MAIN TITLE -->
+    <h1 style="font-family: var(--font-heading); font-size: 28px; font-weight: 800; color: var(--green-primary); margin-bottom: 6px;">
+      Borla Cleared!
+    </h1>
+    <p style="font-size: 14px; color: var(--text-grey); margin-bottom: 20px;">
+      Your gate is clean and your neighborhood is healthier
+    </p>
+
+    <!-- COMPLETION SUMMARY CARD -->
+    <div class="card card-bordered" style="text-align: left; margin: 0 0 16px; padding: 16px;">
+      <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-grey); margin-bottom: 8px;">
+        Trip Summary
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px;">
+        <div>
+          <span style="color: var(--text-grey);">Service:</span>
+          <div style="font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+            <span class="material-icons-round" style="font-size: 16px; color: var(--green-primary);">inventory_2</span> Standard Aboboyaa
+          </div>
+        </div>
+        <div>
+          <span style="color: var(--text-grey);">Duration:</span>
+          <div style="font-weight: 700; color: var(--green-primary); display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+            <span class="material-icons-round" style="font-size: 16px;">schedule</span> 5 mins elapsed
+          </div>
+        </div>
+        <div>
+          <span style="color: var(--text-grey);">Location:</span>
+          <div style="font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+            <span class="material-icons-round" style="font-size: 16px; color: var(--green-primary);">place</span> Gate 14, Lagos Ave
+          </div>
+        </div>
+        <div>
+          <span style="color: var(--text-grey);">Recorded:</span>
+          <div style="font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+            <span class="material-icons-round" style="font-size: 16px; color: var(--text-muted);">calendar_today</span> Today 10:32 AM
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRITICAL PROMINENT AMBER REMINDER CARD -->
+    <div class="card card-amber" style="text-align: left; margin: 0 0 20px; padding: 16px; border-left: 6px solid var(--amber);">
+      <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: #92400E; display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--amber-dark);">payments</span>
+        <span>Settle Carting Fee at Gate</span>
+      </div>
+      <div style="font-size: 13.5px; color: #92400E; line-height: 1.45;">
+        Please settle the agreed carting fee (<strong>GH₵ 15-20</strong>) directly with Emmanuel in cash or personal MoMo.<br>
+        <span style="font-weight: 700; color: #B45309;">⚠️ This collection fee is paid directly to the driver, NOT through the app.</span>
+      </div>
+    </div>
+
+    <!-- RATING PREVIEW SECTION -->
+    <div class="card card-bordered" style="margin: 0 0 16px; padding: 16px;">
+      <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--text-dark);">
+        Rate Emmanuel Mensah
+      </div>
+      <div style="font-size: 12px; color: var(--text-grey); margin-top: 2px;">
+        Help maintain high quality service in East Legon
+      </div>
+
+      <!-- 5 Star Interactive Preview -->
+      <div class="star-row" onclick="window.location.href='./rating.html'">
+        <span class="material-icons-round">star</span>
+        <span class="material-icons-round">star</span>
+        <span class="material-icons-round">star</span>
+        <span class="material-icons-round">star</span>
+        <span class="material-icons-round">star</span>
+      </div>
+
+      <div style="margin-top: 14px;">
+        <a href="./rating.html" class="btn btn-primary" style="height: 50px; font-size: 15px; font-weight: 700; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;">
+          <span class="material-icons-round" style="font-size: 18px;">star</span>
+          <span>Submit Rating</span>
+        </a>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <a href="./home.html" style="font-size: 12.5px; color: var(--text-grey); text-decoration: none;">
+          Skip for now
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

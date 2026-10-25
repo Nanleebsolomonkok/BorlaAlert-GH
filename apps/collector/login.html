@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_stack" name="shell-type"><meta name="theme-color" content="#006b2c"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>Collector Login — BorlaAlert GH</title><link rel="manifest" href="./manifest.json"><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed-variant": "#005049", "inverse-primary": "#62df7d", "on-secondary-container": "#684000", "surface-container-high": "#e1e8fd", "surface-dim": "#d3daef", "primary-fixed-dim": "#62df7d", "on-primary": "#ffffff", "on-tertiary-fixed": "#00201d", "surface-container-low": "#f1f3ff", "error": "#ba1a1a", "primary-container": "#00873a", "background": "#f9f9ff", "tertiary": "#00685f", "surface-container-lowest": "#ffffff", "surface-tint": "#006e2d", "tertiary-fixed": "#89f5e7", "on-surface": "#141b2b", "primary": "#16a34a", "primary-dark": "#15803d", "secondary-container": "#fea619", "on-secondary": "#ffffff", "on-surface-variant": "#4b5563", "on-primary-container": "#f7fff2", "surface-container": "#f3f4f6", "outline-variant": "#e5e7eb", "on-primary-fixed": "#002109", "inverse-on-surface": "#edf0ff", "primary-fixed": "#7ffc97", "on-background": "#141b2b", "outline": "#9ca3af", "surface": "#ffffff", "inverse-surface": "#293040", "error-container": "#ffdad6", "on-secondary-fixed": "#2a1700", "on-primary-fixed-variant": "#005320", "on-tertiary-container": "#f4fffc", "surface-variant": "#f3f4f6", "tertiary-container": "#008378", "on-secondary-fixed-variant": "#653e00", "on-tertiary": "#ffffff", "tertiary-fixed-dim": "#6bd8cb", "surface-container-highest": "#e5e7eb", "secondary": "#855300", "secondary-fixed": "#ffddb8", "on-error-container": "#93000a", "on-error": "#ffffff", "secondary-fixed-dim": "#ffb95f", "surface-bright": "#ffffff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" }, spacing: { "gutter": "1.25rem", "space-lg": "1.5rem", "space-md": "1rem", "margin-tablet": "2rem", "gutter-tablet": "1.5rem", "space-xl": "2rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "margin": "1rem" }, fontFamily: { "label-sm": ["Inter", "sans-serif"], "body-sm": ["Inter", "sans-serif"], "numeric-currency": ["Inter", "sans-serif"], "label-md": ["Inter", "sans-serif"], "headline-xl-mobile": ["Epilogue", "sans-serif"], "headline-sm": ["Epilogue", "sans-serif"], "headline-xl": ["Epilogue", "sans-serif"], "body-lg": ["Inter", "sans-serif"], "headline-md": ["Epilogue", "sans-serif"], "headline-lg": ["Epilogue", "sans-serif"], "body-md": ["Inter", "sans-serif"], "label-lg": ["Inter", "sans-serif"], "headline-lg-mobile": ["Epilogue", "sans-serif"] }, fontSize: { "label-sm": ["11px", { lineHeight: "16px", letterSpacing: "0.4px", fontWeight: "600" }], "body-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }], "numeric-currency": ["20px", { lineHeight: "26px", letterSpacing: "-0.2px", fontWeight: "600" }], "label-md": ["13px", { lineHeight: "18px", letterSpacing: "0.2px", fontWeight: "600" }], "headline-xl-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.5px", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "headline-xl": ["34px", { lineHeight: "42px", fontWeight: "700" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "label-lg": ["15px", { lineHeight: "22px", letterSpacing: "0.1px", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100vw;min-height:100vh;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+      background-color: #ffffff;
+    }
+  </style>
+</head><body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary/20"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-md pt-safe"><div class="h-14 px-gutter flex items-center justify-between"><button aria-label="Go back" class="w-10 h-10 -ml-1.5 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container active:scale-95 transition-all" onclick="window.location.href='../../index.html'" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><button aria-label="Help" class="h-9 px-3.5 rounded-full bg-surface-container hover:bg-surface-container-highest active:scale-95 transition-all text-on-surface flex items-center gap-1.5" type="button"><span class="material-symbols-outlined text-[17px] text-on-surface-variant">help_outline</span><span class="font-label-md text-label-md font-medium text-on-surface">Help</span></button></div></header><main class="flex-1 flex flex-col relative w-full pt-14 bg-surface pb-safe"><div class="flex flex-col w-full px-gutter pb-space-lg select-none"><!-- Uber/Bolt Style Heading & Clean Brand Accent -->
+<div class="mt-4 mb-6">
+  <div class="flex items-center gap-2 mb-4">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0FNS9IlvqHg8sJSXjuvjPmnY2TCMbODmRd-FdSJEOR4iJsLxwFCGuVLpLN2Fgz1msLxpNa1EpgbCpCo76TJBkmzYJjgUtafrwr2aAb9qparXvnpO9GBB_BIMm7r8HXoFtOpV7BhBbYL3dZCDKN1WFtGYMuCqVLClOoKPLW5orWe_XO8rgioIlFxtN6UEOCWH6EA3KC6om-QmYMSS5i4iyn5gSYWz1AMSsF2AhxBFvEFSUEiJCAaSEOHg6OHx9fj1clQ" alt="BorlaAlert Logo" class="w-8 h-8 rounded-xl object-contain shadow-xs">
+    <div class="flex items-baseline gap-1.5">
+      <span class="font-headline-sm text-[18px] text-on-surface font-bold tracking-tight">BorlaAlert</span>
+      <span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[10px] font-bold tracking-wide">GH</span>
+    </div>
+  </div>
+  <h1 class="font-headline-xl-mobile text-[28px] text-on-surface font-bold tracking-tight text-left leading-tight">Enter your mobile number</h1>
+  <p class="mt-2 font-body-md text-on-surface-variant leading-relaxed text-[14px]">A 4-digit code will be sent via SMS to verify your account</p>
+</div>
+
+<!-- Phone Input Module (Uber/Bolt standard) -->
+<form class="flex flex-col gap-4" id="loginForm" onsubmit="event.preventDefault(); handleContinue();">
+  <div class="flex flex-col gap-1.5">
+    <div class="flex items-center w-full bg-[#f6f7f9] border border-[#e5e7eb] rounded-xl transition-all duration-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 focus-within:bg-white overflow-hidden shadow-xs" id="phoneInputContainer">
+      <!-- Modular Country Selector Button -->
+      <button aria-expanded="false" aria-haspopup="listbox" aria-label="Select Country Code" class="flex items-center gap-2 pl-3.5 pr-2.5 py-3.5 h-[58px] bg-transparent hover:bg-black/[0.03] transition-colors focus:outline-none" id="countryPickerBtn" type="button">
+        <span aria-label="Ghana Flag" class="text-[22px] leading-none select-none" role="img">🇬🇭</span>
+        <span class="font-label-lg text-on-surface font-semibold tracking-tight text-[15px]">+233</span>
+        <span class="material-symbols-outlined text-[18px] text-outline">expand_more</span>
+      </button>
+      <!-- Subtle Vertical Divider -->
+      <div class="h-6 w-[1px] bg-outline-variant mr-3"></div>
+      <!-- Numeric Input Field -->
+      <div class="flex-1 relative flex items-center pr-3">
+        <input aria-required="true" autocomplete="tel-national" class="w-full h-[58px] bg-transparent text-on-surface font-numeric-currency text-[18px] placeholder:text-outline/70 focus:outline-none tracking-wide" id="phoneInput" inputmode="numeric" maxlength="12" name="msisdn" placeholder="024 123 4567" required="" type="tel">
+        <button aria-label="Clear field" class="hidden w-8 h-8 flex items-center justify-center rounded-full text-outline hover:text-on-surface hover:bg-black/[0.05] transition-colors" id="clearPhoneBtn" type="button">
+          <span class="material-symbols-outlined text-[18px]">cancel</span>
+        </button>
+      </div>
+    </div>
+    <!-- Network Indicator Feedback -->
+    <div class="flex items-center justify-between px-1 h-5">
+      <span class="font-body-sm text-[12px] text-primary font-medium transition-opacity opacity-0" id="carrierHint">MTN MoMo network detected</span>
+      <span class="font-body-sm text-[11px] text-outline font-normal">Standard carrier SMS charges may apply</span>
+    </div>
+  </div>
+
+  <!-- Signature Full-width Action Button -->
+  <button class="w-full h-[54px] bg-primary hover:bg-primary-dark active:scale-[0.985] text-white font-label-lg text-[16px] font-semibold rounded-xl shadow-[0_2px_8px_rgba(22,163,74,0.28)] transition-all flex items-center justify-center gap-2 cursor-pointer mt-1" id="submitBtn" type="submit">
+    <span class="">Continue</span>
+    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+  </button>
+</form>
+
+<!-- Uber / Bolt Minimalist Divider -->
+<div class="relative my-6 flex items-center justify-center">
+  <div class="absolute inset-0 flex items-center"><div class="w-full h-[1px] bg-[#e5e7eb]"></div></div>
+  <span class="relative px-3 bg-white font-label-sm text-[12px] text-outline font-medium tracking-wide uppercase">or continue with</span>
+</div>
+
+<!-- Secondary Authentication Cards -->
+<div class="flex flex-col gap-3">
+  <!-- Google Login Option -->
+  <button class="w-full h-[52px] bg-white hover:bg-black/[0.03] active:scale-[0.99] border border-[#e5e7eb] text-on-surface font-label-lg text-[14.5px] font-medium rounded-xl flex items-center px-4 transition-all cursor-pointer relative" type="button">
+    <div class="w-6 h-6 flex items-center justify-center flex-shrink-0">
+      <svg aria-hidden="true" class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
+        <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z" fill="#4285F4"></path>
+        <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.25 21.36 7.33 24 12 24Z" fill="#34A853"></path>
+        <path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.97 0 12s.45 3.83 1.25 5.42l4.03-3.15Z" fill="#FBBC05"></path>
+        <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z" fill="#EA4335"></path>
+      </svg>
+    </div>
+    <span class="flex-1 text-center font-medium text-on-surface">Continue with Google</span>
+  </button>
+
+  <!-- Apple Login Option -->
+  <button class="w-full h-[52px] bg-white hover:bg-black/[0.03] active:scale-[0.99] border border-[#e5e7eb] text-on-surface font-label-lg text-[14.5px] font-medium rounded-xl flex items-center px-4 transition-all cursor-pointer relative" type="button">
+    <div class="w-6 h-6 flex items-center justify-center flex-shrink-0">
+      <svg aria-hidden="true" class="w-5 h-5 flex-shrink-0 fill-current text-on-surface" viewBox="0 0 24 24">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.05-.03.07-.42 1.44-1.38 2.82M15.97 6.42c.62-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.64 1.35-.57.65-1.07 1.72-.94 2.74 1.01.08 2.04-.49 2.66-1.24Z"></path>
+      </svg>
+    </div>
+    <span class="flex-1 text-center font-medium text-on-surface">Continue with Apple</span>
+  </button>
+
+  <!-- Ghana Card / New Registration Option -->
+      <a href="./registration_collector.html" class="w-full h-[52px] bg-emerald-50 hover:bg-emerald-100 active:scale-[0.99] border border-emerald-300 text-emerald-800 font-label-lg text-[14.5px] font-semibold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer">
+        <span class="material-symbols-outlined text-[20px] text-emerald-700">badge</span>
+        <span>Register New Collector & Aboboyaa</span>
+      </a>
+  
+</div>
+
+<!-- Clean Bottom Legal & Civic Badge -->
+<div class="mt-8 flex flex-col items-center text-center gap-3">
+  <p class="font-body-sm text-[12px] text-on-surface-variant leading-relaxed px-2">
+    By continuing, you agree to BorlaAlert's <a href="#" class="font-medium text-on-surface underline hover:text-primary transition-colors">Terms of Service</a> and <a href="#" class="font-medium text-on-surface underline hover:text-primary transition-colors">Privacy Policy</a>.
+  </p>
+  <div class="flex items-center gap-1.5 text-outline text-[11px] font-medium pt-1">
+    <span class="material-symbols-outlined text-[14px]">verified_user</span>
+    <span class="">Accra Metropolitan Assembly &amp; EPA Ghana certified 🇬🇭</span>
+  </div>
+</div></div>
+<script>
+  (function() {
+    const input = document.getElementById('phoneInput');
+    const container = document.getElementById('phoneInputContainer');
+    const clearBtn = document.getElementById('clearPhoneBtn');
+    const carrierHint = document.getElementById('carrierHint');
+
+    if (!input || !container) return;
+
+    // Ghana Phone formatter: "024 123 4567"
+    function formatGhanaNumber(value) {
+      const clean = value.replace(/\D/g, '').substring(0, 10);
+      if (clean.length === 0) return '';
+      if (clean.length <= 3) return clean;
+      if (clean.length <= 6) return clean.slice(0, 3) + ' ' + clean.slice(3);
+      return clean.slice(0, 3) + ' ' + clean.slice(3, 6) + ' ' + clean.slice(6, 10);
+    }
+
+    input.addEventListener('input', function(e) {
+      const formatted = formatGhanaNumber(e.target.value);
+      e.target.value = formatted;
+
+      const raw = formatted.replace(/\s/g, '');
+      if (raw.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+
+      // Ghanaian telecom detection feedback
+      if (raw.length >= 3) {
+        const prefix = raw.substring(0, 3);
+        if (['024', '054', '055', '059', '025'].includes(prefix)) {
+          carrierHint.textContent = 'MTN MoMo network detected';
+          carrierHint.classList.remove('opacity-0');
+        } else if (['020', '050'].includes(prefix)) {
+          carrierHint.textContent = 'Telecel Cash network detected';
+          carrierHint.classList.remove('opacity-0');
+        } else if (['027', '057', '026'].includes(prefix)) {
+          carrierHint.textContent = 'AT Money network detected';
+          carrierHint.classList.remove('opacity-0');
+        } else {
+          carrierHint.classList.add('opacity-0');
+        }
+      } else {
+        carrierHint.classList.add('opacity-0');
+      }
+    });
+
+    clearBtn.addEventListener('click', function() {
+      input.value = '';
+      clearBtn.classList.add('hidden');
+      carrierHint.classList.add('opacity-0');
+      input.focus();
+    });
+
+    window.handleContinue = function() {
+      const val = input.value.replace(/\s/g, '');
+      if (val.length < 9) {
+        container.classList.add('border-error', 'ring-2', 'ring-error/20');
+        setTimeout(() => container.classList.remove('border-error', 'ring-2', 'ring-error/20'), 1200);
+        return;
+      }
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.innerHTML = `
+        <span class="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+        <span>Sending SMS code...</span>
+      `;
+      submitBtn.disabled = true;
+
+      try {
+        const state = JSON.parse(localStorage.getItem('borlaalert_global_state') || '{}');
+        state.collector = state.collector || {};
+        state.collector.phone = val;
+        state.collector.loggedIn = true;
+        localStorage.setItem('borlaalert_global_state', JSON.stringify(state));
+      } catch(e){}
+      setTimeout(() => {
+        submitBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px]">check_circle</span>
+          <span>Code verified!</span>
+        `;
+        setTimeout(() => {
+          window.location.href = './home.html';
+        }, 400);
+      }, 800);
+    };
+  })();
+</script></main>
+
+
+
+<script src="../../shared-pwa.js"></script>
+</body></html>

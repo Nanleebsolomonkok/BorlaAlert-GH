@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>My Account — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+
+  <style>
+    .profile-hero {
+      background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
+      color: white;
+      padding: 24px 16px 20px;
+      text-align: center;
+      position: relative;
+    }
+    .profile-avatar-wrap {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 10px;
+    }
+    .profile-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: white;
+      color: var(--green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      border: 3px solid white;
+      box-shadow: var(--shadow-md);
+    }
+    .avatar-edit-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: white;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    .account-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+    }
+    .account-row:first-child {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+    .account-row:last-child {
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      border-bottom: none;
+    }
+    .account-row:hover {
+      background: #F8FAFC;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <h1 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark);">
+      My Account
+    </h1>
+
+    <button type="button" onclick="alert('Account settings')" class="nav-icon-btn" aria-label="Settings">
+      <span class="material-icons-round" style="font-size: 20px;">settings</span>
+    </button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-top: var(--nav-height);">
+
+    <!-- PROFILE HEADER WITH GREEN GRADIENT -->
+    <div class="profile-hero">
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" style="display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.25);">
+          <span class="material-icons-round" style="font-size: 40px; color: white;">person</span>
+        </div>
+        <div class="avatar-edit-badge" style="display: flex; align-items: center; justify-content: center;">
+          <span class="material-icons-round" style="font-size: 14px; color: white;">photo_camera</span>
+        </div>
+      </div>
+      <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: white;">
+        Akua Mensah
+      </h2>
+      <div style="font-size: 12.5px; color: rgba(255,255,255,0.9); margin-top: 2px;">
+        East Legon, Zone 3 • Member since Aug 2026
+      </div>
+
+      <!-- Quick Stats Pill -->
+      <div style="margin: 12px 0 14px; font-size: 12px; font-weight: 600; background: rgba(0,0,0,0.18); display: inline-flex; align-items: center; gap: 10px; padding: 4px 14px; border-radius: 20px;">
+        <span>12 Pickups</span>
+        <span>•</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px;"><span class="material-icons-round" style="font-size: 14px;">recycling</span> 850 Pts</span>
+        <span>•</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px;"><span class="material-icons-round" style="font-size: 14px; color: #F59E0B;">star</span> 5.0 Avg</span>
+      </div>
+
+      <div>
+        <button type="button" onclick="alert('Editing Akua Mensah profile...')" class="btn btn-outline btn-sm" style="color: white; border-color: white; margin: 0 auto; font-weight: 600;">
+          Edit Profile →
+        </button>
+      </div>
+    </div>
+
+    <!-- ECO POINTS CARD AMBER -->
+    <div class="card card-amber" style="margin: 14px 16px 12px; border-left: 5px solid var(--amber); padding: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--amber-dark); display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 15px;">eco</span> Your Eco Points
+          </div>
+          <div style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--amber-dark); margin: 2px 0;">
+            850 Points earned
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-dark);">
+            Water Sachet recycled collections
+          </div>
+        </div>
+        <button type="button" onclick="alert('Redeem rewards: 850 / 1000 points towards GH₵ 10.00 MoMo credit')" class="btn btn-amber btn-sm" style="font-weight: 700;">
+          Redeem →
+        </button>
+      </div>
+
+      <!-- Progress bar -->
+      <div style="margin-top: 10px; height: 6px; background: #FEF3C7; border-radius: 4px; overflow: hidden;">
+        <div style="width: 85%; height: 100%; background: var(--amber);"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 600; color: #92400E; margin-top: 4px;">
+        <span>150 pts to reward</span>
+        <span>1,000 pts = MTN MoMo reward</span>
+      </div>
+    </div>
+
+    <!-- SECTION 1: MY DETAILS -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 6px;">MY DETAILS</div>
+      <div class="card" style="padding: 0; margin: 0 0 14px; border: 1px solid var(--border);">
+        <div class="account-row" onclick="alert('Personal information details')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">person</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Personal Information</div>
+              <div style="font-size: 11px; color: var(--text-grey);">Akua Mensah • 024 ••• •892</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <div class="account-row" onclick="alert('Manage addresses')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">location_on</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">My Addresses</div>
+              <div style="font-size: 11px; color: var(--text-grey);">House 14, Lagos Ave — Default</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <div class="account-row" onclick="alert('Payment method settings')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">credit_card</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Payment Methods</div>
+              <div style="font-size: 11px; color: var(--green-primary); font-weight: 600;">MTN MoMo • Connected</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: ACTIVITY -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 6px;">ACTIVITY</div>
+      <div class="card" style="padding: 0; margin: 0 0 14px; border: 1px solid var(--border);">
+        <a href="./pickups.html" class="account-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">inventory_2</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">My Pickups</div>
+              <div style="font-size: 11px; color: var(--text-grey);">12 completed pickups</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+
+        <a href="./receipts.html" class="account-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">receipt_long</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Receipts</div>
+              <div style="font-size: 11px; color: var(--text-grey);">View all GH₵ 2.00 receipts</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+
+        <div class="account-row" onclick="alert('Eco Points ledger: 850 points')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">eco</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Eco Points</div>
+              <div style="font-size: 11px; color: var(--text-grey);">850 points • 6 clean collections</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: SUPPORT -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 6px;">SUPPORT</div>
+      <div class="card" style="padding: 0; margin: 0 0 14px; border: 1px solid var(--border);">
+        <div class="account-row" onclick="alert('Opening Help Center FAQ')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">help_outline</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Help Center</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <div class="account-row" onclick="alert('WhatsApp support connected: 024 800 9643')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">chat</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Chat Support</div>
+              <div style="font-size: 11px; color: var(--green-primary); font-weight: 600;">Usually replies in 5 mins</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+
+        <a href="tel:0800267524" class="account-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">call</span>
+            <div>
+              <div style="font-size: 13.5px; font-weight: 600;">Call Support</div>
+              <div style="font-size: 11px; color: var(--text-grey);">0800-BORLA-GH (Toll Free)</div>
+            </div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+
+        <div class="account-row" onclick="alert('Report an issue ticket')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--amber);">report_problem</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Report an Issue</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: LEGAL -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 6px;">LEGAL &amp; COMPLIANCE</div>
+      <div class="card" style="padding: 0; margin: 0 0 18px; border: 1px solid var(--border);">
+        <a href="../../terms.html" class="account-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">description</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Terms of Service</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+
+        <a href="../../privacy.html" class="account-row">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">lock</span>
+            <div style="font-size: 13.5px; font-weight: 600;">Privacy Policy</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </a>
+
+        <div class="account-row" onclick="alert('EPA Environmental Permit: EPA-GA-CLEAN-2026-99')">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">verified</span>
+            <div style="font-size: 13.5px; font-weight: 600;">EPA Compliance Certificate</div>
+          </div>
+          <span style="color: var(--text-grey);">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGN OUT & FOOTER -->
+    <div style="text-align: center; margin-bottom: 30px;">
+      <a href="../../index.html" style="color: var(--red); font-size: 14px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        <span class="material-icons-round" style="font-size: 18px;">logout</span> Sign Out
+      </a>
+      <div style="font-size: 11px; color: var(--text-grey); margin-top: 10px;">
+        BorlaAlert GH v1.0.0 • Made in Ghana
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RESIDENT BOTTOM NAVIGATION -->
+  <nav class="bottom-nav bottom-nav-4" aria-label="Main Navigation">
+    <a href="./home.html" class="nav-tab">
+      <span class="material-icons-round nav-tab-icon">home</span>
+      <span class="nav-tab-label">Home</span>
+    </a>
+    <a href="./pickups.html" class="nav-tab">
+      <span class="material-icons-round nav-tab-icon">inventory_2</span>
+      <span class="nav-tab-label">Pickups</span>
+    </a>
+    <a href="./receipts.html" class="nav-tab">
+      <span class="material-icons-round nav-tab-icon">receipt_long</span>
+      <span class="nav-tab-label">Receipts</span>
+    </a>
+    <a href="./account.html" class="nav-tab active" aria-current="page">
+      <span class="material-icons-round nav-tab-icon">person</span>
+      <span class="nav-tab-label">Account</span>
+    </a>
+  </nav>
+
+</body>
+</html>

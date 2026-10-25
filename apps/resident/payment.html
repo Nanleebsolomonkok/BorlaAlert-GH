@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>Secure Payment — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .progress-bar-container {
+      background: var(--bg-light);
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .progress-track {
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--green-primary);
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .momo-option {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      background: white;
+      transition: all 0.2s;
+    }
+    .momo-option.active {
+      border-left: 4px solid var(--green-primary);
+      border-color: var(--green-border);
+      background: var(--green-light);
+    }
+    .step-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--green-light);
+      color: var(--green-primary);
+      font-weight: 700;
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV WITH BACK BUTTON -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="./collector-match.html" class="nav-icon-btn" aria-label="Go back" style="text-decoration: none; color: var(--text-dark);">
+        <span class="material-icons-round">arrow_back</span>
+      </a>
+      <h1 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark); margin: 0;">
+        Secure Payment
+      </h1>
+    </div>
+    
+    <span class="badge badge-green" style="display: inline-flex; align-items: center; gap: 4px;">
+      <span class="material-icons-round" style="font-size: 13px;">lock</span> 256-bit Encrypted
+    </span>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 24px;">
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar-container">
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--text-grey);">
+        <span style="color: var(--green-primary);">1. Service ✓</span>
+        <span style="color: var(--green-primary);">2. Match ✓</span>
+        <span style="color: var(--green-primary);">3. MoMo (100%)</span>
+      </div>
+    </div>
+
+    <!-- ORDER SUMMARY CARD -->
+    <div class="card card-bordered" style="margin-top: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-grey); letter-spacing: 0.5px;">
+            Assigned Collector
+          </span>
+          <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--text-dark); margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+            <span>Emmanuel Mensah</span>
+            <span class="material-icons-round" style="font-size: 18px; color: var(--green-primary);">electric_rickshaw</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-grey);">Standard Aboboyaa Pickup</div>
+          <div style="font-size: 12px; color: var(--text-dark); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 15px; color: var(--green-primary);">place</span> House 14, Lagos Ave, East Legon
+          </div>
+        </div>
+        <span class="badge badge-green">ETA: ~6 mins</span>
+      </div>
+    </div>
+
+    <!-- LARGE AMOUNT DISPLAY -->
+    <div class="card" style="text-align: center; background: #F0FDF4; border: 1.5px solid var(--green-border); padding: 18px 16px;">
+      <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--green-dark); letter-spacing: 0.5px;">
+        Total Platform Fee Due
+      </div>
+      <div style="font-family: var(--font-heading); font-size: 38px; font-weight: 800; color: var(--green-primary); line-height: 1.1; margin: 4px 0;">
+        GH₵ 2.00
+      </div>
+      <div style="font-size: 12px; color: var(--text-grey);">
+        Platform dispatch fee only • Zero hidden charges
+      </div>
+    </div>
+
+    <!-- PAYMENT METHOD SELECTION -->
+    <div style="padding: 0 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">Select Mobile Money Network</div>
+
+      <!-- Option 1: MTN MoMo -->
+      <div class="momo-option active" onclick="selectMomo(this)">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #FFCC02; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; color: black;">
+            MTN
+          </div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 700; color: var(--text-dark);">MTN Mobile Money</div>
+            <div style="font-size: 12px; color: var(--green-primary); font-weight: 600; display: flex; align-items: center; gap: 3px;">
+              <span>024 ••• •892</span>
+              <span class="material-icons-round" style="font-size: 13px;">check_circle</span>
+              <span>Primary</span>
+            </div>
+          </div>
+        </div>
+        <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">radio_button_checked</span>
+      </div>
+
+      <!-- Option 2: Telecel Cash -->
+      <div class="momo-option" onclick="selectMomo(this)">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #E30613; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 10px; color: white;">
+            TEL
+          </div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 700; color: var(--text-dark);">Telecel Cash</div>
+            <div style="font-size: 12px; color: var(--text-grey);">Connect account →</div>
+          </div>
+        </div>
+        <span class="material-icons-round" style="font-size: 20px; color: var(--border);">radio_button_unchecked</span>
+      </div>
+
+      <!-- Option 3: AT Money -->
+      <div class="momo-option" onclick="selectMomo(this)">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #0056A2; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 10px; color: white;">
+            AT
+          </div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 700; color: var(--text-dark);">AT Money (AirtelTigo)</div>
+            <div style="font-size: 12px; color: var(--text-grey);">Connect account →</div>
+          </div>
+        </div>
+        <span class="material-icons-round" style="font-size: 20px; color: var(--border);">radio_button_unchecked</span>
+      </div>
+    </div>
+
+    <!-- USSD GUIDE BOX -->
+    <div class="card card-bordered" style="background: #F8FAFC; margin-top: 10px; padding: 12px 14px;">
+      <div style="font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 16px; color: var(--green-primary);">info</span> How authorization works:
+      </div>
+      <div style="font-size: 11.5px; color: var(--text-grey); line-height: 1.5; display: flex; flex-direction: column; gap: 6px;">
+        <div style="display: flex; align-items: center; gap: 8px;"><span class="step-badge">1</span><span>Tap Authorize Payment below</span></div>
+        <div style="display: flex; align-items: center; gap: 8px;"><span class="step-badge">2</span><span>USSD prompt is pushed directly to your phone</span></div>
+        <div style="display: flex; align-items: center; gap: 8px;"><span class="step-badge">3</span><span>Enter your confidential MoMo PIN to approve GH₵ 2.00</span></div>
+        <div style="display: flex; align-items: center; gap: 8px;"><span class="step-badge">4</span><span>Dispatch is triggered and driver navigates to your gate</span></div>
+      </div>
+    </div>
+
+    <!-- SECURITY BADGES ROW (Truthful, non-fabricated) -->
+    <div style="display: flex; justify-content: center; gap: 8px; padding: 4px 16px; flex-wrap: wrap;">
+      <span class="badge badge-grey" style="display: inline-flex; align-items: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 13px;">security</span> 256-bit TLS
+      </span>
+      <span class="badge badge-grey" style="display: inline-flex; align-items: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 13px;">account_balance_wallet</span> Direct MoMo API
+      </span>
+      <span class="badge badge-grey" style="display: inline-flex; align-items: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 13px;">verified</span> Instant Dispatch
+      </span>
+    </div>
+
+    <!-- MAIN PAY BUTTON -->
+    <div style="padding: 12px 16px 8px;">
+      <a href="./processing.html" class="btn btn-primary" style="height: 52px; font-size: 16px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+        <span class="material-icons-round" style="font-size: 20px;">lock</span>
+        <span>Authorize GH₵ 2.00 &amp; Dispatch</span>
+      </a>
+    </div>
+
+    <!-- CRITICAL FOOTER NOTE (AMBER INFO BOX) -->
+    <div style="margin: 4px 16px 14px; padding: 12px 14px; background: #FFFBEB; border: 1.5px solid #FDE68A; border-radius: 10px; font-size: 12px; color: #92400E; line-height: 1.45;">
+      <div style="font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+        <span class="material-icons-round" style="font-size: 16px; color: var(--amber-dark);">info</span> Important Fee Notice
+      </div>
+      Collector carting fee (GH₵ 15-20 estimated) is settled directly at your gate in cash or personal MoMo to the collector. <strong>This is NOT charged through this platform.</strong>
+    </div>
+
+  </main>
+
+  <script>
+    function selectMomo(elem) {
+      document.querySelectorAll('.momo-option').forEach(opt => {
+        opt.classList.remove('active');
+        const icon = opt.querySelector('.material-icons-round');
+        if (icon) {
+          icon.textContent = 'radio_button_unchecked';
+          icon.style.color = 'var(--border)';
+        }
+      });
+      elem.classList.add('active');
+      const icon = elem.querySelector('.material-icons-round');
+      if (icon) {
+        icon.textContent = 'radio_button_checked';
+        icon.style.color = 'var(--green-primary)';
+      }
+    }
+  </script>
+</body>
+</html>

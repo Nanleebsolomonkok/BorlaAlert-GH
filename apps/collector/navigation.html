@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#15803D">
+  <title>Turn-by-Turn Navigation — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    body {
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+
+    .nav-map-container {
+      height: 62vh;
+      width: 100%;
+      background: #E6EFE6;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(22,163,74,0.15) 0%, transparent 65%),
+        linear-gradient(to right, #D8EAD9 1px, transparent 1px),
+        linear-gradient(to bottom, #D8EAD9 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .route-dashed {
+      stroke-dasharray: 8, 8;
+      animation: dashAnim 1.5s linear infinite;
+    }
+    @keyframes dashAnim {
+      from { stroke-dashoffset: 32; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    .nav-bottom-panel {
+      height: 38vh;
+      background: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      padding: 14px 16px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP OVERLAY STATUS -->
+  <header class="top-nav" style="position: relative; z-index: 30;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="./home.html" class="nav-icon-btn" aria-label="Cancel" style="text-decoration: none; color: var(--text-dark);">
+        <span class="material-icons-round">arrow_back</span>
+      </a>
+      <div>
+        <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--text-dark);">
+          En Route to Pickup
+        </div>
+        <div style="font-size: 11px; color: var(--text-grey);">East Legon Zone 3</div>
+      </div>
+    </div>
+
+    <span class="badge badge-green" style="font-size: 12px; font-weight: 700; padding: 5px 10px; display: inline-flex; align-items: center; gap: 4px;">
+      <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+      <span>ETA: 4 mins • 0.3km</span>
+    </span>
+  </header>
+
+  <!-- MAP VIEW (62vh) -->
+  <section class="nav-map-container">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+      <!-- Roads -->
+      <line x1="20" y1="160" x2="380" y2="160" stroke="#FFFFFF" stroke-width="16" />
+      <line x1="20" y1="160" x2="380" y2="160" stroke="#CBD5E1" stroke-width="12" />
+
+      <line x1="240" y1="20" x2="240" y2="340" stroke="#FFFFFF" stroke-width="18" />
+      <line x1="240" y1="20" x2="240" y2="340" stroke="#FFE082" stroke-width="14" />
+
+      <!-- Route Line -->
+      <path d="M 100,100 Q 240,110 240,160" fill="none" stroke="#16A34A" stroke-width="5" class="route-dashed" />
+    </svg>
+
+    <!-- Accra Street Labels -->
+    <div style="position: absolute; top: 165px; left: 30px; font-size: 10px; font-weight: 800; color: #475569; letter-spacing: 0.5px; text-transform: uppercase;">
+      Mensah Wood Road
+    </div>
+    <div style="position: absolute; top: 40px; right: 65px; font-size: 10px; font-weight: 800; color: #B45309; letter-spacing: 0.5px; text-transform: uppercase; transform: rotate(90deg);">
+      Lagos Avenue
+    </div>
+
+    <!-- COLLECTOR MOVING ICON -->
+    <div style="position: absolute; top: 100px; left: 100px; transform: translate(-50%, -50%); background: white; border: 2.5px solid var(--green-primary); border-radius: 50px; padding: 4px 10px; font-size: 11.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(22,163,74,0.35);">
+      <span class="material-icons-round" style="font-size: 16px; color: var(--green-primary);">electric_rickshaw</span>
+      <span style="color: var(--green-primary);">GW-4921</span>
+    </div>
+
+    <!-- HOUSEHOLD GATE PIN -->
+    <div style="position: absolute; top: 145px; left: 220px; transform: translate(-50%, -100%); background: #111827; color: white; border: 2.5px solid var(--green-primary); border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
+      <span class="material-icons-round" style="font-size: 14px; color: var(--green-supporting);">home</span> Gate 14 Pickup
+    </div>
+  </section>
+
+  <!-- BOTTOM PANEL (38vh) -->
+  <section class="nav-bottom-panel">
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div style="font-family: var(--font-heading); font-size: 15.5px; font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 16px; color: var(--green-primary);">place</span>
+            <span>House 14, Lagos Ave, East Legon</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-grey); margin-top: 2px;">
+            Standard 240L Pickup • Akua Mensah
+          </div>
+        </div>
+        <span class="badge badge-green">GA-183-9021</span>
+      </div>
+
+      <!-- Gate note -->
+      <div style="background: #F8FAFC; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 12px; color: var(--text-dark); margin-top: 8px;">
+        <strong>Gate note:</strong> "Green gate on left. Call on arrival. Dogs inside."
+      </div>
+
+      <!-- Communication actions -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+        <a href="tel:+233245821928" class="btn btn-outline btn-sm" style="height: 38px; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; text-decoration: none;">
+          <span class="material-icons-round" style="font-size: 16px;">phone</span> Call Household
+        </a>
+        <button type="button" onclick="alert('Opening navigation coordinates...')" class="btn btn-grey btn-sm" style="height: 38px; font-size: 12.5px; display: flex; align-items: center; justify-content: center; gap: 4px;">
+          <span class="material-icons-round" style="font-size: 16px;">map</span> External Map
+        </button>
+      </div>
+
+      <!-- Safety Reminder -->
+      <div style="margin-top: 8px; font-size: 11px; color: var(--green-dark); display: flex; align-items: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 14px; color: var(--green-primary);">health_and_safety</span>
+        <span>Operational safety: Wear protective gloves &amp; high-visibility vest.</span>
+      </div>
+    </div>
+
+    <!-- ARRIVAL BUTTON (LINKS TO ARRIVED.HTML) -->
+    <a href="./arrived.html" class="btn btn-primary" style="height: 50px; font-size: 16px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;">
+      <span class="material-icons-round" style="font-size: 20px;">check_circle</span>
+      <span>I Have Arrived at Gate</span>
+    </a>
+  </section>
+
+</body>
+</html>

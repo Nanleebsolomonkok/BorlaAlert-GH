@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#15803D">
+  <title>Collector Registration — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .form-input {
+      width: 100%;
+      height: 48px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 0 14px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+      background: white;
+    }
+    .form-input:focus {
+      border-color: var(--green-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="../../index.html" class="nav-icon-btn" aria-label="Home" style="text-decoration: none; color: var(--text-dark); display: flex; align-items: center; justify-content: center;">
+        <span class="material-icons-round" style="font-size: 20px;">arrow_back</span>
+      </a>
+      <h1 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark);">
+        Collector Registration
+      </h1>
+    </div>
+
+    <span class="badge badge-amber">Step 1 of 3</span>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 30px;">
+
+    <!-- INTRO HEADER -->
+    <div class="card card-bordered" style="margin-top: 14px; background: #F0FDF4; border: 1.5px solid var(--green-border);">
+      <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--green-dark); display: flex; align-items: center; gap: 6px;">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">electric_rickshaw</span> Join Accra's Verified Waste Fleet
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-grey); margin-top: 4px; line-height: 1.4;">
+        Receive live pickup dispatches in your zone, earn directly from households at the gate, and build your certified rating.
+      </p>
+    </div>
+
+    <!-- REGISTRATION FORM -->
+    <form style="padding: 0 16px;" onsubmit="event.preventDefault(); window.location.href='./id-upload.html';">
+      
+      <div class="form-group">
+        <label class="form-label">Full Legal Name (as on Ghana Card)</label>
+        <input type="text" class="form-input" required placeholder="e.g. Emmanuel Mensah" value="Emmanuel Mensah">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mobile Phone Number (Personal MoMo)</label>
+        <input type="tel" class="form-input" required placeholder="e.g. 024 800 9643" value="024 800 9643">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Ghana Card PIN Number</label>
+        <input type="text" class="form-input" required placeholder="GHA-000000000-0" value="GHA-729481023-4" style="text-transform: uppercase; font-family: monospace;">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Vehicle Type</label>
+        <select class="form-input" style="height: 48px;">
+          <option selected>Aboboyaa (Motor Tricycle - 240L Capacity)</option>
+          <option>Mini-Truck / Compactor</option>
+          <option>Pushcart / Plastic Sachet Hauler</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Vehicle Plate / Registration Number</label>
+        <input type="text" class="form-input" required placeholder="e.g. GW-4921-24" value="GW-4921-24" style="text-transform: uppercase; font-family: monospace;">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Primary Operating Zone</label>
+        <select class="form-input" style="height: 48px;">
+          <option selected>East Legon (Zone 3)</option>
+          <option>Madina / Adenta</option>
+          <option>Spintex Road</option>
+          <option>Osu / Cantonments</option>
+          <option>Dansoman / Korle Bu</option>
+        </select>
+      </div>
+
+      <!-- CRITICAL BUSINESS MODEL REMINDER FOR DRIVERS -->
+      <div class="card card-amber" style="margin: 10px 0 16px; padding: 12px 14px;">
+        <div style="font-weight: 700; color: #92400E; font-size: 12.5px; display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+          <span class="material-icons-round" style="font-size: 16px;">payments</span> Driver Direct Payment Guarantee
+        </div>
+        <p style="font-size: 12px; color: #92400E; line-height: 1.45;">
+          You keep 100% of your carting fee (GH₵ 15-20), collected directly at the household gate in cash or personal MoMo. BorlaAlert never delays your money!
+        </p>
+      </div>
+
+      <!-- CONTINUE BUTTON -->
+      <button type="submit" class="btn btn-primary" style="height: 52px; font-size: 16px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        Continue to Documents →
+      </button>
+
+      <div style="text-align: center; margin-top: 14px;">
+        <span style="font-size: 12px; color: var(--text-grey);">Already registered?</span>
+        <a href="./login.html" style="font-size: 12px; font-weight: 700; color: var(--green-primary); margin-left: 4px; text-decoration: none;">
+          Log In
+        </a>
+      </div>
+
+    </form>
+
+  </main>
+
+</body>
+</html>

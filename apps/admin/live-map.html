@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
+  <title>GIS Live Map — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    body {
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #0B1329;
+    }
+
+    .admin-nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: var(--nav-height);
+      background: #0F172A;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 100;
+      border-bottom: 1px solid #1E293B;
+    }
+
+    .gis-viewport {
+      flex: 1;
+      width: 100%;
+      position: relative;
+      background: #0B1329;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(34,197,94,0.1) 0%, transparent 70%),
+        linear-gradient(to right, #1E293B 1px, transparent 1px),
+        linear-gradient(to bottom, #1E293B 1px, transparent 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
+    }
+
+    /* Admin bottom nav */
+    .admin-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: var(--bottom-nav);
+      background: #0F172A;
+      border-top: 1px solid #1E293B;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      z-index: 100;
+    }
+    .admin-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-decoration: none;
+      color: #94A3B8;
+    }
+    .admin-tab.active {
+      color: #22C55E;
+    }
+    .admin-tab-icon {
+      font-size: 18px;
+    }
+    .admin-tab-label {
+      font-size: 9.5px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN TOP BAR -->
+  <header class="admin-nav">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="./dashboard.html" style="color: #94A3B8; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;" aria-label="Back to dashboard">
+        <span class="material-icons-round" style="font-size: 20px;">arrow_back</span>
+      </a>
+      <h1 style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: white;">
+        Greater Accra GIS Radar
+      </h1>
+    </div>
+
+    <span class="badge badge-green" style="background: rgba(34,197,94,0.2); color: #4ADE80; font-family: monospace;">
+      127 Units Active
+    </span>
+  </header>
+
+  <!-- GIS VIEWPORT -->
+  <main class="gis-viewport" style="margin-top: var(--nav-height); margin-bottom: var(--bottom-nav);">
+    
+    <!-- Vector Map Grid overlay -->
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+      <!-- Main Roads -->
+      <path d="M 20,120 Q 200,140 380,80" stroke="#1E293B" stroke-width="8" fill="none" />
+      <path d="M 140,20 Q 180,240 220,440" stroke="#1E293B" stroke-width="10" fill="none" />
+      <path d="M 60,320 Q 220,300 380,360" stroke="#1E293B" stroke-width="8" fill="none" />
+    </svg>
+
+    <!-- Zone Overlay Pills -->
+    <div style="position: absolute; top: 16px; left: 16px; background: rgba(15,23,42,0.9); border: 1px solid #334155; padding: 6px 12px; border-radius: 8px; color: white; font-size: 11px;">
+      <strong>Zone 3:</strong> East Legon (42 Aboboyaa units)
+    </div>
+
+    <!-- Active Collector Pin 1 -->
+    <div style="position: absolute; top: 38%; left: 35%; background: #22C55E; color: white; border-radius: 20px; padding: 3px 8px; font-size: 11px; font-weight: 700; box-shadow: 0 0 12px #22C55E; cursor: pointer; display: flex; align-items: center; gap: 4px;" onclick="alert('Emmanuel Mensah (GW-4921-24) • En route to Gate 14 Lagos Ave • Speed: 18km/h')">
+      <span class="material-icons-round" style="font-size: 13px;">electric_rickshaw</span> Emmanuel M.
+    </div>
+
+    <!-- Active Collector Pin 2 -->
+    <div style="position: absolute; top: 52%; left: 62%; background: #22C55E; color: white; border-radius: 20px; padding: 3px 8px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;" onclick="alert('Kofi Mensah • Active in Boundary Road')">
+      <span class="material-icons-round" style="font-size: 13px;">electric_rickshaw</span> Kofi M.
+    </div>
+
+    <!-- Active Collector Pin 3 (Standby) -->
+    <div style="position: absolute; top: 28%; left: 70%; background: #F59E0B; color: black; border-radius: 20px; padding: 3px 8px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;" onclick="alert('Yaw Boateng • Standby near Madina')">
+      <span class="material-icons-round" style="font-size: 13px;">electric_rickshaw</span> Yaw B. (Standby)
+    </div>
+
+    <!-- Compactor Truck -->
+    <div style="position: absolute; top: 68%; left: 40%; background: #3B82F6; color: white; border-radius: 20px; padding: 3px 8px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px;">
+      <span class="material-icons-round" style="font-size: 13px;">local_shipping</span> Compactor 04
+    </div>
+
+    <!-- Depot Marker -->
+    <div style="position: absolute; top: 15%; right: 16px; background: rgba(15,23,42,0.85); border: 1px solid #22C55E; padding: 4px 10px; border-radius: 8px; color: #4ADE80; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 5px;">
+      <span class="material-icons-round" style="font-size: 13px;">warehouse</span> Pantang Depot: Open
+    </div>
+
+    <!-- Telemetry Float -->
+    <div style="position: absolute; bottom: 14px; left: 16px; right: 16px; background: rgba(15,23,42,0.92); backdrop-blur: 8px; border: 1px solid #334155; border-radius: 10px; padding: 10px 14px; color: white; font-size: 11.5px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="font-weight: 700;">AMA GPS Gateway: Active</div>
+        <div style="color: #94A3B8; font-size: 10.5px;">Latency: 42ms • Packet Loss: 0.0%</div>
+      </div>
+      <button type="button" onclick="alert('Fleet radar refresh triggered')" class="btn btn-primary btn-sm" style="height: 32px; font-size: 11px;">
+        Refresh
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ADMIN BOTTOM NAV -->
+  <nav class="admin-bottom-nav" aria-label="Admin Navigation">
+    <a href="./dashboard.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">dashboard</span>
+      <span class="admin-tab-label">Dashboard</span>
+    </a>
+    <a href="./live-map.html" class="admin-tab active" aria-current="page">
+      <span class="material-icons-round admin-tab-icon">map</span>
+      <span class="admin-tab-label">Live Map</span>
+    </a>
+    <a href="./users.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">group</span>
+      <span class="admin-tab-label">Users</span>
+    </a>
+    <a href="./revenue.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">payments</span>
+      <span class="admin-tab-label">Revenue</span>
+    </a>
+    <a href="./settings.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">settings</span>
+      <span class="admin-tab-label">Settings</span>
+    </a>
+  </nav>
+
+</body>
+</html>

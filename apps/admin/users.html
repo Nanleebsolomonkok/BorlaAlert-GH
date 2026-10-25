@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
+  <title>User &amp; Fleet Directory — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .admin-nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: var(--nav-height);
+      background: #0F172A;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 100;
+      border-bottom: 1px solid #1E293B;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 6px;
+      padding: 10px 16px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+    .user-pill {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-grey);
+      background: #F1F5F9;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .user-pill.active {
+      background: #0F172A;
+      color: white;
+    }
+
+    /* Admin 5 tab bottom nav */
+    .admin-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: var(--bottom-nav);
+      background: #0F172A;
+      border-top: 1px solid #1E293B;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      z-index: 100;
+    }
+    .admin-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-decoration: none;
+      color: #94A3B8;
+    }
+    .admin-tab.active {
+      color: #22C55E;
+    }
+    .admin-tab-icon {
+      font-size: 18px;
+    }
+    .admin-tab-label {
+      font-size: 9.5px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN TOP BAR -->
+  <header class="admin-nav">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="./dashboard.html" style="color: #94A3B8; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;" aria-label="Back to dashboard">
+        <span class="material-icons-round" style="font-size: 20px;">arrow_back</span>
+      </a>
+      <h1 style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: white;">
+        Users &amp; Fleet Directory
+      </h1>
+    </div>
+
+    <button type="button" onclick="alert('Add new operator dialog')" class="btn btn-primary btn-sm" style="height: 32px; font-size: 11.5px; border-radius: 6px;">
+      + Add Driver
+    </button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-top: var(--nav-height); padding-bottom: calc(var(--bottom-nav) + 24px);">
+
+    <!-- FILTER TABS -->
+    <div class="filter-row">
+      <span class="user-pill active" onclick="switchFilter(this)">All Operators (127)</span>
+      <span class="user-pill" onclick="switchFilter(this)">Pending (8)</span>
+      <span class="user-pill" onclick="switchFilter(this)">Households (2,847)</span>
+    </div>
+
+    <!-- PENDING VERIFICATION ACTION ALERT -->
+    <div class="card card-amber" style="margin-top: 12px; padding: 12px 14px;">
+      <div style="font-weight: 700; color: #92400E; font-size: 12.5px; display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+        <span class="material-icons-round" style="font-size: 16px;">pending_actions</span> 8 Drivers Pending Review
+      </div>
+      <p style="font-size: 12px; color: #92400E;">
+        National Identification Authority (NIA) and AMA background checks ready for approval.
+      </p>
+    </div>
+
+    <!-- OPERATORS LIST -->
+    <div style="padding: 0 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">VERIFIED OPERATOR FLEET</div>
+
+      <!-- User 1 -->
+      <div class="card" style="margin: 0 0 10px; padding: 14px; border: 1px solid var(--border);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: #DCFCE7; border: 2px solid var(--green-primary); display: flex; align-items: center; justify-content: center; color: var(--green-primary);">
+              <span class="material-icons-round" style="font-size: 22px;">electric_rickshaw</span>
+            </div>
+            <div>
+              <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: var(--text-dark);">
+                Emmanuel Mensah
+              </div>
+              <div style="font-size: 11.5px; color: var(--text-grey);">
+                GW-4921-24 • GHA-729481023-4
+              </div>
+            </div>
+          </div>
+          <span class="badge badge-green">Active • Zone 3</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 12px;">
+          <span style="color: var(--text-grey); display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 14px; color: #F59E0B;">star</span> 4.9 (342 pickups)
+          </span>
+          <button type="button" onclick="alert('Viewing driver compliance file: Emmanuel Mensah')" style="background: none; border: none; color: var(--green-primary); font-weight: 700; cursor: pointer;">
+            Manage Driver →
+          </button>
+        </div>
+      </div>
+
+      <!-- User 2 -->
+      <div class="card" style="margin: 0 0 10px; padding: 14px; border: 1px solid var(--border);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: #DCFCE7; border: 2px solid var(--green-primary); display: flex; align-items: center; justify-content: center; color: var(--green-primary);">
+              <span class="material-icons-round" style="font-size: 22px;">electric_rickshaw</span>
+            </div>
+            <div>
+              <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: var(--text-dark);">
+                Kofi Mensah
+              </div>
+              <div style="font-size: 11.5px; color: var(--text-grey);">
+                GW-1904-23 • GHA-892103445-1
+              </div>
+            </div>
+          </div>
+          <span class="badge badge-green">Active • Zone 3</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 12px;">
+          <span style="color: var(--text-grey); display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 14px; color: #F59E0B;">star</span> 4.9 (298 pickups)
+          </span>
+          <button type="button" onclick="alert('Viewing driver compliance file: Kofi Mensah')" style="background: none; border: none; color: var(--green-primary); font-weight: 700; cursor: pointer;">
+            Manage Driver →
+          </button>
+        </div>
+      </div>
+
+      <!-- User 3 (Pending Approval) -->
+      <div class="card" style="margin: 0 0 10px; padding: 14px; border: 1.5px solid var(--amber); background: #FFFBEB;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: white; border: 2px solid var(--amber); display: flex; align-items: center; justify-content: center; color: var(--amber);">
+              <span class="material-icons-round" style="font-size: 22px;">hourglass_top</span>
+            </div>
+            <div>
+              <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: var(--text-dark);">
+                Kwame Acheampong
+              </div>
+              <div style="font-size: 11.5px; color: var(--text-grey);">
+                Aboboyaa (Reg: GW-8812-25)
+              </div>
+            </div>
+          </div>
+          <span class="badge badge-amber">Pending Vetting</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px dashed #FDE68A; font-size: 12px;">
+          <span style="color: #92400E; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 14px; color: var(--green-primary);">verified</span> Ghana Card Uploaded
+          </span>
+          <button type="button" onclick="alert('Approved Kwame Acheampong! License activated.'); this.textContent = 'Approved'; this.disabled = true;" class="btn btn-primary btn-sm" style="height: 30px; font-size: 11px;">
+            Approve Operator
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ADMIN BOTTOM NAV -->
+  <nav class="admin-bottom-nav" aria-label="Admin Navigation">
+    <a href="./dashboard.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">dashboard</span>
+      <span class="admin-tab-label">Dashboard</span>
+    </a>
+    <a href="./live-map.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">map</span>
+      <span class="admin-tab-label">Live Map</span>
+    </a>
+    <a href="./users.html" class="admin-tab active" aria-current="page">
+      <span class="material-icons-round admin-tab-icon">group</span>
+      <span class="admin-tab-label">Users</span>
+    </a>
+    <a href="./revenue.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">payments</span>
+      <span class="admin-tab-label">Revenue</span>
+    </a>
+    <a href="./settings.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">settings</span>
+      <span class="admin-tab-label">Settings</span>
+    </a>
+  </nav>
+
+  <script>
+    function switchFilter(el) {
+      document.querySelectorAll('.filter-row .user-pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+    }
+  </script>
+</body>
+</html>

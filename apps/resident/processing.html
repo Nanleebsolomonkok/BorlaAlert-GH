@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>Processing Payment — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .pulse-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pulse-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(22,163,74,0.15);
+      animation: pulseAnim 2s infinite ease-out;
+    }
+    .pulse-center {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 8px 24px rgba(22,163,74,0.3);
+    }
+    @keyframes pulseAnim {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+    }
+    .step-item.active {
+      border-color: var(--green-primary);
+      background: var(--green-light);
+      color: var(--green-dark);
+    }
+    .step-item.done {
+      color: var(--green-dark);
+    }
+    .step-item.pending {
+      color: var(--text-grey);
+      background: #F8FAFC;
+    }
+    .spin {
+      display: inline-block;
+      animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body style="display: flex; flex-direction: column; justify-content: center; min-height: 100vh; text-align: center; padding: 24px;">
+
+  <main style="max-width: 380px; margin: 0 auto; width: 100%;">
+    <!-- PULSING CIRCLE WITH LOGO -->
+    <div class="pulse-container">
+      <div class="pulse-circle"></div>
+      <div class="pulse-center">
+        <span class="material-icons-round" style="font-size: 38px; color: white;">recycling</span>
+      </div>
+    </div>
+
+    <!-- HEADING -->
+    <h1 style="font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px;">
+      Processing Payment...
+    </h1>
+    <p style="font-size: 13.5px; color: var(--text-grey); margin-bottom: 24px;">
+      Confirming GH₵ 2.00 dispatch fee via MTN MoMo
+    </p>
+
+    <!-- 3-STEP PROGRESS CONTAINER -->
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
+      <div class="step-item done" id="step1">
+        <span class="material-icons-round" style="font-size: 18px; color: var(--green-primary);">check_circle</span>
+        <span>Payment initiated</span>
+      </div>
+      <div class="step-item active" id="step2">
+        <span class="material-icons-round spin" style="font-size: 18px; color: var(--green-primary);">sync</span>
+        <span>Connecting to MoMo gateway...</span>
+      </div>
+      <div class="step-item pending" id="step3">
+        <span class="material-icons-round" style="font-size: 18px; color: var(--text-muted);">schedule</span>
+        <span>Dispatching collector Emmanuel...</span>
+      </div>
+    </div>
+
+    <!-- WARNING NOTE -->
+    <div style="font-size: 12px; color: var(--text-grey); display: flex; align-items: center; justify-content: center; gap: 6px;">
+      <span class="material-icons-round" style="font-size: 14px;">lock</span>
+      <span>Do not close or refresh this screen</span>
+    </div>
+  </main>
+
+  <script>
+    // Progressive update of steps before auto redirect
+    setTimeout(() => {
+      const step2 = document.getElementById('step2');
+      if (step2) {
+        step2.className = 'step-item done';
+        step2.innerHTML = '<span class="material-icons-round" style="font-size: 18px; color: var(--green-primary);">check_circle</span><span>MoMo transaction authorized</span>';
+      }
+      const step3 = document.getElementById('step3');
+      if (step3) {
+        step3.className = 'step-item active';
+        step3.innerHTML = '<span class="material-icons-round spin" style="font-size: 18px; color: var(--green-primary);">sync</span><span>Dispatching collector Emmanuel...</span>';
+      }
+    }, 1500);
+
+    // Auto redirect after 3 seconds
+    setTimeout(() => {
+      window.location.href = 'confirmed.html';
+    }, 3000);
+  </script>
+</body>
+</html>

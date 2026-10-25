@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#166534">
+  <meta name="description" content="BorlaAlert GH connects residents with verified local waste collectors across Greater Accra. Request doorstep pickup, pay GH₵ 2.00 platform fee via Mobile Money, and track collection easily.">
+  <title>BorlaAlert GH — Waste Collection, Made Simpler</title>
+
+  <!-- PWA & Favicon -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+
+  <!-- Typography: Epilogue for Headings, Inter for Body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <!-- Shared Design Tokens -->
+  <link rel="stylesheet" href="./css/variables.css">
+
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background-color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Accessibility Focus Ring */
+    :focus-visible {
+      outline: 2px solid var(--green-primary);
+      outline-offset: 3px;
+    }
+
+    /* Skip link for keyboard accessibility */
+    .skip-to-content {
+      position: absolute;
+      top: -60px;
+      left: 16px;
+      background: var(--green-forest);
+      color: var(--white);
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: var(--border-radius-sm);
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-to-content:focus {
+      top: 16px;
+    }
+
+    /* Icon Utilities */
+    .material-icons-round {
+      font-size: inherit;
+      vertical-align: middle;
+      line-height: 1;
+      display: inline-block;
+      user-select: none;
+    }
+
+    .icon-sm { font-size: 18px; }
+    .icon-md { font-size: 22px; }
+    .icon-lg { font-size: 28px; }
+    .icon-xl { font-size: 36px; }
+
+    /* Layout Containers */
+    .section-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-header.text-center {
+      text-align: center;
+    }
+
+    .section-header.text-center .section-eyebrow,
+    .section-header.text-center .section-sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green-primary);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 3.2vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-grey);
+      max-width: 600px;
+      line-height: 1.65;
+    }
+
+    /* ==========================================
+       1. NAVIGATION HEADER
+       ========================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.25s ease;
+    }
+
+    .site-header.scrolled {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--green-forest);
+      color: var(--white);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--green-forest);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .brand-tag {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--green-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--green-light);
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-grey);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: var(--border-radius-sm);
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-primary);
+      background-color: var(--bg-light);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dark);
+      border: 1px solid var(--border);
+      background: var(--white);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: var(--border-radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-nav-secondary:hover {
+      background: var(--bg-light);
+      border-color: #CBD5E1;
+    }
+
+    .btn-nav-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-primary);
+      color: var(--white);
+      text-decoration: none;
+      padding: 8px 18px;
+      border-radius: var(--border-radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+      box-shadow: 0 1px 2px rgba(21, 128, 61, 0.2);
+    }
+
+    .btn-nav-primary:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-sm);
+      color: var(--text-dark);
+      padding: 8px;
+      cursor: pointer;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mobile Navigation Drawer */
+    .mobile-menu-drawer {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      z-index: 999;
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
+    }
+
+    .mobile-menu-drawer.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-inner {
+      padding: 20px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-nav-list a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-decoration: none;
+      border-radius: var(--border-radius-sm);
+      transition: background-color 0.15s ease;
+    }
+
+    .mobile-nav-list a:hover {
+      background-color: var(--green-light);
+      color: var(--green-forest);
+    }
+
+    .mobile-menu-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .btn-nav-secondary { display: none; }
+      .menu-toggle-btn { display: flex; }
+      .mobile-menu-drawer { display: block; }
+    }
+
+    /* ==========================================
+       2. HERO SECTION
+       ========================================== */
+    .hero-section {
+      padding-top: 130px;
+      padding-bottom: 72px;
+      background: linear-gradient(180deg, var(--white) 0%, var(--bg-light) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-light);
+      color: var(--green-forest);
+      border: 1px solid var(--green-border);
+      border-radius: var(--border-radius-full);
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(34px, 4.2vw, 52px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+    }
+
+    .hero-headline .text-highlight {
+      color: var(--green-forest);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--text-grey);
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-forest);
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: var(--border-radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+      box-shadow: 0 2px 4px rgba(22, 101, 52, 0.2);
+      min-height: var(--min-touch-target);
+    }
+
+    .btn-hero-primary:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--text-dark);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: var(--border-radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+      min-height: var(--min-touch-target);
+    }
+
+    .btn-hero-secondary:hover {
+      background: var(--bg-light);
+      border-color: #CBD5E1;
+    }
+
+    .hero-trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .trust-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-grey);
+    }
+
+    .trust-indicator .material-icons-round {
+      color: var(--green-primary);
+    }
+
+    /* Hero Product Visual Frame */
+    .hero-preview-frame {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .preview-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preview-brand-tag {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-forest);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-status-pill {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-grey);
+      background: var(--bg-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .preview-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .preview-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-grey);
+      margin-bottom: 6px;
+    }
+
+    .preview-details-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preview-main-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .preview-sub-text {
+      font-size: 12px;
+      color: var(--text-grey);
+      margin-top: 2px;
+    }
+
+    .preview-fee-card {
+      background: var(--green-light);
+      border: 1px solid var(--green-border);
+      border-radius: var(--border-radius);
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .fee-label-group strong {
+      font-size: 13px;
+      color: var(--green-forest);
+      display: block;
+    }
+
+    .fee-label-group span {
+      font-size: 11.5px;
+      color: var(--text-grey);
+    }
+
+    .fee-amount-badge {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--green-forest);
+      white-space: nowrap;
+    }
+
+    .preview-btn-mock {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--green-primary);
+      color: var(--white);
+      padding: 12px;
+      border-radius: var(--border-radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.15s ease;
+    }
+    .preview-btn-mock:hover {
+      background: var(--green-dark);
+    }
+
+    .preview-caption {
+      margin-top: 10px;
+      font-size: 11.5px;
+      color: var(--text-grey);
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-section {
+        padding-top: 104px;
+      }
+      .hero-preview-frame {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+
+    /* ==========================================
+       3. TRANSPARENT PRICING & FEE BREAKDOWN
+       ========================================== */
+    .fee-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .fee-split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .fee-card-detailed {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-lg);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .fee-card-detailed.featured {
+      background: var(--white);
+      border-color: var(--green-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .fee-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    .fee-tag.platform {
+      background: var(--green-light);
+      color: var(--green-forest);
+      border: 1px solid var(--green-border);
+    }
+
+    .fee-tag.collector {
+      background: var(--amber-light);
+      color: var(--amber-dark);
+      border: 1px solid #FDE68A;
+    }
+
+    .fee-price {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .fee-price small {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-grey);
+    }
+
+    .fee-desc {
+      font-size: 14.5px;
+      color: var(--text-grey);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .fee-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-dark);
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .fee-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .fee-checklist .material-icons-round {
+      color: var(--green-primary);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .fee-split-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================
+       4. HOW IT WORKS
+       ========================================== */
+    .steps-section {
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .step-item-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-lg);
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .step-item-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-badge-num {
+      width: 36px;
+      height: 36px;
+      background: var(--green-light);
+      color: var(--green-forest);
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .step-card-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .step-card-text {
+      font-size: 14.5px;
+      color: var(--text-grey);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       5. THREE EXPERIENCES (PLATFORM TIERS)
+       ========================================== */
+    .apps-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .app-showcase-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-lg);
+      padding: 32px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .app-showcase-card:hover {
+      border-color: var(--green-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .app-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .app-icon-container {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-icon-container.green {
+      background: var(--green-light);
+      color: var(--green-forest);
+    }
+
+    .app-icon-container.amber {
+      background: var(--amber-light);
+      color: var(--amber-dark);
+    }
+
+    .app-icon-container.slate {
+      background: #F1F5F9;
+      color: #334155;
+    }
+
+    .app-role-pill {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: var(--bg-light);
+      color: var(--text-grey);
+      border: 1px solid var(--border);
+    }
+
+    .app-card-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .app-card-desc {
+      font-size: 14.5px;
+      color: var(--text-grey);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .app-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .app-feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--text-dark);
+    }
+
+    .app-feature-list .material-icons-round {
+      color: var(--green-primary);
+    }
+
+    .app-btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: var(--border-radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      min-height: var(--min-touch-target);
+    }
+
+    .btn-card-primary {
+      background: var(--green-primary);
+      color: var(--white);
+    }
+    .btn-card-primary:hover {
+      background: var(--green-dark);
+    }
+
+    .btn-card-secondary {
+      background: var(--white);
+      color: var(--text-dark);
+      border: 1px solid var(--border);
+    }
+    .btn-card-secondary:hover {
+      background: var(--bg-light);
+      border-color: #CBD5E1;
+    }
+
+    /* ==========================================
+       6. WASTE CATEGORIES & SORTING
+       ========================================== */
+    .waste-section {
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .waste-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .waste-card-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-lg);
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .waste-card-item.incentive {
+      border-color: var(--green-border);
+      background: #FBFEFB;
+    }
+
+    .waste-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .waste-icon-box.green {
+      background: var(--green-light);
+      color: var(--green-forest);
+    }
+
+    .waste-item-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .waste-item-desc {
+      font-size: 13.5px;
+      color: var(--text-grey);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .waste-meta-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .waste-hazardous-notice {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: var(--border-radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13.5px;
+      color: #92400E;
+      line-height: 1.55;
+    }
+
+    .waste-hazardous-notice .material-icons-round {
+      color: #D97706;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ==========================================
+       7. OPERATING PRINCIPLES
+       ========================================== */
+    .principles-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .principle-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius);
+      background: var(--white);
+    }
+
+    .principle-icon {
+      color: var(--green-forest);
+      margin-bottom: 14px;
+    }
+
+    .principle-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .principle-text {
+      font-size: 14px;
+      color: var(--text-grey);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       8. TECHNOLOGY ROADMAP
+       ========================================== */
+    .tech-section {
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    .tech-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-lg);
+      padding: 28px 24px;
+    }
+
+    .tech-status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .tech-status-badge.live {
+      background: var(--green-light);
+      color: var(--green-forest);
+      border: 1px solid var(--green-border);
+    }
+
+    .tech-status-badge.roadmap {
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #CBD5E1;
+    }
+
+    .tech-card-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .tech-card-desc {
+      font-size: 14px;
+      color: var(--text-grey);
+      line-height: 1.6;
+    }
+
+    .tech-credit-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-grey);
+    }
+
+    .tech-credit-box .material-icons-round {
+      color: var(--green-forest);
+    }
+
+    .tech-credit-box strong {
+      color: var(--text-dark);
+    }
+
+    @media (max-width: 768px) {
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================
+       9. PWA INSTALLATION INSTRUCTIONS
+       ========================================== */
+    .pwa-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pwa-container-box {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius-lg);
+      padding: 48px 36px;
+      text-align: center;
+    }
+
+    .pwa-steps-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin: 36px 0;
+    }
+
+    .pwa-step-item {
+      max-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pwa-step-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-forest);
+      margin-bottom: 4px;
+    }
+
+    .pwa-step-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .pwa-step-desc {
+      font-size: 12.5px;
+      color: var(--text-grey);
+      line-height: 1.5;
+    }
+
+    .pwa-actions-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================
+       10. FOOTER
+       ========================================== */
+    .site-footer {
+      background: #0B130E;
+      color: #9AA79E;
+      padding-top: 64px;
+      padding-bottom: 32px;
+      font-size: 14px;
+    }
+
+    .footer-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #1E2B22;
+    }
+
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-brand-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #8A988E;
+      max-width: 320px;
+    }
+
+    .footer-heading {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .footer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-list a {
+      color: #9AA79E;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-nav-list a:hover {
+      color: var(--white);
+    }
+
+    .footer-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .footer-contact-list .material-icons-round {
+      color: var(--green-supporting);
+      margin-top: 2px;
+    }
+
+    .footer-contact-list a {
+      color: #9AA79E;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .footer-contact-list a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: #728277;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-legal-links a {
+      color: #728277;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .footer-legal-links a:hover {
+      color: var(--white);
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 50px;
+      height: 50px;
+      background: #25D366;
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+      z-index: 998;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .whatsapp-float-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45);
+    }
+
+    @media (max-width: 860px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Keyboard Accessibility Skip Link -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- ==========================================
+       1. NAVIGATION HEADER
+       ========================================== -->
+  <header class="site-header" role="banner">
+    <div class="nav-container">
+
+      <!-- Logo & Brand Identity -->
+      <a href="./index.html" class="nav-brand" aria-label="BorlaAlert GH Home">
+        <div class="brand-mark">
+          <span class="material-icons-round icon-md" aria-hidden="true">recycling</span>
+        </div>
+        <span class="brand-title">
+          BorlaAlert
+          <span class="brand-tag">GH</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#pricing">Pricing &amp; Fees</a></li>
+          <li><a href="#apps">Experiences</a></li>
+          <li><a href="#waste-categories">Waste Types</a></li>
+          <li><a href="#principles">Operating Principles</a></li>
+          <li><a href="#technology">Technology</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop CTAs & Mobile Hamburger Button -->
+      <div class="nav-actions">
+        <a href="apps/collector/register.html" class="btn-nav-secondary">
+          <span class="material-icons-round icon-sm" aria-hidden="true">electric_rickshaw</span>
+          <span>Drive With Us</span>
+        </a>
+        <a href="apps/resident/home.html" class="btn-nav-primary">
+          <span class="material-icons-round icon-sm" aria-hidden="true">open_in_new</span>
+          <span>Request Pickup</span>
+        </a>
+
+        <!-- Accessible Hamburger Toggle -->
+        <button class="menu-toggle-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span class="material-icons-round icon-md" aria-hidden="true">menu</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-menu-drawer" id="mobileDrawer" role="region" aria-label="Mobile Navigation Drawer">
+    <div class="mobile-menu-inner">
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="#how-it-works">
+            <span class="material-icons-round icon-sm" aria-hidden="true">info</span>
+            <span>How It Works</span>
+          </a>
+        </li>
+        <li>
+          <a href="#pricing">
+            <span class="material-icons-round icon-sm" aria-hidden="true">payments</span>
+            <span>Pricing &amp; Fees</span>
+          </a>
+        </li>
+        <li>
+          <a href="#apps">
+            <span class="material-icons-round icon-sm" aria-hidden="true">devices</span>
+            <span>Platform Experiences</span>
+          </a>
+        </li>
+        <li>
+          <a href="#waste-categories">
+            <span class="material-icons-round icon-sm" aria-hidden="true">delete_outline</span>
+            <span>Waste Categories</span>
+          </a>
+        </li>
+        <li>
+          <a href="#principles">
+            <span class="material-icons-round icon-sm" aria-hidden="true">verified_user</span>
+            <span>Operating Principles</span>
+          </a>
+        </li>
+        <li>
+          <a href="#technology">
+            <span class="material-icons-round icon-sm" aria-hidden="true">psychology</span>
+            <span>Technology Roadmap</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="mobile-menu-actions">
+        <a href="apps/resident/home.html" class="btn-hero-primary" style="justify-content: center; width: 100%;">
+          <span class="material-icons-round icon-sm" aria-hidden="true">recycling</span>
+          <span>Launch Resident App</span>
+        </a>
+        <a href="apps/collector/register.html" class="btn-hero-secondary" style="justify-content: center; width: 100%;">
+          <span class="material-icons-round icon-sm" aria-hidden="true">electric_rickshaw</span>
+          <span>Collector Registration</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MAIN CONTENT CONTAINER
+       ========================================== -->
+  <main id="main-content">
+
+    <!-- ==========================================
+         2. HERO SECTION
+         ========================================== -->
+    <section class="hero-section">
+      <div class="section-container" style="padding-top: 0; padding-bottom: 0;">
+        <div class="hero-grid">
+
+          <!-- Left Column: Value Proposition -->
+          <div class="hero-content">
+
+            <div class="hero-badge">
+              <span class="material-icons-round icon-sm" aria-hidden="true">place</span>
+              <span>Available in Greater Accra Neighborhoods</span>
+            </div>
+
+            <h1 class="hero-headline">
+              Waste collection, <br>
+              <span class="text-highlight">made simpler.</span>
+            </h1>
+
+            <p class="hero-sub">
+              Request a local waste pickup, connect with an independent tricycle collector in your neighborhood, and manage your collection from your phone.
+            </p>
+
+            <div class="hero-actions">
+              <a href="apps/resident/home.html" class="btn-hero-primary">
+                <span>Request a Pickup</span>
+                <span class="material-icons-round icon-sm" aria-hidden="true">arrow_forward</span>
+              </a>
+              <a href="apps/collector/register.html" class="btn-hero-secondary">
+                <span class="material-icons-round icon-sm" aria-hidden="true">electric_rickshaw</span>
+                <span>Become a Collector</span>
+              </a>
+            </div>
+
+            <!-- Honest Trust Indicators -->
+            <div class="hero-trust-row">
+              <div class="trust-indicator">
+                <span class="material-icons-round icon-sm" aria-hidden="true">payments</span>
+                <span>Fixed GH₵ 2.00 Platform Fee</span>
+              </div>
+              <div class="trust-indicator">
+                <span class="material-icons-round icon-sm" aria-hidden="true">verified_user</span>
+                <span>Ghana Card Vetted Collectors</span>
+              </div>
+              <div class="trust-indicator">
+                <span class="material-icons-round icon-sm" aria-hidden="true">eco</span>
+                <span>Eco-Points for Recyclables</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Authentic Product Screen Preview -->
+          <div class="hero-visual">
+            <div class="hero-preview-frame">
+              <div class="preview-header-bar">
+                <div class="preview-brand-tag">
+                  <span class="material-icons-round icon-sm" aria-hidden="true">recycling</span>
+                  <span>BorlaAlert Resident App</span>
+                </div>
+                <span class="preview-status-pill">Active Workflow</span>
+              </div>
+
+              <!-- Waste Details Card -->
+              <div class="preview-card">
+                <div class="preview-card-title">Pickup Request</div>
+                <div class="preview-details-row">
+                  <div>
+                    <div class="preview-main-text">Standard Household Borla</div>
+                    <div class="preview-sub-text">Gate 14, Lagos Ave, East Legon</div>
+                  </div>
+                  <span class="material-icons-round icon-md" style="color: var(--green-forest);" aria-hidden="true">check_circle</span>
+                </div>
+              </div>
+
+              <!-- Collector Assigned Card -->
+              <div class="preview-card">
+                <div class="preview-card-title">Assigned Collector</div>
+                <div class="preview-details-row">
+                  <div>
+                    <div class="preview-main-text">Emmanuel Mensah</div>
+                    <div class="preview-sub-text">Aboboyaa (GW 4921-24) · Zone 3</div>
+                  </div>
+                  <span class="material-icons-round icon-md" style="color: var(--amber-dark);" aria-hidden="true">near_me</span>
+                </div>
+              </div>
+
+              <!-- Transparent Fee Breakdown Notice -->
+              <div class="preview-fee-card">
+                <div class="fee-label-group">
+                  <strong>Platform Dispatch Fee</strong>
+                  <span>Paid securely via Mobile Money</span>
+                </div>
+                <div class="fee-amount-badge">GH₵ 2.00</div>
+              </div>
+
+              <!-- Direct CTA linking to real application -->
+              <a href="apps/resident/home.html" class="preview-btn-mock">
+                Open Resident Experience →
+              </a>
+
+              <p class="preview-caption">
+                Resident Web App · Works on Android, iPhone &amp; Desktop
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         3. TRANSPARENT PRICING & FEE BREAKDOWN
+         ========================================== -->
+    <section class="fee-section" id="pricing">
+      <div class="section-container">
+
+        <div class="section-header text-center">
+          <div class="section-eyebrow">
+            <span class="material-icons-round icon-sm" aria-hidden="true">payments</span>
+            <span>Honest &amp; Predictable Pricing</span>
+          </div>
+          <h2 class="section-title">Clear Fee Breakdown</h2>
+          <p class="section-sub">
+            We separate the digital platform fee from the collector's physical carting fee so you always know exactly who you are paying.
+          </p>
+        </div>
+
+        <div class="fee-split-grid">
+
+          <!-- Card 1: Platform Dispatch Fee -->
+          <div class="fee-card-detailed featured">
+            <div>
+              <span class="fee-tag platform">
+                <span class="material-icons-round icon-sm" aria-hidden="true">smartphone</span>
+                <span>Paid via Mobile Money in App</span>
+              </span>
+              <div class="fee-price">GH₵ 2.00 <small>/ pickup</small></div>
+              <p class="fee-desc">
+                A flat platform dispatch fee charged via MTN MoMo, Telecel Cash, or AT Money when you confirm your pickup request.
+              </p>
+            </div>
+            <ul class="fee-checklist">
+              <li>
+                <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                <span>Connects you with an available vetted collector in your zone</span>
+              </li>
+              <li>
+                <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                <span>Covers driver KYC vetting and automated SMS dispatch alerts</span>
+              </li>
+              <li>
+                <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                <span>Maintains your digital collection history and earned Eco-Points</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Collector Gate Carting Fee -->
+          <div class="fee-card-detailed">
+            <div>
+              <span class="fee-tag collector">
+                <span class="material-icons-round icon-sm" aria-hidden="true">handshake</span>
+                <span>Paid Directly to Collector at Gate</span>
+              </span>
+              <div class="fee-price">GH₵ 15 – 25 <small>typical rate</small></div>
+              <p class="fee-desc">
+                The physical carting fee paid directly to your independent collector upon arrival, settled via cash or direct personal MoMo.
+              </p>
+            </div>
+            <ul class="fee-checklist">
+              <li>
+                <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                <span>100% of this fee goes directly to the independent driver partner</span>
+              </li>
+              <li>
+                <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                <span>Fair volume-based pricing agreed upon at your compound gate</span>
+              </li>
+              <li>
+                <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                <span>Zero platform commission taken from the driver's carting wage</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         4. HOW IT WORKS
+         ========================================== -->
+    <section class="steps-section" id="how-it-works">
+      <div class="section-container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="material-icons-round icon-sm" aria-hidden="true">timeline</span>
+            <span>Straightforward Process</span>
+          </div>
+          <h2 class="section-title">Four Steps to a Cleared Compound</h2>
+          <p class="section-sub">
+            Built specifically for Ghanaian households and informal waste collector logistics.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+
+          <!-- Step 1 -->
+          <div class="step-item-card">
+            <div class="step-badge-num">01</div>
+            <h3 class="step-card-title">Select Waste Category</h3>
+            <p class="step-card-text">
+              Open the web app, select your household waste type (regular rubbish, pure-water sachets, or yard waste), and confirm your gate address.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-item-card">
+            <div class="step-badge-num">02</div>
+            <h3 class="step-card-title">Authorize GH₵ 2.00 Fee</h3>
+            <p class="step-card-text">
+              Approve the standard GH₵ 2.00 platform booking prompt on your phone using MTN Mobile Money, Telecel Cash, or AT Money.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-item-card">
+            <div class="step-badge-num">03</div>
+            <h3 class="step-card-title">Collector Dispatched</h3>
+            <p class="step-card-text">
+              The dispatch engine routes your request to an available vetted Aboboyaa driver in your zone who accepts the assignment.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-item-card">
+            <div class="step-badge-num">04</div>
+            <h3 class="step-card-title">Pickup &amp; Gate Settlement</h3>
+            <p class="step-card-text">
+              The collector arrives at your compound gate, loads your waste, and you settle the carting fee directly with the driver.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         5. THREE EXPERIENCES (PLATFORM TIERS)
+         ========================================== -->
+    <section class="apps-section" id="apps">
+      <div class="section-container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="material-icons-round icon-sm" aria-hidden="true">devices</span>
+            <span>Platform Experiences</span>
+          </div>
+          <h2 class="section-title">One Service. Tailored Interfaces.</h2>
+          <p class="section-sub">
+            Dedicated web applications designed for the distinct needs of residents, independent drivers, and operations personnel.
+          </p>
+        </div>
+
+        <div class="apps-grid">
+
+          <!-- Card 1: Resident Experience -->
+          <div class="app-showcase-card">
+            <div>
+              <div class="app-card-top">
+                <div class="app-icon-container green">
+                  <span class="material-icons-round icon-md" aria-hidden="true">cottage</span>
+                </div>
+                <span class="app-role-pill">For Households</span>
+              </div>
+              <h3 class="app-card-title">Resident App</h3>
+              <p class="app-card-desc">
+                Request doorstep pickups in seconds, track collection progress, pay the GH₵ 2.00 platform fee, and earn Eco-Points for sorting recyclables.
+              </p>
+              <ul class="app-feature-list">
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Waste categorization wizard</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>MoMo micro-checkout</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Collector assignment alerts</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Eco-Points reward ledger</span>
+                </li>
+              </ul>
+            </div>
+            <a href="apps/resident/home.html" class="app-btn-action btn-card-primary">
+              <span>Open Resident App</span>
+              <span class="material-icons-round icon-sm" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Card 2: Collector Experience -->
+          <div class="app-showcase-card">
+            <div>
+              <div class="app-card-top">
+                <div class="app-icon-container amber">
+                  <span class="material-icons-round icon-md" aria-hidden="true">electric_rickshaw</span>
+                </div>
+                <span class="app-role-pill">For Drivers</span>
+              </div>
+              <h3 class="app-card-title">Collector Console</h3>
+              <p class="app-card-desc">
+                Built for Aboboyaa tricycle and truck operators to receive nearby pickup alerts, navigate to resident gates, and record collections.
+              </p>
+              <ul class="app-feature-list">
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Instant 30s dispatch alerts</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Turn-by-turn gate directions</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Ghana Card verification</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Digital trip manifests</span>
+                </li>
+              </ul>
+            </div>
+            <a href="apps/collector/home.html" class="app-btn-action btn-card-secondary">
+              <span>Open Collector Console</span>
+              <span class="material-icons-round icon-sm" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Card 3: Operations Experience -->
+          <div class="app-showcase-card">
+            <div>
+              <div class="app-card-top">
+                <div class="app-icon-container slate">
+                  <span class="material-icons-round icon-md" aria-hidden="true">dashboard</span>
+                </div>
+                <span class="app-role-pill">For Operations</span>
+              </div>
+              <h3 class="app-card-title">Operations Center</h3>
+              <p class="app-card-desc">
+                Operational visibility for municipal managers and dispatchers to oversee collection requests, verify driver compliance, and audit volume.
+              </p>
+              <ul class="app-feature-list">
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Zonal dispatch queue triage</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Collector compliance verification</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Platform volume ledger</span>
+                </li>
+                <li>
+                  <span class="material-icons-round icon-sm" aria-hidden="true">check</span>
+                  <span>Service area analytics</span>
+                </li>
+              </ul>
+            </div>
+            <a href="apps/admin/dashboard.html" class="app-btn-action btn-card-secondary">
+              <span>Open Operations Center</span>
+              <span class="material-icons-round icon-sm" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         6. WASTE CATEGORIES & SORTING
+         ========================================== -->
+    <section class="waste-section" id="waste-categories">
+      <div class="section-container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="material-icons-round icon-sm" aria-hidden="true">delete_outline</span>
+            <span>Accepted Categories</span>
+          </div>
+          <h2 class="section-title">What BorlaAlert GH Collects</h2>
+          <p class="section-sub">
+            Please ensure materials are properly bagged and placed curbside or near your compound gate.
+          </p>
+        </div>
+
+        <div class="waste-grid">
+
+          <!-- Category 1 -->
+          <div class="waste-card-item">
+            <div>
+              <div class="waste-icon-box">
+                <span class="material-icons-round icon-lg" aria-hidden="true">delete</span>
+              </div>
+              <h3 class="waste-item-title">Standard Household Rubbish</h3>
+              <p class="waste-item-desc">
+                Daily kitchen organic refuse, food containers, paper waste, and general compound bins.
+              </p>
+            </div>
+            <span class="waste-meta-tag">Curbside Standard Sacks</span>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="waste-card-item incentive">
+            <div>
+              <div class="waste-icon-box green">
+                <span class="material-icons-round icon-lg" aria-hidden="true">recycling</span>
+              </div>
+              <h3 class="waste-item-title">Pure-Water Rubber &amp; Plastics</h3>
+              <p class="waste-item-desc">
+                Segregated clean LDPE drinking water sachets, clear plastic beverage bottles, and shopping bags.
+              </p>
+            </div>
+            <span class="waste-meta-tag" style="color: var(--green-forest);">
+              <span class="material-icons-round icon-sm" aria-hidden="true">stars</span>
+              <span>Earns +150 Eco-Points</span>
+            </span>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="waste-card-item">
+            <div>
+              <div class="waste-icon-box">
+                <span class="material-icons-round icon-lg" aria-hidden="true">yard</span>
+              </div>
+              <h3 class="waste-item-title">Bulky &amp; Yard Debris</h3>
+              <p class="waste-item-desc">
+                Compound tree clippings, garden sweepings, broken crates, and discarded furniture fragments.
+              </p>
+            </div>
+            <span class="waste-meta-tag">Requires Advance Notice</span>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="waste-card-item">
+            <div>
+              <div class="waste-icon-box">
+                <span class="material-icons-round icon-lg" aria-hidden="true">inventory_2</span>
+              </div>
+              <h3 class="waste-item-title">Commercial Dry Packaging</h3>
+              <p class="waste-item-desc">
+                Cardboard packaging boxes, shipping materials, and sorted dry commercial paper from local kiosks.
+              </p>
+            </div>
+            <span class="waste-meta-tag">Bundled Curbside</span>
+          </div>
+
+        </div>
+
+        <!-- Restricted Materials Notice -->
+        <div class="waste-hazardous-notice" role="alert">
+          <span class="material-icons-round icon-md" aria-hidden="true">warning</span>
+          <div>
+            <strong>Restricted &amp; Hazardous Waste Notice:</strong>
+            Standard Aboboyaa tricycle operators are prohibited from collecting bio-hazardous clinic waste, sharps, industrial chemicals, or flammable fuels. These materials require certified municipal hazardous waste contractors.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         7. OPERATING PRINCIPLES
+         ========================================== -->
+    <section class="principles-section" id="principles">
+      <div class="section-container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="material-icons-round icon-sm" aria-hidden="true">verified_user</span>
+            <span>Operating Principles</span>
+          </div>
+          <h2 class="section-title">Built on Responsibility &amp; Trust</h2>
+          <p class="section-sub">
+            How BorlaAlert GH establishes accountable sanitation in Ghanaian communities.
+          </p>
+        </div>
+
+        <div class="principles-grid">
+
+          <div class="principle-card">
+            <span class="material-icons-round icon-lg principle-icon" aria-hidden="true">schedule</span>
+            <h3 class="principle-title">Predictable Scheduling</h3>
+            <p class="principle-text">
+              Eliminating the uncertainty of waiting indefinitely for informal collectors or chasing tricycles down neighborhood streets.
+            </p>
+          </div>
+
+          <div class="principle-card">
+            <span class="material-icons-round icon-lg principle-icon" aria-hidden="true">handshake</span>
+            <h3 class="principle-title">Fair Driver Compensation</h3>
+            <p class="principle-text">
+              Independent collectors keep 100% of their gate carting fees. The platform never takes deductions from the physical collection wage.
+            </p>
+          </div>
+
+          <div class="principle-card">
+            <span class="material-icons-round icon-lg principle-icon" aria-hidden="true">shield</span>
+            <h3 class="principle-title">Vetted Identities</h3>
+            <p class="principle-text">
+              Collector partners submit their Ghana Card National ID, vehicle documentation, and assembly permits during onboarding.
+            </p>
+          </div>
+
+          <div class="principle-card">
+            <span class="material-icons-round icon-lg principle-icon" aria-hidden="true">eco</span>
+            <h3 class="principle-title">Cleaner Gutters &amp; Beaches</h3>
+            <p class="principle-text">
+              Rewarding household plastic segregation directly reduces the volume of pure-water sachets entering municipal drainage and coastal waters.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         8. TECHNOLOGY ROADMAP
+         ========================================== -->
+    <section class="tech-section" id="technology">
+      <div class="section-container">
+
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="material-icons-round icon-sm" aria-hidden="true">code</span>
+            <span>Engineering &amp; Research</span>
+          </div>
+          <h2 class="section-title">Technology &amp; Development Roadmap</h2>
+          <p class="section-sub">
+            Honest separation of current production capabilities and ongoing academic research.
+          </p>
+        </div>
+
+        <div class="tech-grid">
+
+          <!-- Live Capabilities -->
+          <div class="tech-card">
+            <span class="tech-status-badge live">Production Capabilities</span>
+            <h3 class="tech-card-title">Live Platform Services</h3>
+            <p class="tech-card-desc">
+              PWA offline support, state persistence via localStorage, Mobile Money transaction webhooks (MTN MoMo, Telecel Cash, AT Money), digital trip manifests, and multi-role web consoles.
+            </p>
+          </div>
+
+          <!-- Research / Roadmap -->
+          <div class="tech-card">
+            <span class="tech-status-badge roadmap">In Research &amp; Evaluation</span>
+            <h3 class="tech-card-title">Algorithmic Dispatch Roadmap</h3>
+            <p class="tech-card-desc">
+              Research prototypes in development: AI collector-to-gate assignment heuristics, zonal market day demand forecasting, and photo-based volume estimation using on-device machine learning models.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Academic Credit Box -->
+        <div class="tech-credit-box">
+          <span class="material-icons-round icon-md" aria-hidden="true">school</span>
+          <div>
+            AI dispatch architecture and core platform engineering developed by <strong>Solomon Nanleeb</strong>, Computer Science &amp; Engineering Department, University of Mines and Technology (UMaT), Tarkwa, Ghana.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         9. PWA INSTALLATION INSTRUCTIONS
+         ========================================== -->
+    <section class="pwa-section">
+      <div class="section-container">
+
+        <div class="pwa-container-box">
+          <div class="section-eyebrow" style="justify-content: center;">
+            <span class="material-icons-round icon-sm" aria-hidden="true">install_mobile</span>
+            <span>Progressive Web App</span>
+          </div>
+          <h2 class="section-title">Install to Your Phone Screen</h2>
+          <p class="section-sub" style="margin: 0 auto;">
+            BorlaAlert GH works directly in your phone browser. No app store download or storage-heavy installation required.
+          </p>
+
+          <div class="pwa-steps-row">
+            <div class="pwa-step-item">
+              <div class="pwa-step-icon">
+                <span class="material-icons-round icon-md" aria-hidden="true">language</span>
+              </div>
+              <div class="pwa-step-title">1. Open in Browser</div>
+              <div class="pwa-step-desc">Visit the website on Chrome (Android) or Safari (iPhone).</div>
+            </div>
+
+            <div class="pwa-step-item">
+              <div class="pwa-step-icon">
+                <span class="material-icons-round icon-md" aria-hidden="true">ios_share</span>
+              </div>
+              <div class="pwa-step-title">2. Tap Share / Menu</div>
+              <div class="pwa-step-desc">Select the browser menu (⋮ on Android, Share on iOS).</div>
+            </div>
+
+            <div class="pwa-step-item">
+              <div class="pwa-step-icon">
+                <span class="material-icons-round icon-md" aria-hidden="true">add_to_home_screen</span>
+              </div>
+              <div class="pwa-step-title">3. Add to Home Screen</div>
+              <div class="pwa-step-desc">Tap "Add to Home Screen" to install the instant app icon.</div>
+            </div>
+          </div>
+
+          <div class="pwa-actions-row">
+            <a href="apps/resident/home.html" class="btn-hero-primary">
+              <span class="material-icons-round icon-sm" aria-hidden="true">cottage</span>
+              <span>Resident App</span>
+            </a>
+            <a href="apps/collector/home.html" class="btn-hero-secondary">
+              <span class="material-icons-round icon-sm" aria-hidden="true">electric_rickshaw</span>
+              <span>Collector Console</span>
+            </a>
+            <a href="apps/admin/dashboard.html" class="btn-hero-secondary">
+              <span class="material-icons-round icon-sm" aria-hidden="true">dashboard</span>
+              <span>Operations Console</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       10. FOOTER
+       ========================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+
+      <div class="footer-grid">
+
+        <!-- Column 1: Brand & Purpose -->
+        <div class="footer-brand-col">
+          <a href="./index.html" class="footer-brand-title">
+            <span class="material-icons-round icon-md" style="color: var(--green-supporting);" aria-hidden="true">recycling</span>
+            <span>BorlaAlert GH</span>
+          </a>
+          <p class="footer-brand-text">
+            Connecting Ghanaian households with verified waste collectors for dependable, transparent, and environmentally responsible sanitation.
+          </p>
+          <div style="font-size: 13px; color: #8A988E;">
+            Greater Accra Metropolitan Area, Ghana
+          </div>
+        </div>
+
+        <!-- Column 2: Platform Links -->
+        <div>
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="apps/resident/home.html">Resident App</a></li>
+            <li><a href="apps/collector/home.html">Collector Console</a></li>
+            <li><a href="apps/admin/dashboard.html">Operations Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Information & Policies -->
+        <div>
+          <h4 class="footer-heading">Policies &amp; Info</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#pricing">Pricing Structure</a></li>
+            <li><a href="#waste-categories">Accepted Waste</a></li>
+            <li><a href="./terms.html">Terms of Service</a></li>
+            <li><a href="./privacy.html">Privacy Notice</a></li>
+            <li><a href="./support.html">Help &amp; Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact & Inquiries -->
+        <div>
+          <h4 class="footer-heading">Contact &amp; Assistance</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <span class="material-icons-round icon-sm" aria-hidden="true">mail</span>
+              <a href="mailto:support@borlaalert.gh">support@borlaalert.gh</a>
+            </li>
+            <li>
+              <span class="material-icons-round icon-sm" aria-hidden="true">chat</span>
+              <a href="https://wa.me/233245821928" target="_blank" rel="noopener noreferrer">+233 24 582 1928</a>
+            </li>
+            <li>
+              <span class="material-icons-round icon-sm" aria-hidden="true">place</span>
+              <span>Accra, Ghana</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 BorlaAlert GH. All rights reserved.
+        </div>
+        <div class="footer-legal-links">
+          <a href="./privacy.html">Privacy</a>
+          <a href="./terms.html">Terms</a>
+          <a href="./support.html">Support</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick Button -->
+  <a href="https://wa.me/233245821928?text=Hello%20BorlaAlert%20GH%2C%20I%20have%20an%20inquiry%20regarding%20waste%20pickup." class="whatsapp-float-btn" title="Chat with us on WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="Chat with BorlaAlert support on WhatsApp">
+    <span class="material-icons-round icon-lg" aria-hidden="true">chat</span>
+  </a>
+
+  <!-- ==========================================
+       SCRIPTS: NAVIGATION & ACCESSIBILITY
+       ========================================== -->
+  <script>
+    // Header shadow on scroll
+    const header = document.querySelector('.site-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 12) {
+        header?.classList.add('scrolled');
+      } else {
+        header?.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // Accessible Mobile Menu Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    if (menuBtn && mobileDrawer) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileDrawer.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        const icon = menuBtn.querySelector('.material-icons-round');
+        if (icon) {
+          icon.textContent = isOpen ? 'close' : 'menu';
+        }
+      });
+
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileDrawer.classList.contains('open')) {
+          mobileDrawer.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded', 'false');
+          menuBtn.setAttribute('aria-label', 'Open navigation menu');
+          const icon = menuBtn.querySelector('.material-icons-round');
+          if (icon) icon.textContent = 'menu';
+          menuBtn.focus();
+        }
+      });
+
+      // Close mobile menu when anchor link is clicked
+      mobileDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded', 'false');
+          menuBtn.setAttribute('aria-label', 'Open navigation menu');
+          const icon = menuBtn.querySelector('.material-icons-round');
+          if (icon) icon.textContent = 'menu';
+        });
+      });
+    }
+
+    // Smooth scroll for anchor links with focus management
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        }
+      });
+    });
+  </script>
+
+  <!-- PWA Shared State & Service Worker -->
+  <script src="./shared-pwa.js"></script>
+</body>
+</html>

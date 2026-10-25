@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>Pickup Confirmed — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    /* Confetti animation */
+    .confetti-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--green-primary);
+      opacity: 0.8;
+      animation: fall 2.5s infinite linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(180px) rotate(720deg); opacity: 0; }
+    }
+
+    /* Checkmark Bounce */
+    .check-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px auto 14px;
+      color: white;
+      box-shadow: 0 8px 24px rgba(22,163,74,0.3);
+      animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes bounce {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body style="position: relative;">
+
+  <!-- CONFETTI PARTICLES -->
+  <div class="confetti-container">
+    <div class="confetti" style="left: 15%; animation-delay: 0.1s; background: #16A34A;"></div>
+    <div class="confetti" style="left: 30%; animation-delay: 0.4s; background: #F59E0B; width: 6px; height: 10px;"></div>
+    <div class="confetti" style="left: 50%; animation-delay: 0.2s; background: #3B82F6;"></div>
+    <div class="confetti" style="left: 70%; animation-delay: 0.5s; background: #10B981; width: 10px; height: 6px;"></div>
+    <div class="confetti" style="left: 85%; animation-delay: 0.3s; background: #EC4899;"></div>
+  </div>
+
+  <main style="padding: 24px 16px; max-width: 430px; margin: 0 auto; text-align: center;">
+
+    <!-- CHECKMARK ANIMATION -->
+    <div class="check-circle">
+      <span class="material-icons-round" style="font-size: 38px; color: white;">check</span>
+    </div>
+
+    <!-- MAIN TITLE -->
+    <h1 style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--green-primary); margin-bottom: 4px;">
+      Borla Pickup Confirmed!
+    </h1>
+    <p style="font-size: 13.5px; color: var(--text-grey); margin-bottom: 20px;">
+      Transaction ID: <strong>BRA-2026-04892</strong>
+    </p>
+
+    <!-- COLLECTOR SUMMARY CARD -->
+    <div class="card card-bordered" style="text-align: left; padding: 16px; margin: 0 0 14px;">
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: #DCFCE7; border: 2.5px solid var(--green-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <span class="material-icons-round" style="font-size: 26px; color: var(--green-primary);">electric_rickshaw</span>
+        </div>
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="font-family: var(--font-heading); font-size: 15.5px; font-weight: 700; color: var(--text-dark);">
+              Emmanuel Mensah
+            </div>
+            <span class="badge badge-green" style="font-size: 11px;">En route to gate</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-grey); margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+            <span>Standard Aboboyaa •</span>
+            <span class="material-icons-round" style="font-size: 13px; color: var(--amber-dark);">star</span>
+            <span>4.9 (342)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ETA Pill & Location Details -->
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 12.5px; font-weight: 600; color: var(--text-dark); display: flex; align-items: center; gap: 4px;">
+          <span class="material-icons-round" style="font-size: 16px; color: var(--green-primary);">place</span>
+          <span>Gate 14, Lagos Ave</span>
+        </div>
+        <div class="badge badge-green" style="padding: 6px 12px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+          <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+          <span>~6 Mins Away</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS: CALL & CHAT -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+      <a href="tel:+233248009643" class="btn btn-outline" style="height: 46px; font-size: 14px; border-radius: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;">
+        <span class="material-icons-round" style="font-size: 18px;">phone</span>
+        <span>Call Driver</span>
+      </a>
+      <button type="button" onclick="alert('Chat window with Emmanuel opened')" class="btn btn-grey" style="height: 46px; font-size: 14px; border-radius: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span class="material-icons-round" style="font-size: 18px;">chat</span>
+        <span>Chat</span>
+      </button>
+    </div>
+
+    <!-- TRACK LIVE ON MAP LINK BUTTON -->
+    <div style="margin-bottom: 16px;">
+      <a href="./tracking.html" class="btn btn-primary" style="height: 52px; font-size: 16px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+        <span class="material-icons-round" style="font-size: 20px;">navigation</span>
+        <span>View Dispatch Map →</span>
+      </a>
+    </div>
+
+    <!-- CRITICAL AMBER REMINDER CARD -->
+    <div class="card card-amber" style="text-align: left; margin: 0; padding: 14px 16px;">
+      <div style="font-weight: 700; color: var(--amber-dark); font-size: 13.5px; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+        <span class="material-icons-round" style="font-size: 18px; color: var(--amber-dark);">payments</span>
+        <span>Remember at Gate:</span>
+      </div>
+      <p style="font-size: 12.5px; color: #92400E; line-height: 1.45; margin: 0;">
+        Pay Emmanuel <strong>GH₵ 15-20</strong> directly at your gate for waste carting service (cash or personal MoMo). <strong>This carting fee is NOT charged through the app.</strong>
+      </p>
+    </div>
+
+  </main>
+
+</body>
+</html>

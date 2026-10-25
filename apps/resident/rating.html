@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>Rate Your Collector — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .star-btn {
+      font-size: 38px;
+      color: #CBD5E1;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .star-btn.gold {
+      color: #F59E0B;
+    }
+
+    .cat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-stars {
+      display: flex;
+      gap: 4px;
+      font-size: 18px;
+      color: #F59E0B;
+      cursor: pointer;
+    }
+
+    .tag-chip {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tag-chip.selected {
+      border-color: var(--green-primary);
+      background: var(--green-light);
+      color: var(--green-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV WITH BACK BUTTON -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="./complete.html" class="nav-icon-btn" aria-label="Back" style="text-decoration: none; color: var(--text-dark);">
+        <span class="material-icons-round">arrow_back</span>
+      </a>
+      <h1 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark); margin: 0;">
+        Rate Your Collector
+      </h1>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 24px;">
+
+    <!-- COLLECTOR INFO HEADER -->
+    <div class="card card-bordered" style="text-align: center; margin-top: 14px; padding: 18px 16px;">
+      <div style="width: 72px; height: 72px; border-radius: 50%; background: #DCFCE7; border: 3px solid var(--green-primary); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
+        <span class="material-icons-round" style="font-size: 32px; color: var(--green-primary);">electric_rickshaw</span>
+      </div>
+      <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: var(--text-dark); margin: 0;">
+        Emmanuel Mensah
+      </h2>
+      <div style="font-size: 12.5px; color: var(--text-grey); margin-top: 2px;">
+        Standard Aboboyaa Pickup
+      </div>
+      <div style="font-size: 11.5px; color: var(--green-dark); font-weight: 600; margin-top: 4px;">
+        Gate 14 Lagos Ave • East Legon
+      </div>
+    </div>
+
+    <!-- MAIN 5-STAR RATING -->
+    <div class="card card-bordered" style="text-align: center;">
+      <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark);">
+        How was Emmanuel?
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 8px; margin: 12px 0;" id="main-stars">
+        <span class="star-btn gold" onclick="setStar(1)">★</span>
+        <span class="star-btn gold" onclick="setStar(2)">★</span>
+        <span class="star-btn gold" onclick="setStar(3)">★</span>
+        <span class="star-btn gold" onclick="setStar(4)">★</span>
+        <span class="star-btn gold" onclick="setStar(5)">★</span>
+      </div>
+
+      <!-- THREE CATEGORY RATINGS -->
+      <div style="margin-top: 14px; text-align: left;">
+        <div class="cat-row">
+          <span style="font-size: 13px; font-weight: 600; color: var(--text-dark);">Punctuality</span>
+          <div class="cat-stars">★★★★★</div>
+        </div>
+        <div class="cat-row">
+          <span style="font-size: 13px; font-weight: 600; color: var(--text-dark);">Professionalism</span>
+          <div class="cat-stars">★★★★★</div>
+        </div>
+        <div class="cat-row" style="border-bottom: none;">
+          <span style="font-size: 13px; font-weight: 600; color: var(--text-dark);">Cleanliness</span>
+          <div class="cat-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK TAG CHIPS -->
+    <div style="padding: 0 16px 10px;">
+      <div class="section-title" style="margin-bottom: 8px;">What went well?</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span class="tag-chip selected" onclick="toggleTag(this)">On Time</span>
+        <span class="tag-chip selected" onclick="toggleTag(this)">Professional</span>
+        <span class="tag-chip selected" onclick="toggleTag(this)">Friendly</span>
+        <span class="tag-chip" onclick="toggleTag(this)">Thorough</span>
+        <span class="tag-chip" onclick="toggleTag(this)">Gate Area Swept</span>
+      </div>
+    </div>
+
+    <!-- WRITTEN REVIEW TEXTAREA -->
+    <div class="card card-bordered">
+      <label for="review-text" style="font-size: 13px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 6px;">
+        Share your experience (Optional)
+      </label>
+      <textarea id="review-text" rows="3" placeholder="Emmanuel was punctual and handled the bins cleanly..." style="width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-family: var(--font-body); font-size: 13px; outline: none; resize: none;"></textarea>
+    </div>
+
+    <!-- SUBMIT BUTTON & REPORT AN ISSUE LINK -->
+    <div style="padding: 10px 16px;">
+      <a href="./receipts.html" class="btn btn-primary" style="height: 52px; font-size: 16px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;">
+        <span class="material-icons-round" style="font-size: 20px;">check</span>
+        <span>Submit Review</span>
+      </a>
+
+      <div style="text-align: center; margin-top: 14px;">
+        <a href="#" onclick="alert('Support ticket opened for Gate 14 pickup'); return false;" style="font-size: 12px; color: var(--red); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <span class="material-icons-round" style="font-size: 16px;">report_problem</span>
+          <span>Report an issue with this pickup</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function setStar(n) {
+      const stars = document.querySelectorAll('#main-stars .star-btn');
+      stars.forEach((s, i) => {
+        if (i < n) s.classList.add('gold');
+        else s.classList.remove('gold');
+      });
+    }
+
+    function toggleTag(el) {
+      el.classList.toggle('selected');
+    }
+  </script>
+</body>
+</html>

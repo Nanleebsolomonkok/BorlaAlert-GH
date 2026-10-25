@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>AI Collector Match — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .progress-bar-container {
+      background: var(--bg-light);
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .progress-track {
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--green-primary);
+      width: 66.6%;
+      border-radius: 4px;
+    }
+
+    .fee-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 14px 0;
+    }
+    .fee-box {
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 11.5px;
+    }
+    .fee-box.platform {
+      background: var(--green-light);
+      border: 1.5px solid var(--green-border);
+    }
+    .fee-box.collector {
+      background: #F8FAFC;
+      border: 1.5px solid var(--border);
+    }
+
+    .trust-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV WITH BACK BUTTON -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="./request.html" class="nav-icon-btn" aria-label="Go back" style="text-decoration: none; color: var(--text-dark);">
+        <span class="material-icons-round">arrow_back</span>
+      </a>
+      <h1 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark); margin: 0;">
+        Collector Dispatch Match
+      </h1>
+    </div>
+    
+    <span class="badge badge-green">Step 2 of 3</span>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 24px;">
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar-container">
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--text-grey);">
+        <span style="color: var(--green-primary);">1. Service ✓</span>
+        <span style="color: var(--green-primary);">2. Match</span>
+        <span>3. MoMo</span>
+      </div>
+    </div>
+
+    <!-- AI MATCH HEADER CARD (GREEN) -->
+    <div style="margin: 14px 16px 10px; padding: 12px 14px; background: #DCFCE7; border: 1px solid #86EFAC; border-radius: 12px; display: flex; gap: 10px; align-items: flex-start;">
+      <span class="material-icons-round" style="color: #166534; font-size: 22px;">smart_toy</span>
+      <div>
+        <div style="font-weight: 700; font-size: 13px; color: #166534;">
+          Local Dispatch Match: Optimal Available Collector
+        </div>
+        <div style="font-size: 11px; color: #15803D; margin-top: 2px;">
+          Ranked by proximity, verified rating, completion history &amp; vehicle capacity
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP PICK FEATURED CARD -->
+    <div class="card card-bordered" style="border: 2px solid var(--green-primary); box-shadow: var(--shadow-md); position: relative;">
+      
+      <!-- Top Pick Badge -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <span class="badge badge-amber" style="font-size: 11px; font-weight: 700; padding: 4px 10px; display: inline-flex; align-items: center; gap: 3px;">
+          <span class="material-icons-round" style="font-size: 14px;">star</span> TOP PICK
+        </span>
+        <span style="font-size: 12px; font-weight: 700; color: var(--green-primary); display: flex; align-items: center; gap: 3px;">
+          <span class="material-icons-round" style="font-size: 14px;">near_me</span> ~6 mins away
+        </span>
+      </div>
+
+      <!-- Collector Header Info -->
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="width: 58px; height: 58px; border-radius: 50%; background: #DCFCE7; border: 2.5px solid var(--green-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <span class="material-icons-round" style="font-size: 28px; color: var(--green-primary);">electric_rickshaw</span>
+        </div>
+        <div>
+          <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text-dark);">
+            Emmanuel Mensah
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px;">
+            <span class="badge badge-green" style="font-size: 10px; display: inline-flex; align-items: center; gap: 2px;">
+              <span class="material-icons-round" style="font-size: 12px;">badge</span> Ghana Card
+            </span>
+            <span class="badge badge-green" style="font-size: 10px; display: inline-flex; align-items: center; gap: 2px;">
+              <span class="material-icons-round" style="font-size: 12px;">verified_user</span> Background Checked
+            </span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-grey); margin-top: 3px; display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 14px; color: var(--amber-dark);">star</span>
+            <strong>4.9</strong> (342 pickups) • 450m from gate
+          </div>
+        </div>
+      </div>
+
+      <!-- TWO CLEAR FEE BOXES (CRITICAL BUSINESS MODEL) -->
+      <div class="fee-grid">
+        <!-- Left: Platform Fee -->
+        <div class="fee-box platform">
+          <div style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--green-dark);">
+            Platform Fee
+          </div>
+          <div style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--green-primary); margin: 2px 0;">
+            GH₵ 2.00
+          </div>
+          <div style="font-size: 10.5px; color: var(--text-dark); font-weight: 600;">
+            Charged via MoMo now
+          </div>
+          <div style="font-size: 10px; color: var(--text-grey);">
+            Goes to BorlaAlert GH
+          </div>
+        </div>
+
+        <!-- Right: Collector Carting Fee -->
+        <div class="fee-box collector">
+          <div style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--amber-dark);">
+            Collector Fee
+          </div>
+          <div style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--text-dark); margin: 2px 0;">
+            GH₵ 15-20
+          </div>
+          <div style="font-size: 10.5px; color: var(--amber-dark); font-weight: 700;">
+            Paid at gate directly
+          </div>
+          <div style="font-size: 10px; color: var(--text-grey);">
+            NOT through the app
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust Badges Row -->
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; padding-top: 4px; border-top: 1px solid var(--border);">
+        <span class="trust-chip"><span class="material-icons-round" style="font-size: 14px; color: var(--green-primary);">badge</span> ID Verified</span>
+        <span class="trust-chip"><span class="material-icons-round" style="font-size: 14px; color: var(--green-primary);">place</span> Local Dispatch</span>
+        <span class="trust-chip"><span class="material-icons-round" style="font-size: 14px; color: var(--amber-dark);">star</span> 4.9 Rated</span>
+        <span class="trust-chip"><span class="material-icons-round" style="font-size: 14px; color: var(--green-primary);">autorenew</span> 98% Accept</span>
+      </div>
+
+    </div>
+
+    <!-- OTHER AVAILABLE COLLECTORS -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">Other Available Collectors</div>
+
+      <!-- Yaw B. -->
+      <div class="collector-card" style="margin: 0 0 8px;">
+        <div class="collector-avatar" style="width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;">
+          <span class="material-icons-round" style="font-size: 22px; color: var(--green-primary);">electric_rickshaw</span>
+        </div>
+        <div class="collector-info">
+          <div class="collector-name" style="font-size: 13.5px;">Yaw Boateng</div>
+          <div class="collector-meta" style="display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 13px; color: var(--amber-dark);">star</span> 4.7 · 850m away · ~10 mins
+          </div>
+        </div>
+        <a href="./payment.html" class="btn btn-grey btn-sm">Select</a>
+      </div>
+
+      <!-- Ibrahim S. -->
+      <div class="collector-card" style="margin: 0 0 8px;">
+        <div class="collector-avatar" style="width: 42px; height: 42px; background: var(--amber-light); border-color: var(--amber); display: flex; align-items: center; justify-content: center;">
+          <span class="material-icons-round" style="font-size: 20px; color: var(--text-dark);">local_shipping</span>
+        </div>
+        <div class="collector-info">
+          <div class="collector-name" style="font-size: 13.5px;">Ibrahim Salifu</div>
+          <div class="collector-meta" style="display: flex; align-items: center; gap: 4px;">
+            <span class="material-icons-round" style="font-size: 13px; color: var(--amber-dark);">star</span> 4.6 · 620m away · ~8 mins
+          </div>
+        </div>
+        <a href="./payment.html" class="btn btn-grey btn-sm">Select</a>
+      </div>
+    </div>
+
+    <!-- MAIN CONFIRM BUTTON -->
+    <div style="padding: 10px 16px;">
+      <a href="./payment.html" class="btn btn-primary" style="height: 52px; font-size: 16px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;">
+        <span class="material-icons-round" style="font-size: 20px;">check</span>
+        <span>Confirm Emmanuel Mensah</span>
+      </a>
+
+      <div style="text-align: center; margin-top: 10px;">
+        <a href="./request.html" style="font-size: 13px; color: var(--text-grey); font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <span class="material-icons-round" style="font-size: 16px;">arrow_back</span> Choose Different Service
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

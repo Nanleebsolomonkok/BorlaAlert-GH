@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>Live Tracking — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    /* Full height split view */
+    body {
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tracking-map {
+      height: 64vh;
+      width: 100%;
+      background: #E5EDE6;
+      background-image: 
+        radial-gradient(circle at 60% 40%, rgba(22,163,74,0.15) 0%, transparent 65%),
+        linear-gradient(to right, #D5E5D8 1px, transparent 1px),
+        linear-gradient(to bottom, #D5E5D8 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Dashed SVG Route animation */
+    .route-path {
+      stroke-dasharray: 8, 8;
+      animation: dashMove 1.5s linear infinite;
+    }
+    @keyframes dashMove {
+      from { stroke-dashoffset: 32; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    .tracking-sheet {
+      height: 36vh;
+      background: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 12px 16px;
+      overflow-y: auto;
+      z-index: 20;
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #CBD5E1;
+      border-radius: 2px;
+      margin: 0 auto 10px;
+    }
+
+    .step-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #F1F5F9;
+      color: var(--text-grey);
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .step-pill.active {
+      background: var(--green-light);
+      color: var(--green-dark);
+      border: 1px solid var(--green-border);
+    }
+    .step-pill.done {
+      color: var(--green-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="top-nav" style="position: relative; z-index: 30;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="./confirmed.html" class="nav-icon-btn" aria-label="Back" style="text-decoration: none; color: var(--text-dark);">
+        <span class="material-icons-round">arrow_back</span>
+      </a>
+      <div>
+        <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--text-dark); line-height: 1.1;">
+          En Route to Pickup
+        </div>
+        <div style="font-size: 11px; color: var(--text-grey);">East Legon Zone 3</div>
+      </div>
+    </div>
+
+    <span class="badge badge-green" style="font-size: 11.5px; font-weight: 700; padding: 5px 10px; display: inline-flex; align-items: center; gap: 4px;">
+      <span class="material-icons-round" style="font-size: 14px;">schedule</span> ETA: ~4 mins
+    </span>
+  </header>
+
+  <!-- LIVE MAP SECTION (64vh) -->
+  <section class="tracking-map">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+      <!-- Street lines -->
+      <line x1="20" y1="180" x2="380" y2="180" stroke="#FFFFFF" stroke-width="16" />
+      <line x1="20" y1="180" x2="380" y2="180" stroke="#CBD5E1" stroke-width="12" />
+
+      <line x1="220" y1="20" x2="220" y2="340" stroke="#FFFFFF" stroke-width="18" />
+      <line x1="220" y1="20" x2="220" y2="340" stroke="#FFE082" stroke-width="14" />
+
+      <!-- Animated route line between collector and gate -->
+      <path d="M 120,90 Q 220,110 220,180" fill="none" stroke="#16A34A" stroke-width="5" class="route-path" />
+    </svg>
+
+    <!-- Real Accra Street Labels -->
+    <div style="position: absolute; top: 185px; left: 30px; font-size: 10px; font-weight: 800; color: #475569; letter-spacing: 0.5px; text-transform: uppercase;">
+      Mensah Wood Road
+    </div>
+    <div style="position: absolute; top: 50px; right: 80px; font-size: 10px; font-weight: 800; color: #B45309; letter-spacing: 0.5px; text-transform: uppercase; transform: rotate(90deg);">
+      Lagos Avenue
+    </div>
+
+    <!-- GATE PIN -->
+    <div style="position: absolute; top: 165px; left: 200px; transform: translate(-50%, -100%); background: #111827; color: white; border: 2.5px solid var(--green-primary); border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
+      <span class="material-icons-round" style="font-size: 14px; color: var(--green-supporting);">home</span> Gate 14 Lagos Ave
+    </div>
+
+    <!-- COLLECTOR MOVING PIN -->
+    <div style="position: absolute; top: 90px; left: 120px; transform: translate(-50%, -50%); background: white; border: 2.5px solid var(--green-primary); border-radius: 50px; padding: 4px 10px; font-size: 11.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(22,163,74,0.35);">
+      <span class="material-icons-round" style="font-size: 16px; color: var(--green-primary);">electric_rickshaw</span>
+      <span style="color: var(--green-primary);">Emmanuel</span>
+      <span class="badge badge-green" style="font-size: 10px; padding: 1px 5px;">0.3km</span>
+    </div>
+
+    <!-- SPEED/RADAR STATUS BADGE (Honestly labeled demo simulation) -->
+    <div style="position: absolute; bottom: 12px; left: 14px; background: rgba(255,255,255,0.95); backdrop-blur: 4px; border: 1px solid var(--border); border-radius: 8px; padding: 4px 10px; font-size: 11px; font-weight: 600; color: var(--text-dark); display: flex; align-items: center; gap: 4px;">
+      <span class="material-icons-round" style="font-size: 14px; color: var(--green-primary);">sensors</span>
+      <span>Simulated Telemetry • ETA: 4 mins</span>
+    </div>
+  </section>
+
+  <!-- BOTTOM SHEET (36vh) -->
+  <section class="tracking-sheet">
+    <div class="sheet-handle"></div>
+
+    <!-- Collector Row -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 46px; height: 46px; border-radius: 50%; background: #DCFCE7; border: 2px solid var(--green-primary); display: flex; align-items: center; justify-content: center;">
+          <span class="material-icons-round" style="font-size: 24px; color: var(--green-primary);">electric_rickshaw</span>
+        </div>
+        <div>
+          <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--text-dark);">
+            Emmanuel Mensah
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-grey); display: flex; align-items: center; gap: 3px;">
+            <span>GW-4921-24 •</span>
+            <span class="material-icons-round" style="font-size: 12px; color: var(--amber-dark);">star</span>
+            <span>4.9 (342)</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="tel:+233248009643" class="btn btn-primary btn-sm" style="height: 38px; border-radius: 8px; padding: 0 14px; font-weight: 700; display: flex; align-items: center; gap: 4px; text-decoration: none;">
+        <span class="material-icons-round" style="font-size: 16px;">phone</span> Call
+      </a>
+    </div>
+
+    <!-- Progress Steps Tracker -->
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px; margin-bottom: 10px;">
+      <span class="step-pill done"><span class="material-icons-round" style="font-size: 13px;">check_circle</span> Confirmed</span>
+      <span style="font-size: 10px; color: var(--text-grey);">→</span>
+      <span class="step-pill active"><span class="material-icons-round" style="font-size: 13px;">sync</span> En Route</span>
+      <span style="font-size: 10px; color: var(--text-grey);">→</span>
+      <span class="step-pill">Arrived</span>
+      <span style="font-size: 10px; color: var(--text-grey);">→</span>
+      <span class="step-pill">Complete</span>
+    </div>
+
+    <!-- Amber Reminder -->
+    <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 8px 12px; font-size: 11.5px; color: #92400E; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+      <span style="display: flex; align-items: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 15px; color: var(--amber-dark);">payments</span>
+        <span>Have <strong>GH₵ 15-20</strong> ready at gate</span>
+      </span>
+      <span style="font-size: 10.5px; color: #B45309; font-weight: 600;">Direct to driver</span>
+    </div>
+
+    <!-- Action Buttons Row -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <button type="button" onclick="alert('Tracking link copied to clipboard!')" class="btn btn-grey btn-sm" style="height: 42px; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 16px;">share</span> Share Route
+      </button>
+
+      <!-- Simulation button for pickup completion -->
+      <a href="./complete.html" class="btn btn-primary btn-sm" style="height: 42px; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; text-decoration: none;">
+        <span>Pickup Complete</span>
+        <span class="material-icons-round" style="font-size: 16px;">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+</body>
+</html>

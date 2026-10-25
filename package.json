@@ -1,0 +1,22 @@
+{
+  "name": "borlaalert-gh",
+  "version": "1.0.0",
+  "description": "BorlaAlert GH — Civic Cleantech Progressive Web App (PWA) Platform for Greater Accra",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -p 3000",
+    "dev": "npx -y serve . -p 3000",
+    "serve": "npx -y serve . -p 8080"
+  },
+  "keywords": [
+    "pwa",
+    "progressive-web-app",
+    "cleantech",
+    "waste-management",
+    "ghana",
+    "accra",
+    "mobile-money"
+  ],
+  "author": "BorlaAlert GH Team",
+  "license": "UNLICENSED"
+}

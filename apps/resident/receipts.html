@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#16A34A">
+  <title>Receipts — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .receipt-item-row {
+      background: white;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">
+        <span class="material-icons-round icon-sm" style="color:white;">receipt_long</span>
+      </div>
+      <span class="nav-logo-text">Receipts</span>
+    </div>
+
+    <button type="button" onclick="alert('Downloading all Oct 2026 receipts in CSV/PDF format...')" class="btn btn-outline btn-sm" style="font-weight: 700; gap: 4px;">
+      <span class="material-icons-round icon-sm">download</span>
+      <span>Export All</span>
+    </button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content">
+
+    <!-- CRITICAL INFO BANNER -->
+    <div class="card card-amber" style="margin-top: 14px; border-left: 4px solid var(--amber); padding: 12px 14px;">
+      <div style="font-weight: 700; color: #92400E; font-size: 12.5px; display: flex; align-items: center; gap: 4px; margin-bottom: 2px;">
+        <span>ℹ️</span> Platform Fee Receipts Only
+      </div>
+      <p style="font-size: 12px; color: #92400E; line-height: 1.45;">
+        These receipts reflect only your <strong>GH₵ 2.00 platform booking fees</strong> paid via MoMo. Collector carting service fees are paid directly at your gate.
+      </p>
+    </div>
+
+    <!-- MONTH SELECTOR & SUMMARY CARD -->
+    <div class="card card-bordered">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-grey);">
+          Billing Period
+        </span>
+        <button type="button" style="background: #F1F5F9; border: 1px solid var(--border); border-radius: 8px; padding: 4px 10px; font-size: 12px; font-weight: 700; color: var(--text-dark); cursor: pointer;">
+          Oct 2026 ▼
+        </button>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+          <div style="font-size: 12px; color: var(--text-grey);">Total Platform Fees Paid</div>
+          <div style="font-family: var(--font-heading); font-size: 26px; font-weight: 800; color: var(--green-primary); line-height: 1.2;">
+            GH₵ 24.00
+          </div>
+        </div>
+        <span class="badge badge-green" style="font-size: 12px; padding: 4px 10px;">
+          12 pickups this month
+        </span>
+      </div>
+    </div>
+
+    <!-- RECEIPT LIST -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">OCTOBER 2026 STATEMENTS</div>
+
+      <!-- Receipt 1 -->
+      <div class="receipt-item-row">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: #DCFCE7; color: var(--green-dark); display: flex; align-items: center; justify-content: center; font-size: 14px;">
+            ✅
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; font-family: monospace; color: var(--text-dark);">
+              BRA-2026-04892
+            </div>
+            <div style="font-size: 11px; color: var(--text-grey);">
+              Standard • Emmanuel Mensah • Oct 24, 10:27 AM
+            </div>
+          </div>
+        </div>
+        <div style="text-align: right; flex-shrink: 0;">
+          <div style="font-size: 13.5px; font-weight: 700; color: var(--green-primary);">GH₵ 2.00</div>
+          <a href="./receipt.html" style="font-size: 11px; font-weight: 600; color: var(--green-dark); text-decoration: none;">View →</a>
+        </div>
+      </div>
+
+      <!-- Receipt 2 -->
+      <div class="receipt-item-row">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: #DCFCE7; color: var(--green-dark); display: flex; align-items: center; justify-content: center; font-size: 14px;">
+            ✅
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; font-family: monospace; color: var(--text-dark);">
+              BRA-2026-04711
+            </div>
+            <div style="font-size: 11px; color: var(--text-grey);">
+              Plastic Sachet • Kofi Mensah • Oct 21, 2:15 PM
+            </div>
+          </div>
+        </div>
+        <div style="text-align: right; flex-shrink: 0;">
+          <div style="font-size: 13.5px; font-weight: 700; color: var(--green-primary);">GH₵ 2.00</div>
+          <a href="./receipt.html" style="font-size: 11px; font-weight: 600; color: var(--green-dark); text-decoration: none;">View →</a>
+        </div>
+      </div>
+
+      <!-- Receipt 3 -->
+      <div class="receipt-item-row">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: #DCFCE7; color: var(--green-dark); display: flex; align-items: center; justify-content: center; font-size: 14px;">
+            ✅
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; font-family: monospace; color: var(--text-dark);">
+              BRA-2026-04508
+            </div>
+            <div style="font-size: 11px; color: var(--text-grey);">
+              Standard • Yaw Boateng • Oct 18, 8:40 AM
+            </div>
+          </div>
+        </div>
+        <div style="text-align: right; flex-shrink: 0;">
+          <div style="font-size: 13.5px; font-weight: 700; color: var(--green-primary);">GH₵ 2.00</div>
+          <a href="./receipt.html" style="font-size: 11px; font-weight: 600; color: var(--green-dark); text-decoration: none;">View →</a>
+        </div>
+      </div>
+
+      <!-- Receipt 4 -->
+      <div class="receipt-item-row">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: #DCFCE7; color: var(--green-dark); display: flex; align-items: center; justify-content: center; font-size: 14px;">
+            ✅
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; font-family: monospace; color: var(--text-dark);">
+              BRA-2026-04390
+            </div>
+            <div style="font-size: 11px; color: var(--text-grey);">
+              Standard • Ibrahim Salifu • Oct 14, 11:05 AM
+            </div>
+          </div>
+        </div>
+        <div style="text-align: right; flex-shrink: 0;">
+          <div style="font-size: 13.5px; font-weight: 700; color: var(--green-primary);">GH₵ 2.00</div>
+          <a href="./receipt.html" style="font-size: 11px; font-weight: 600; color: var(--green-dark); text-decoration: none;">View →</a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- RESIDENT BOTTOM NAVIGATION -->
+  <nav class="bottom-nav bottom-nav-4" aria-label="Main Navigation">
+    <a href="./home.html" class="nav-tab">
+      <span class="material-icons-round nav-tab-icon">home</span>
+      <span class="nav-tab-label">Home</span>
+    </a>
+    <a href="./pickups.html" class="nav-tab">
+      <span class="material-icons-round nav-tab-icon">inventory_2</span>
+      <span class="nav-tab-label">Pickups</span>
+    </a>
+    <a href="./receipts.html" class="nav-tab active" aria-current="page">
+      <span class="material-icons-round nav-tab-icon">receipt_long</span>
+      <span class="nav-tab-label">Receipts</span>
+    </a>
+    <a href="./account.html" class="nav-tab">
+      <span class="material-icons-round nav-tab-icon">person</span>
+      <span class="nav-tab-label">Account</span>
+    </a>
+  </nav>
+
+</body>
+</html>

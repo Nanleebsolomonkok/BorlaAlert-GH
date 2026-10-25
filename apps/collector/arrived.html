@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#15803D">
+  <title>Arrived at Gate — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .check-bounce {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--green-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px auto 10px;
+      box-shadow: 0 8px 24px rgba(22,163,74,0.3);
+      animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes bounce {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-dark);
+      background: white;
+      transition: all 0.15s;
+    }
+    .check-item.checked {
+      background: var(--green-light);
+      border-color: var(--green-border);
+      color: var(--green-dark);
+    }
+  </style>
+</head>
+<body style="padding-bottom: 30px;">
+
+  <main style="padding: 16px; max-width: 430px; margin: 0 auto; text-align: center;">
+
+    <!-- GREEN BOUNCE CHECKMARK -->
+    <div class="check-bounce">
+      <span class="material-icons-round" style="font-size: 38px; color: white;">place</span>
+    </div>
+
+    <h1 style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; color: var(--green-primary); margin-bottom: 2px;">
+      Arrived at Gate
+    </h1>
+    <div style="font-size: 13px; color: var(--text-grey); margin-bottom: 18px;">
+      Gate 14, Lagos Ave • East Legon
+    </div>
+
+    <!-- COMPLETION CHECKLIST -->
+    <div class="card card-bordered" style="text-align: left; padding: 14px; margin: 0 0 14px;">
+      <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: var(--text-grey); margin-bottom: 8px;">
+        Gate Clearance Checklist
+      </div>
+
+      <div class="check-item checked" onclick="toggleCheck(this)">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">check_box</span>
+        <span>Waste bins &amp; bags loaded onto Aboboyaa</span>
+      </div>
+
+      <div class="check-item checked" onclick="toggleCheck(this)">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">check_box</span>
+        <span>Curbside perimeter cleared &amp; swept</span>
+      </div>
+
+      <div class="check-item checked" onclick="toggleCheck(this)">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">check_box</span>
+        <span>Gate compound left clean</span>
+      </div>
+
+      <div class="check-item" onclick="toggleCheck(this)">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--border);">check_box_outline_blank</span>
+        <span>Vehicle tarp &amp; load secured for transit</span>
+      </div>
+    </div>
+
+    <!-- OPTIONAL PHOTO BOX -->
+    <div class="card card-bordered" style="background: #F8FAFC; border: 2px dashed #94A3B8; text-align: center; padding: 14px; margin: 0 0 14px; cursor: pointer;" onclick="alert('Camera opened: Capture photo of cleared gate area')">
+      <span class="material-icons-round" style="font-size: 28px; color: var(--green-primary); margin-bottom: 2px;">photo_camera</span>
+      <div style="font-size: 13px; font-weight: 700; color: var(--text-dark); margin-top: 4px;">
+        Photo of cleared area (Optional)
+      </div>
+      <div style="font-size: 11px; color: var(--text-grey); margin: 2px 0 8px;">
+        Builds household trust and gives you 5.0 ratings!
+      </div>
+      <button type="button" class="btn btn-outline btn-sm" style="margin: 0 auto; pointer-events: none;">
+        Take Photo
+      </button>
+    </div>
+
+    <!-- CRITICAL PAYMENT REMINDER AMBER (LARGE PROMINENT) -->
+    <div class="card card-amber" style="text-align: left; margin: 0 0 18px; padding: 16px; border-left: 6px solid var(--amber);">
+      <div style="font-family: var(--font-heading); font-size: 15.5px; font-weight: 800; color: #92400E; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--amber-dark);">payments</span>
+        <span>Collect Carting Fee at Gate</span>
+      </div>
+      <p style="font-size: 13px; color: #92400E; line-height: 1.45; margin: 0;">
+        Agree service carting fee directly with household (estimated <strong>GH₵ 15-20</strong>). Receive 100% in cash or personal MoMo directly.<br>
+        <strong>⚠️ This fee is settled at the gate, NOT charged through the app.</strong>
+      </p>
+    </div>
+
+    <!-- MARK COMPLETE ACTION -->
+    <div>
+      <a href="./home.html" class="btn btn-primary" style="height: 52px; font-size: 16px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;">
+        <span class="material-icons-round" style="font-size: 20px;">task_alt</span>
+        <span>Mark Pickup Complete</span>
+      </a>
+
+      <div style="margin-top: 12px;">
+        <a href="./navigation.html" style="font-size: 12.5px; color: var(--text-grey); text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <span class="material-icons-round" style="font-size: 15px;">arrow_back</span>
+          <span>Still at gate, wait</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function toggleCheck(el) {
+      el.classList.toggle('checked');
+      const icon = el.querySelector('.material-icons-round');
+      if (icon) {
+        if (el.classList.contains('checked')) {
+          icon.textContent = 'check_box';
+          icon.style.color = 'var(--green-primary)';
+        } else {
+          icon.textContent = 'check_box_outline_blank';
+          icon.style.color = 'var(--border)';
+        }
+      }
+    }
+  </script>
+</body>
+</html>

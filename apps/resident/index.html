@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta content="mobile_blank" name="shell-type">
+  <meta name="theme-color" content="#072415">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BorlaAlert">
+  <title>BorlaAlert GH — Household Resident</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <style>
+    @layer base {
+      html, body { width: 100vw; margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#072415] font-['Inter'] text-white antialiased pt-safe pb-safe min-h-screen flex flex-col select-none">
+  <main class="flex flex-col relative w-full min-h-screen justify-between items-center px-6 pt-3 pb-8 text-white overflow-hidden">
+    <!-- Ambient Subtle Dark Vignette & Soft Glow -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-emerald-500/15 blur-3xl"></div>
+      <div class="absolute -bottom-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-emerald-600/15 blur-3xl"></div>
+    </div>
+
+    <!-- Top Status Bar & Skip CTA -->
+    <div class="relative z-10 w-full flex justify-between items-center px-2 pt-2 text-white/90">
+      <span class="text-[14px] font-semibold tracking-tight">9:41</span>
+      <a href="./onboarding.html" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-emerald-300 text-xs font-semibold flex items-center gap-1 transition-all active:scale-95">
+        <span>Skip</span>
+        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+      </a>
+    </div>
+
+    <!-- Center Brand Identity -->
+    <div class="relative z-10 flex flex-col items-center justify-center my-auto text-center cursor-pointer" onclick="window.location.href='./onboarding.html'">
+      <!-- App Icon Emblem -->
+      <div class="relative mb-5 flex items-center justify-center">
+        <div class="absolute -inset-3 rounded-[32px] bg-emerald-400/20 blur-xl"></div>
+        <div class="relative w-24 h-24 rounded-[24px] bg-gradient-to-b from-[#0f4b28] to-[#062916] p-[2px] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-emerald-400/30 flex items-center justify-center">
+          <div class="w-full h-full rounded-[22px] bg-white flex items-center justify-center shadow-inner relative overflow-hidden p-2">
+            <img src="../../packages/brand-assets/logo.svg" alt="BorlaAlert Logo" class="w-full h-full object-contain">
+          </div>
+        </div>
+      </div>
+
+      <!-- Wordmark -->
+      <div class="flex items-center justify-center gap-1.5 mb-1.5">
+        <h1 class="text-[34px] font-extrabold text-white tracking-[-0.03em] font-['Epilogue']">
+          BorlaAlert<span class="text-emerald-400">.</span>
+        </h1>
+      </div>
+
+      <!-- Tagline -->
+      <p class="text-[13px] text-white/70 font-normal tracking-wide">
+        Smart waste collection across Greater Accra
+      </p>
+
+      <!-- Dynamic Progress Indicator -->
+      <div class="w-48 h-1.5 bg-white/10 rounded-full mt-6 overflow-hidden relative">
+        <div id="splash-progress-fill" class="h-full bg-gradient-to-r from-emerald-400 to-teal-300 rounded-full transition-all duration-300" style="width: 25%;"></div>
+      </div>
+      <span id="splash-percentage" class="text-[11px] text-emerald-300/80 font-mono mt-2">Connecting dispatch... 25%</span>
+    </div>
+
+    <!-- Bottom Actions & Civic Tag -->
+    <div class="relative z-10 w-full flex flex-col items-center gap-4">
+      <a href="./onboarding.html" class="w-full max-w-xs h-12 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-[0.98] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/40 transition-all">
+        <span>Get Started</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+      </a>
+
+      <div class="flex flex-col items-center gap-2">
+        <div class="flex items-center gap-1.5 text-white/50 text-[11px] font-medium tracking-wider uppercase">
+          <span>Greater Accra</span>
+          <span class="text-[8px] text-white/30">•</span>
+          <span>Ghana 🇬🇭</span>
+        </div>
+        <div class="w-32 h-1 rounded-full bg-white/20 mt-1"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    (function() {
+      let progress = 25;
+      const fillEl = document.getElementById('splash-progress-fill');
+      const textEl = document.getElementById('splash-percentage');
+
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 18) + 12;
+        if (progress >= 100) {
+          progress = 100;
+          if (fillEl) fillEl.style.width = '100%';
+          if (textEl) textEl.textContent = 'Ready! Loading Accra grid...';
+          clearInterval(interval);
+          setTimeout(() => {
+            window.location.href = './onboarding.html';
+          }, 450);
+        } else {
+          if (fillEl) fillEl.style.width = progress + '%';
+          if (textEl) textEl.textContent = `Connecting dispatch... ${progress}%`;
+        }
+      }, 180);
+    })();
+  </script>
+</body>
+</html>

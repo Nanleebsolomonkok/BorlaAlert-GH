@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html class="h-full bg-slate-950" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_dashboard" name="shell-type">
+  <title>BorlaAlert GH — Operations &amp; Dispatch</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#16a34a',
+              700: '#006b2c',
+              900: '#064e3b'
+            },
+            slate: {
+              850: '#0f172a',
+              900: '#0b1120',
+              950: '#030712'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Epilogue', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @layer base {
+      body {
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        overscroll-behavior: none;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0b1120;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    @keyframes radar-sweep {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .radar-beam {
+      animation: radar-sweep 6s linear infinite;
+      transform-origin: center center;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-slate-950 font-sans text-slate-100 antialiased h-full flex overflow-hidden selection:bg-brand-600 selection:text-white">
+  <!-- ==================== UBER/BOLT FLEET SIDEBAR NAVIGATION ==================== -->
+  <aside
+    class="w-64 flex-shrink-0 bg-slate-900/95 border-r border-slate-800/80 flex flex-col justify-between z-30 select-none">
+    <div class="flex flex-col h-full">
+      <!-- App Brand & Identity -->
+      <div class="h-16 px-4 flex items-center justify-between border-b border-slate-800/80 bg-slate-950/40">
+        <div class="flex items-center gap-3">
+          <div class="relative flex items-center justify-center">
+            <img alt="BorlaAlert GH Fleet"
+              class="h-9 w-9 rounded-xl object-contain ring-1 ring-brand-500/30 shadow-[0_0_15px_rgba(22,163,74,0.35)]"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1UTA1fRp3bLatg3iYvORB5aBstd3NIlooyAyTvcdvGDGhzoHt-s38rW2gdJNtMuNHXzXq-PXmpPegYbRU-4uP5dLY6pTdjvgxL1ZsrXs2OGl8tdkH0WHbIGHNjNbjRUzuhc5iKhoQyggJx9Fk3-onFAcs4pn258pWnNAn7ez2DrbzdpVPaeuUj-FpJD-oC5Glk1pmsCnQg9i6W1Hn938T5vdBAa4woKbnekgpqjbiF6_LGVxbjfEsILQxI">
+            <span
+              class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-brand-500 rounded-full ring-2 ring-slate-900 animate-pulse"></span>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-display font-bold text-[15px] tracking-tight text-white">BorlaAlert<span
+                  class="text-brand-500">.GH</span></span>
+              <span
+                class="px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider bg-brand-900/60 text-brand-400 border border-brand-500/30 rounded">OPS</span>
+            </div>
+            <span class="text-[10px] text-slate-400 font-mono tracking-wide">Operations &amp; Dispatch Console</span>
+          </div>
+        </div>
+        <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
+      </div>
+      <!-- Live Dispatch Grid Status Indicator -->
+      <div
+        class="mx-3 mt-3 px-3 py-2 rounded-lg bg-slate-800/40 border border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </div>
+          <span class="text-[11px] font-medium text-slate-300">Fleet Dispatch Grid</span>
+        </div>
+        <span
+          class="text-[10px] font-mono font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-1.5 py-0.5 rounded">99.4%
+          SLA</span>
+      </div>
+      <!-- Navigation Tree -->
+      <nav class="flex-1 px-3 py-3 overflow-y-auto space-y-5 text-[12px]">
+        <!-- Group: LIVE MOBILITY & DISPATCH -->
+        <div>
+          <span
+            class="px-2 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1.5">Live
+            Dispatch</span>
+          <div class="space-y-0.5">
+            <a class="flex items-center justify-between px-2.5 py-2 rounded-lg bg-brand-600/15 border border-brand-500/30 text-white font-medium group transition-all"
+              href="#">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-[19px] text-brand-400">dashboard_customize</span>
+                <span class="">Fleet Command Core</span>
+              </div>
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+            </a>
+            <a class="flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">radar</span>
+                <span class="">Live Fleet Radar</span>
+              </div>
+              <span
+                class="text-[10px] font-mono px-1.5 py-0.2 bg-slate-800 text-slate-400 rounded group-hover:text-slate-300">52
+                On-Grid</span>
+            </a>
+            <a class="flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">alt_route</span>
+                <span class="">Route Optimization</span>
+              </div>
+              <span class="text-[9px] font-mono text-emerald-400">Klottey/Ayawaso</span>
+            </a>
+          </div>
+        </div>
+        <!-- Group: FLEET VETTING & ASSETS -->
+        <div>
+          <span
+            class="px-2 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1.5">Fleet
+            Vetting</span>
+          <div class="space-y-0.5">
+            <a class="flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">verified_user</span>
+                <span class="">Collector Clearances</span>
+              </div>
+              <span
+                class="px-1.5 py-0.5 text-[10px] font-mono font-bold bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">2
+                Action</span>
+            </a>
+            <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <span
+                class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">two_wheeler</span>
+              <span class="">Aboboyaa Registry</span>
+            </a>
+            <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <span
+                class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">local_shipping</span>
+              <span class="">AMA Heavy Compactors</span>
+            </a>
+          </div>
+        </div>
+        <!-- Group: FINANCIAL & PLATFORM LEDGER -->
+        <div>
+          <span
+            class="px-2 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1.5">Financial
+            Ledger</span>
+          <div class="space-y-0.5">
+            <a class="flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">payments</span>
+                <span class="">Platform MoMo Fees</span>
+              </div>
+              <span class="font-mono text-[10px] text-slate-400">GH₵ 2.00/tx</span>
+            </a>
+            <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <span
+                class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">receipt_long</span>
+              <span class="">Household Manifests</span>
+            </a>
+            <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <span
+                class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">account_balance_wallet</span>
+              <span class="">MTN &amp; Telecel Cash</span>
+            </a>
+            <a class="flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <div class="flex items-center gap-2.5"><span
+                  class="material-symbols-outlined text-[19px] text-amber-400 group-hover:text-amber-300">hourglass_top</span><span
+                  class="">Business Reg: ORC Ghana</span></div><span
+                class="px-1.5 py-0.5 text-[9px] font-mono font-bold bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">Pending
+                ⏳</span>
+            </a>
+          </div>
+        </div>
+        <!-- Group: MUNICIPAL COMPLIANCE -->
+        <div>
+          <span
+            class="px-2 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1.5">Municipal
+            &amp; Ecology</span>
+          <div class="space-y-0.5">
+            <a class="flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">water</span>
+                <span class="">Korle Lagoon Shield</span>
+              </div>
+              <span class="text-[10px] font-mono text-emerald-400">3.2T Off-Drain</span>
+            </a>
+            <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <span
+                class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">policy</span>
+              <span class="">AMA Regulatory Reports</span>
+            </a>
+            <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all group"
+              href="#">
+              <span class="material-symbols-outlined text-[19px] text-slate-400 group-hover:text-slate-300">tune</span>
+              <span class="">Dispatch Protocols</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <!-- Sidebar Bottom Telemetry -->
+      <div class="p-3 border-t border-slate-800/80 bg-slate-950/70">
+        <div class="p-2.5 mb-2 rounded-lg bg-amber-950/40 border border-amber-500/30 flex flex-col gap-1">
+          <div class="flex items-center justify-between"><span
+              class="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1"><span
+                class="material-symbols-outlined text-[13px] text-amber-400">emoji_events</span> PITCH READY</span><span
+              class="text-[9px] font-mono font-semibold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">ACTIVE</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px] text-slate-300 font-mono"><span class="">Tony
+              Elumelu:</span><span class="text-white font-medium">Feb 2027</span></div>
+          <div class="flex items-center justify-between text-[10px] text-slate-300 font-mono"><span class="">Anzisha
+              Prize:</span><span class="text-amber-400 font-medium">Open Now</span></div>
+        </div>
+        <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-brand-400 text-[18px]">cloud_sync</span>
+            <div class="flex flex-col">
+              <span class="text-[11px] font-medium text-slate-200">EPA GH Uplink</span>
+              <span class="text-[9px] font-mono text-slate-400">Lat: 12ms · Sync 2s</span>
+            </div>
+          </div>
+          <span class="h-2 w-2 rounded-full bg-brand-400"></span>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- ==================== MAIN FLUID COMMAND CENTER ==================== -->
+  <div class="flex-1 flex flex-col h-full overflow-hidden bg-slate-950">
+    <!-- Top Command Header (Uber/Bolt Fleet Style) -->
+    <header
+      class="h-16 flex-shrink-0 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-6 flex items-center justify-between z-20">
+      <!-- Left: Real-time Telemetry & Global Search -->
+      <div class="flex items-center gap-4 flex-1 max-w-2xl">
+        <!-- Live Pill -->
+        <div
+          class="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-md bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-[11px] font-mono">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="">ACCRA METRO GRID • AMA ONLINE</span>
+        </div>
+        <!-- Global Search Field with Keybinding -->
+        <div class="relative flex-1">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-[18px]">search</span>
+          <input
+            class="w-full h-9 pl-9 pr-14 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-200 placeholder:text-slate-500 text-[12px] font-sans focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
+            placeholder="Search Ghana Card, Trip Manifest #, GhanaPost GPS (e.g. GA-183-9021)..." type="text">
+          <div class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+            <kbd
+              class="px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-800 border border-slate-700 rounded shadow-xs">⌘K</kbd>
+          </div>
+        </div>
+      </div>
+      <!-- Right: Fast Actions & Operator Identity -->
+      <div class="flex items-center gap-3">
+        <!-- Action Buttons -->
+        <button
+          class="h-9 px-3.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-[12px] font-medium flex items-center gap-2 transition-all cursor-pointer shadow-xs active:scale-[0.98]"
+          onclick="document.getElementById('broadcast-modal').classList.toggle('hidden')">
+          <span class="material-symbols-outlined text-[17px] text-amber-400">campaign</span>
+          <span class="">Broadcast Fleet Alert</span>
+        </button>
+        <button
+          class="h-9 px-3.5 rounded-lg bg-brand-600 hover:bg-brand-500 border border-brand-500 text-white text-[12px] font-medium flex items-center gap-2 transition-all cursor-pointer shadow-[0_0_15px_rgba(22,163,74,0.3)] active:scale-[0.98]">
+          <span class="material-symbols-outlined text-[17px]">download</span>
+          <span class="">Export AMA Manifest</span>
+        </button>
+        <!-- Divider -->
+        <div class="h-6 w-px bg-slate-800 mx-1"></div>
+        <!-- Quick Notifications -->
+        <button
+          class="relative w-9 h-9 rounded-lg bg-slate-800/70 border border-slate-700/70 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
+          <span class="material-symbols-outlined text-[19px]">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-slate-900"></span>
+        </button>
+        <!-- Dispatch Admin Profile (Solomon Nanleeb) -->
+        <div class="flex items-center gap-2.5 pl-1.5 py-1">
+          <div class="relative">
+            <div
+              class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-600 to-emerald-400 text-slate-950 font-bold flex items-center justify-center text-[13px] shadow-sm ring-1 ring-white/10 font-mono">
+              SN
+            </div>
+            <span
+              class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-slate-900"></span>
+          </div>
+          <div class="hidden lg:flex flex-col text-left">
+            <span class="text-[12px] font-semibold text-white leading-tight">Solomon Nanleeb</span>
+            <span class="text-[10px] font-mono text-emerald-400 leading-tight">Head of Dispatch Ops</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Scrollable Operations Viewport -->
+    <main class="flex-1 overflow-y-auto p-6 space-y-6">
+      <!-- ==================== EXECUTIVE HEADER STRIP ==================== -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-1 border-b border-slate-800/60">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-slate-400 mb-1">
+            <span class="text-brand-400 font-semibold">BORLAALERT COMMAND</span>
+            <span class="">/</span>
+            <span class="">GREATER ACCRA MUNICIPAL DISPATCH SECTOR</span>
+            <span class="">/</span>
+            <span class="text-slate-400">Platform ID: BRA-GH-2026</span>
+          </div>
+          <h1 class="text-2xl font-display font-bold text-white tracking-tight flex items-center gap-3">
+            Accra Mobility &amp; Clearing Operations
+            <span
+              class="text-xs font-sans font-normal px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300">Peak
+              Hours: 06:00 - 14:00</span>
+          </h1>
+        </div>
+        <!-- Scope & Date Pill Filter -->
+        <div class="flex items-center gap-2">
+          <div class="bg-slate-900 border border-slate-800 rounded-lg p-0.5 flex items-center text-[12px] font-medium">
+            <button class="px-3 py-1.5 rounded-md bg-brand-600 text-white font-semibold shadow-xs">Today (Live)</button>
+            <button class="px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition-colors">Past 7
+              Days</button>
+            <button class="px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition-colors">Nov
+              2026</button>
+          </div>
+          <div
+            class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-2 text-[12px] font-mono text-slate-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="">LIVE SYNC</span>
+          </div>
+        </div>
+      </div>
+      <!-- ==================== HIGH-PRECISION TELEMETRY KPI CARDS ==================== -->
+      <!-- Strictly adhering to Platform GHC 2.00 fee rules -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <!-- KPI 1: Platform Fee Revenue Only -->
+        <div
+          class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 relative overflow-hidden group hover:border-slate-700 transition-all shadow-sm">
+          <div
+            class="absolute -right-6 -bottom-6 w-28 h-28 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/15 transition-all">
+          </div>
+          <div class="flex items-center justify-between text-slate-400 mb-2">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Platform Fee
+              Revenue (Today)</span>
+            <span class="p-1.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+              <span class="material-symbols-outlined text-[18px]">payments</span>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-display font-extrabold text-white tracking-tight">GH₵ 847.00</span>
+              <span class="text-xs font-mono font-semibold text-emerald-400 flex items-center">
+                <span class="material-symbols-outlined text-[14px]">arrow_upward</span> +23.4%
+              </span>
+            </div>
+            <div class="flex items-center gap-1.5 text-[11px] font-mono text-slate-400">
+              <span class="text-slate-300 font-semibold">423 Dispatches</span>
+              <span class="">×</span>
+              <span class="text-brand-400 font-bold">GH₵ 2.00 fixed platform fee</span>
+            </div>
+          </div>
+          <!-- Micro Sparkline / Telemetry Footer -->
+          <div
+            class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+            <span class="text-emerald-400/90 font-mono font-medium flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              MoMo Instant Settled
+            </span>
+            <span class="font-mono text-slate-400">Hauler fees paid direct</span>
+          </div>
+        </div>
+        <!-- KPI 2: Active Fleet On-Duty -->
+        <div
+          class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 relative overflow-hidden group hover:border-slate-700 transition-all shadow-sm">
+          <div
+            class="absolute -right-6 -bottom-6 w-28 h-28 bg-amber-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-amber-500/15 transition-all">
+          </div>
+          <div class="flex items-center justify-between text-slate-400 mb-2">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Active Fleet
+              On-Grid</span>
+            <span class="p-1.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400">
+              <span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-display font-extrabold text-white tracking-tight">52</span>
+              <span class="text-sm font-sans font-medium text-slate-400">Haulers Live</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-slate-300 font-medium">
+              <span class="flex items-center gap-1 text-emerald-400 font-mono"><span
+                  class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 38 Aboboyaa</span>
+              <span class="text-slate-600">•</span>
+              <span class="flex items-center gap-1 text-sky-400 font-mono"><span
+                  class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> 14 Compactors</span>
+            </div>
+          </div>
+          <div
+            class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+            <span class="font-mono text-slate-300">East Legon, Osu, Adabraka</span>
+            <span class="font-mono text-emerald-400 font-semibold">100% AMA Licensed</span>
+          </div>
+        </div>
+        <!-- KPI 3: Dispatch SLA & Turnaround -->
+        <div
+          class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 relative overflow-hidden group hover:border-slate-700 transition-all shadow-sm">
+          <div
+            class="absolute -right-6 -bottom-6 w-28 h-28 bg-sky-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-sky-500/15 transition-all">
+          </div>
+          <div class="flex items-center justify-between text-slate-400 mb-2">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Dispatch SLA &amp;
+              ETA</span>
+            <span class="p-1.5 rounded-md bg-sky-500/10 border border-sky-500/20 text-sky-400">
+              <span class="material-symbols-outlined text-[18px]">timer</span>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-display font-extrabold text-white tracking-tight">14.2</span>
+              <span class="text-sm font-sans font-medium text-slate-400">min avg response</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-slate-300">
+              <span class="text-emerald-400 font-semibold">96.2% on-time</span>
+              <span class="text-slate-600">•</span>
+              <span class="text-slate-400">Target &lt; 20m</span>
+            </div>
+          </div>
+          <div
+            class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+            <span class="text-sky-400 font-mono font-medium">14 Active En Route</span>
+            <span class="text-amber-400 font-mono">3 Pending Assignment</span>
+          </div>
+        </div>
+        <!-- KPI 4: Municipal Environmental Diversion -->
+        <div
+          class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 relative overflow-hidden group hover:border-slate-700 transition-all shadow-sm">
+          <div
+            class="absolute -right-6 -bottom-6 w-28 h-28 bg-teal-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-teal-500/15 transition-all">
+          </div>
+          <div class="flex items-center justify-between text-slate-400 mb-2">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Korle &amp; Odaw
+              Diversion</span>
+            <span class="p-1.5 rounded-md bg-teal-500/10 border border-teal-500/20 text-teal-400">
+              <span class="material-symbols-outlined text-[18px]">eco</span>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-display font-extrabold text-white tracking-tight">4.82</span>
+              <span class="text-sm font-sans font-medium text-slate-400">Metric Tonnes</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-[11px] font-mono text-teal-400">
+              <span class="material-symbols-outlined text-[14px]">water</span>
+              <span class="">3.2T kept from Korle Lagoon basin</span>
+            </div>
+            <div class="flex items-center gap-1 text-[11px] font-mono text-emerald-400 font-semibold"><span
+                class="material-symbols-outlined text-[14px]">arrow_upward</span><span class="">23% less illegal dumping
+                Korle drainage zone</span></div>
+          </div>
+          <div
+            class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+            <span class="text-slate-300 font-mono">PET &amp; Organics Sort</span>
+            <span class="text-teal-400 font-mono font-semibold">EPA Protocol Clean</span>
+          </div>
+        </div>
+      </div>
+      <!-- ==================== MAIN DISPATCH WORKSPACE (8:4 SPLIT) ==================== -->
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+        <!-- ==================== LEFT: UBER-STYLE GIS RADAR & FLEET MATRIX (8 COLS) ==================== -->
+        <div class="xl:col-span-8 space-y-6">
+          <!-- Interactive GIS Radar Card -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm flex flex-col">
+            <!-- Map Card Header & Live Controls -->
+            <div
+              class="px-5 py-3.5 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90">
+              <div class="flex items-center gap-3">
+                <div class="relative flex items-center justify-center">
+                  <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span class="absolute w-6 h-6 rounded-full bg-emerald-500/30 animate-ping"></span>
+                </div>
+                <div>
+                  <h2 class="text-sm font-display font-bold text-white tracking-wide flex items-center gap-2">
+                    Greater Accra Real-Time Fleet Radar
+                    <span
+                      class="px-1.5 py-0.5 text-[10px] font-mono bg-slate-800 border border-slate-700 text-slate-300 rounded">GPS
+                      GIS v3.4</span>
+                  </h2>
+                  <p class="text-[11px] text-slate-400 font-mono">Active Corridors: Klottey Korle · Ayawaso West · Osu ·
+                    Circle Basin</p>
+                </div>
+              </div>
+              <!-- Radar Telemetry Badges & Refresh -->
+              <div class="flex items-center gap-2">
+                <div
+                  class="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-[11px] font-mono text-slate-300">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                  <span class="">52 Units Streaming</span>
+                </div>
+                <button
+                  class="h-8 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-[11px] font-mono flex items-center gap-1.5 transition-colors">
+                  <span class="material-symbols-outlined text-[15px] text-emerald-400">sync</span>
+                  <span class="">Auto 5s</span>
+                </button>
+              </div>
+            </div>
+            <!-- Fleet Filter Chips (Uber Style) -->
+            <div
+              class="px-5 py-2.5 bg-slate-950/70 border-b border-slate-800/80 flex flex-wrap items-center gap-2 text-xs">
+              <button
+                class="px-3 py-1 rounded-md bg-brand-600 text-white font-medium text-[11px] flex items-center gap-1.5 shadow-xs">
+                <span class="">All Units</span>
+                <span class="px-1 rounded bg-brand-700 text-[10px] font-mono">52</span>
+              </button>
+              <button
+                class="px-3 py-1 rounded-md bg-slate-800/70 hover:bg-slate-800 text-slate-300 text-[11px] flex items-center gap-1.5 border border-slate-700 transition-colors">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="">Active Pickups</span>
+                <span class="text-slate-400 font-mono">41</span>
+              </button>
+              <button
+                class="px-3 py-1 rounded-md bg-slate-800/70 hover:bg-slate-800 text-slate-300 text-[11px] flex items-center gap-1.5 border border-slate-700 transition-colors">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span class="">Idle / Standby</span>
+                <span class="text-slate-400 font-mono">8</span>
+              </button>
+              <button
+                class="px-3 py-1 rounded-md bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 text-[11px] flex items-center gap-1.5 border border-rose-800/50 transition-colors">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                <span class="">High Delay Alert (&gt;15m)</span>
+                <span class="text-rose-400 font-mono font-bold">3</span>
+              </button>
+              <div class="ml-auto hidden md:flex items-center gap-2 text-[11px] font-mono text-slate-400">
+                <span class="">Density:</span>
+                <span class="text-brand-400 font-semibold">East Legon Surge 1.4x</span>
+              </div>
+            </div>
+            <!-- Map Vector Canvas Viewport -->
+            <div class="relative w-full h-[460px] bg-slate-950 overflow-hidden select-none">
+              <!-- Map Geographic Vector Simulation (Clean Dark Cartography of Accra) -->
+              <div class="w-full h-full bg-cover bg-center opacity-45 mix-blend-luminosity filter contrast-125"
+                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAr-KtAMaC8mZ8UlmaJI7oNtT5mnEIkCswfo0IrrfrDywEcUs1KaUg_JqhqcPu_mF3fRUH1kN6MbwJXFbhEyphUZED8JWEge6rJfkyyrtpDqb5kHqLZDO_6-0nXgqIUnrdWyrizUUSW4G4puKwGDxp3iMwjtvvfX8V_gAlze0qLn18wQJD0-XOvGcmqtegrfjcZ-aJB7sYYTIyUnKJ8ls3b0NvHcuBxT-uuxVmtT9EWQU0WShpmZ_zo')">
+              </div>
+              <!-- High-Contrast Vector Grid & Concentric Telemetry Rings -->
+              <div class="absolute inset-0 bg-slate-950/60 pointer-events-none"></div>
+              <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20"
+                xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern height="48" id="telemetry-grid" patternUnits="userSpaceOnUse" width="48">
+                    <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#38bdf8" stroke-width="0.5"></path>
+                  </pattern>
+                </defs>
+                <rect fill="url(#telemetry-grid)" height="100%" width="100%"></rect>
+                <circle cx="50%" cy="48%" fill="none" r="120" stroke="#10b981" stroke-dasharray="3 3"
+                  stroke-width="0.8"></circle>
+                <circle cx="50%" cy="48%" fill="none" r="220" stroke="#10b981" stroke-dasharray="6 6"
+                  stroke-width="0.8"></circle>
+                <circle cx="50%" cy="48%" fill="none" r="320" stroke="#38bdf8" stroke-width="0.5"></circle>
+              </svg>
+              <!-- Radar Beam Simulation Effect -->
+              <div
+                class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none opacity-20">
+                <div class="w-full h-full rounded-full border border-emerald-500/40 relative">
+                  <div class="absolute inset-0 rounded-full radar-beam"
+                    style="background: conic-gradient(from 0deg at 50% 50%, rgba(16, 185, 129, 0.4) 0deg, transparent 60deg);">
+                  </div>
+                </div>
+              </div>
+              <!-- GPS PINS / VEHICLE TELEMETRY OVERLAYS -->
+              <!-- Pin 1: East Legon Pickup Hub (Aboboyaa Trike #AB-104) -->
+              <div class="absolute top-20 left-36 group cursor-pointer">
+                <div class="relative flex items-center justify-center">
+                  <span class="absolute w-8 h-8 rounded-full bg-emerald-500/30 animate-ping"></span>
+                  <div
+                    class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)] border border-emerald-400/50">
+                    <span class="material-symbols-outlined text-[18px]">electric_moped</span>
+                  </div>
+                </div>
+                <!-- Interactive Tooltip Pill -->
+                <div
+                  class="mt-1.5 -ml-12 w-48 bg-slate-900/95 border border-slate-700/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg shadow-xl text-left pointer-events-none group-hover:scale-105 transition-all">
+                  <div class="flex items-center justify-between text-[10px]">
+                    <span class="font-mono font-bold text-white">AB-104 (Trike)</span>
+                    <span class="text-emerald-400 font-mono font-bold">24 km/h</span>
+                  </div>
+                  <div class="text-[11px] font-medium text-slate-200">Kweku Addo · East Legon</div>
+                  <div
+                    class="flex items-center justify-between mt-1 text-[9px] font-mono text-slate-400 border-t border-slate-800 pt-1">
+                    <span class="">ETA: 4 mins</span>
+                    <span class="text-emerald-400">Platform: GH₵ 2.00</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Pin 2: Osu Oxford Street AMA Compactor (CP-08) -->
+              <div class="absolute top-52 left-1/3 group cursor-pointer">
+                <div class="relative flex items-center justify-center">
+                  <span class="absolute w-10 h-10 rounded-full bg-sky-500/30 animate-pulse"></span>
+                  <div
+                    class="w-9 h-9 rounded-lg bg-sky-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(56,189,248,0.5)] border border-sky-400/50">
+                    <span class="material-symbols-outlined text-[19px]">local_shipping</span>
+                  </div>
+                </div>
+                <div
+                  class="mt-1.5 -ml-10 w-44 bg-slate-900/95 border border-slate-700/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg shadow-xl text-left pointer-events-none group-hover:scale-105 transition-all">
+                  <div class="flex items-center justify-between text-[10px]">
+                    <span class="font-mono font-bold text-white">CP-08 (Compactor)</span>
+                    <span class="text-sky-400 font-mono">AMA Fleet</span>
+                  </div>
+                  <div class="text-[11px] font-medium text-slate-200">Osu Coastal Corridor</div>
+                  <div
+                    class="flex items-center justify-between mt-1 text-[9px] font-mono text-slate-400 border-t border-slate-800 pt-1">
+                    <span class="">Load: 3.4 Metric T</span>
+                    <span class="text-sky-300">En Route Dump</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Pin 3: Korle Lagoon Basin — Urgent Delay Alert -->
+              <div class="absolute bottom-28 right-1/3 group cursor-pointer">
+                <div class="relative flex items-center justify-center">
+                  <span class="absolute w-10 h-10 rounded-full bg-rose-500/50 animate-ping"></span>
+                  <div
+                    class="w-8 h-8 rounded-lg bg-rose-600 text-white flex items-center justify-center shadow-[0_0_15px_rgba(244,63,94,0.6)] border border-rose-400">
+                    <span class="material-symbols-outlined text-[18px]">priority_high</span>
+                  </div>
+                </div>
+                <div
+                  class="mt-1.5 -ml-16 w-52 bg-slate-900/95 border border-rose-800/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg shadow-xl text-left pointer-events-none group-hover:scale-105 transition-all">
+                  <div class="flex items-center justify-between text-[10px]">
+                    <span class="font-mono font-bold text-rose-400">HIGH DELAY (&gt;18m)</span>
+                    <span class="text-slate-400 font-mono">GA-029-4112</span>
+                  </div>
+                  <div class="text-[11px] font-medium text-slate-200">Korle Drainage Overflow Point</div>
+                  <div
+                    class="flex items-center justify-between mt-1 text-[9px] font-mono text-slate-400 border-t border-slate-800 pt-1">
+                    <span class="text-rose-300 font-semibold">Tricycle AB-44 Rerouted</span>
+                    <span class="text-white">ETA 3m</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Pin 4: Dzorwulu / Airport Residential Pin -->
+              <div class="absolute top-32 right-32 group cursor-pointer">
+                <div
+                  class="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center shadow-md border border-amber-400/40">
+                  <span class="material-symbols-outlined text-[16px]">electric_moped</span>
+                </div>
+                <div
+                  class="mt-1 -ml-10 w-36 bg-slate-900/95 border border-slate-700/80 px-2 py-1 rounded-md shadow-md text-left pointer-events-none">
+                  <div class="text-[10px] font-mono font-bold text-slate-200">Dzorwulu Node 03</div>
+                  <div class="text-[9px] font-mono text-slate-400">18 Pickups Cleared</div>
+                </div>
+              </div>
+              <!-- Floating Map HUD Legend -->
+              <div
+                class="absolute bottom-4 left-4 bg-slate-900/95 border border-slate-800/90 backdrop-blur-md p-3 rounded-xl shadow-2xl flex flex-col gap-2 text-[11px] font-mono">
+                <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Accra GIS Map Layers</span>
+                <div class="flex items-center gap-2 text-slate-300">
+                  <span class="w-2.5 h-2.5 rounded bg-emerald-500 shadow-xs"></span>
+                  <span class="">Active Aboboyaa Tricycle (38)</span>
+                </div>
+                <div class="flex items-center gap-2 text-slate-300">
+                  <span class="w-2.5 h-2.5 rounded bg-sky-500 shadow-xs"></span>
+                  <span class="">Heavy Compactor Hauler (14)</span>
+                </div>
+                <div class="flex items-center gap-2 text-slate-300">
+                  <span class="w-2.5 h-2.5 rounded bg-rose-500 animate-pulse"></span>
+                  <span class="">Corridor Delay / Spill Overflow (3)</span>
+                </div>
+              </div>
+              <!-- Zoom & Pan Controls -->
+              <div class="absolute top-4 right-4 flex flex-col gap-1">
+                <button
+                  class="w-8 h-8 rounded-lg bg-slate-900/90 border border-slate-700 text-slate-200 hover:bg-slate-800 flex items-center justify-center font-bold text-sm shadow-md transition-colors">+</button>
+                <button
+                  class="w-8 h-8 rounded-lg bg-slate-900/90 border border-slate-700 text-slate-200 hover:bg-slate-800 flex items-center justify-center font-bold text-sm shadow-md transition-colors">-</button>
+              </div>
+              <!-- Geolocation Tag -->
+              <div
+                class="absolute bottom-4 right-4 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-md text-[10px] font-mono text-slate-400">
+                Lat: 5.6037° N · Lon: 0.1870° W (Accra Center)
+              </div>
+            </div>
+            <!-- Sub-Metro Operational Status Table (Uber Fleet Style) -->
+            <div class="p-5 flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-sm font-display font-bold text-white tracking-wide">Accra Sub-Metro Municipal
+                    Performance</h3>
+                  <p class="text-[11px] text-slate-400 font-mono">Real-time GPS reconciliation with AMA Service Level
+                    Agreements</p>
+                </div>
+                <span
+                  class="text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded">All
+                  4 Corridors Monitored</span>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                  <thead>
+                    <tr
+                      class="bg-slate-800/50 text-slate-400 font-mono uppercase text-[10px] tracking-wider border-y border-slate-800">
+                      <th class="py-2.5 px-3">Sub-Metro Zone</th>
+                      <th class="py-2.5 px-3">Active Haulers</th>
+                      <th class="py-2.5 px-3">Avg ETA</th>
+                      <th class="py-2.5 px-3">Waste Cleared</th>
+                      <th class="py-2.5 px-3">SLA Compliance</th>
+                      <th class="py-2.5 px-3 text-right">Dispatch Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-800/60 font-medium">
+                    <!-- Zone 1 -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td class="py-3 px-3 text-white flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span class="font-semibold">Klottey Korle (Osu / Adabraka)</span>
+                      </td>
+                      <td class="py-3 px-3 text-slate-300 font-mono">18 Haulers (12 Trikes)</td>
+                      <td class="py-3 px-3 text-emerald-400 font-mono">11.8 mins</td>
+                      <td class="py-3 px-3 text-slate-200 font-mono font-semibold">1,620 kg</td>
+                      <td class="py-3 px-3">
+                        <div class="flex items-center gap-2">
+                          <div class="w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="w-[96%] h-full bg-emerald-500 rounded-full"></div>
+                          </div>
+                          <span class="text-[11px] font-mono text-emerald-400 font-bold">96%</span>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3 text-right">
+                        <button
+                          class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] font-mono transition-colors">Inspect
+                          GIS</button>
+                      </td>
+                    </tr>
+                    <!-- Zone 2 -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td class="py-3 px-3 text-white flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span class="font-semibold">Ayawaso West (East Legon / Dzorwulu)</span>
+                      </td>
+                      <td class="py-3 px-3 text-slate-300 font-mono">16 Haulers (8 Compactors)</td>
+                      <td class="py-3 px-3 text-emerald-400 font-mono">14.1 mins</td>
+                      <td class="py-3 px-3 text-slate-200 font-mono font-semibold">1,840 kg</td>
+                      <td class="py-3 px-3">
+                        <div class="flex items-center gap-2">
+                          <div class="w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="w-[92%] h-full bg-emerald-500 rounded-full"></div>
+                          </div>
+                          <span class="text-[11px] font-mono text-emerald-400 font-bold">92%</span>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3 text-right">
+                        <button
+                          class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] font-mono transition-colors">Inspect
+                          GIS</button>
+                      </td>
+                    </tr>
+                    <!-- Zone 3 -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td class="py-3 px-3 text-white flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                        <span class="font-semibold">Accra Central / Jamestown</span>
+                      </td>
+                      <td class="py-3 px-3 text-slate-300 font-mono">11 Haulers (Trikes)</td>
+                      <td class="py-3 px-3 text-amber-400 font-mono">16.5 mins</td>
+                      <td class="py-3 px-3 text-slate-200 font-mono font-semibold">980 kg</td>
+                      <td class="py-3 px-3">
+                        <div class="flex items-center gap-2">
+                          <div class="w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="w-[84%] h-full bg-amber-500 rounded-full"></div>
+                          </div>
+                          <span class="text-[11px] font-mono text-amber-400 font-bold">84%</span>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3 text-right">
+                        <button
+                          class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] font-mono transition-colors">Inspect
+                          GIS</button>
+                      </td>
+                    </tr>
+                    <!-- Zone 4 -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td class="py-3 px-3 text-white flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                        <span class="font-semibold text-rose-300">Korle Klottey Coastal Drain Zone</span>
+                      </td>
+                      <td class="py-3 px-3 text-slate-300 font-mono">7 Haulers (Low Density)</td>
+                      <td class="py-3 px-3 text-rose-400 font-mono">22.4 mins</td>
+                      <td class="py-3 px-3 text-slate-200 font-mono font-semibold">380 kg</td>
+                      <td class="py-3 px-3">
+                        <div class="flex items-center gap-2">
+                          <div class="w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="w-[71%] h-full bg-rose-500 rounded-full"></div>
+                          </div>
+                          <span class="text-[11px] font-mono text-rose-400 font-bold">71%</span>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3 text-right">
+                        <button
+                          class="px-2.5 py-1 rounded bg-rose-950/80 hover:bg-rose-900 border border-rose-800 text-rose-200 text-[11px] font-mono transition-colors">Reinforce
+                          Corridor</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ==================== RIGHT: LIVE DISPATCH LOG & HAULER VETTING (4 COLS) ==================== -->
+        <div class="xl:col-span-4 space-y-6">
+          <!-- Uber-style Live Dispatch Stream -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-1 border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-400 text-[20px]">dynamic_feed</span>
+                <h3 class="text-sm font-display font-bold text-white tracking-wide">Live Dispatch Feed</h3>
+              </div>
+              <span
+                class="text-[10px] font-mono font-bold text-emerald-400 px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-800/80 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                ACTIVE LOG
+              </span>
+            </div>
+            <!-- Feed Items -->
+            <div class="space-y-3 max-h-[360px] overflow-y-auto pr-1">
+              <!-- Dispatch Entry 1 -->
+              <div
+                class="p-3 rounded-lg bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition-all space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="text-xs font-mono font-bold text-white">#BRA-2026-8021</span>
+                  </div>
+                  <span class="text-[10px] font-mono text-slate-500">2 mins ago</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-300">Hauler: <strong class="text-white font-medium">Ibrahim
+                      Tetteh</strong></span>
+                  <span
+                    class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-slate-800 text-emerald-400 border border-slate-700">GA-183-9021</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-1 border-t border-slate-800/80">
+                  <span class="text-slate-400 font-mono">12.4 kg PET Plastics</span>
+                  <!-- Strictly GHC 2.00 Platform Fee Badge -->
+                  <span
+                    class="font-mono font-bold text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Platform:
+                    GH₵ 2.00</span>
+                </div>
+              </div>
+              <!-- Dispatch Entry 2 -->
+              <div
+                class="p-3 rounded-lg bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition-all space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                    <span class="text-xs font-mono font-bold text-sky-300">#BRA-2026-8020 (En Route)</span>
+                  </div>
+                  <span class="text-[10px] font-mono text-slate-500">4 mins ago</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-300">Hauler: <strong class="text-white font-medium">Kwesi Boateng
+                      (Trike)</strong></span>
+                  <span
+                    class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">GS-044-1299</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-1 border-t border-slate-800/80">
+                  <span class="text-slate-400 font-mono">Est. 18.0 kg Organic Household</span>
+                  <span class="font-mono text-[10px] text-sky-400">ETA: 4m · Platform: GH₵ 2.00</span>
+                </div>
+              </div>
+              <!-- Dispatch Entry 3 -->
+              <div
+                class="p-3 rounded-lg bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition-all space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="text-xs font-mono font-bold text-white">#BRA-2026-8019</span>
+                  </div>
+                  <span class="text-[10px] font-mono text-slate-500">9 mins ago</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-300">Hauler: <strong class="text-white font-medium">Samuel
+                      Adjei</strong></span>
+                  <span
+                    class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-slate-800 text-emerald-400 border border-slate-700">GA-492-3001</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-1 border-t border-slate-800/80">
+                  <span class="text-slate-400 font-mono">9.2 kg Cardboard &amp; Metal</span>
+                  <span
+                    class="font-mono font-bold text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Platform:
+                    GH₵ 2.00</span>
+                </div>
+              </div>
+              <div
+                class="p-3 rounded-lg bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition-all space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span><span
+                      class="text-xs font-mono font-bold text-white">#BRA-2026-8018</span></div><span
+                    class="text-[10px] font-mono text-slate-500">10 mins ago</span>
+                </div>
+                <div class="flex items-center justify-between text-xs"><span class="text-slate-300">Hauler: <strong
+                      class="text-white font-medium">Abena Owusu</strong></span><span
+                    class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-slate-800 text-emerald-400 border border-slate-700">GA-771-0045</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-1 border-t border-slate-800/80">
+                  <div class="flex items-center gap-1.5"><span class="text-slate-400 font-mono">Pure Water Sachets
+                      8.2kg</span><span
+                      class="font-mono font-semibold text-[10px] px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">+150
+                      Eco Points Issued</span></div><span
+                    class="font-mono font-bold text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Platform:
+                    GH₵ 2.00</span>
+                </div>
+              </div>
+              <!-- Dispatch Entry 4: Overflow Warning -->
+              <div class="p-3 rounded-lg bg-rose-950/30 border border-rose-900/60 transition-all space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px] text-rose-400">warning</span>
+                    <span class="text-xs font-mono font-bold text-rose-300">Overflow Alert Flagged</span>
+                  </div>
+                  <span class="text-[10px] font-mono text-rose-400">12 mins ago</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-300">Citizen: <strong class="text-white font-medium">Osu Ring Road Public
+                      Bin</strong></span>
+                  <span
+                    class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-slate-900 text-rose-300 border border-rose-800">GA-081-0021</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-1 border-t border-rose-900/40">
+                  <span class="text-rose-300 font-mono">Tricycle AB-44 auto-assigned</span>
+                  <span class="font-mono font-bold text-[10px] text-rose-400 uppercase">Urgent Priority</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fast Driver Vetting & AMA Compliance Panel -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-1 border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-400 text-[20px]">badge</span>
+                <h3 class="text-sm font-display font-bold text-white tracking-wide">Hauler Biometric Clearances</h3>
+              </div>
+              <span
+                class="text-[10px] font-mono font-bold text-amber-400 px-2 py-0.5 rounded-full bg-amber-950/60 border border-amber-800/60">
+                2 Pending AMA Vetting
+              </span>
+            </div>
+            <!-- Applicant 1 -->
+            <div class="p-3 rounded-lg bg-slate-800/40 border border-slate-800 space-y-2.5">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-white">Kwame Mensah</span>
+                    <span
+                      class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700">Ayawaso
+                      West</span>
+                  </div>
+                  <div class="text-[11px] text-slate-400 font-mono mt-0.5">Aboboyaa Trike · Reg: <span
+                      class="text-slate-200 font-bold">GW-2940-23</span></div>
+                  <div class="text-[10px] font-mono text-emerald-400">Ghana Card: GHA-719302194-2 (Biometric Verified)
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 pt-1">
+                <button
+                  class="flex-1 py-1.5 rounded-md bg-brand-600 hover:bg-brand-500 text-white font-mono text-[11px] font-semibold transition-colors shadow-xs">
+                  Approve &amp; License
+                </button>
+                <button
+                  class="px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-[11px] border border-slate-700 transition-colors">
+                  Inspect Docs
+                </button>
+              </div>
+            </div>
+            <!-- Applicant 2 -->
+            <div class="p-3 rounded-lg bg-slate-800/40 border border-slate-800 space-y-2.5">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-white">Nii Ayitey Hammond</span>
+                    <span
+                      class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700">Klottey
+                      Korle</span>
+                  </div>
+                  <div class="text-[11px] text-slate-400 font-mono mt-0.5">4-Ton Compactor · Reg: <span
+                      class="text-slate-200 font-bold">GC-4192-22</span></div>
+                  <div class="text-[10px] font-mono text-emerald-400">Ghana Card: GHA-892401822-0 (Roadworthy OK)</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 pt-1">
+                <button
+                  class="flex-1 py-1.5 rounded-md bg-brand-600 hover:bg-brand-500 text-white font-mono text-[11px] font-semibold transition-colors shadow-xs">
+                  Approve &amp; License
+                </button>
+                <button
+                  class="px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-[11px] border border-slate-700 transition-colors">
+                  Inspect Docs
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Environmental Recycling Breakdown Card -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3">
+            <div class="flex items-center justify-between pb-1 border-b border-slate-800">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Korle Diversion
+                Streams</span>
+              <span class="text-[10px] font-mono text-emerald-400 font-bold">AMA 2026 Goal</span>
+            </div>
+            <div class="space-y-2.5 pt-1 text-xs">
+              <div>
+                <div class="flex justify-between text-[11px] font-mono mb-1">
+                  <span class="text-slate-300">PET &amp; High-Density Plastics</span>
+                  <span class="text-emerald-400 font-bold">AMA 2026 Goal</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="w-[74%] h-full bg-emerald-500 rounded-full"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-[11px] font-mono mb-1">
+                  <span class="text-slate-300">Organic Compost Stream</span>
+                  <span class="text-amber-400 font-bold">AMA 2026 Goal</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="w-[62%] h-full bg-amber-500 rounded-full"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-[11px] font-mono mb-1">
+                  <span class="text-slate-300">Scrap Metal &amp; E-Waste</span>
+                  <span class="text-teal-400 font-bold">AMA 2026 Goal</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="w-[88%] h-full bg-teal-500 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+            <!-- CO2 Metric -->
+            <div class="mt-3 p-3 rounded-lg bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-emerald-400 text-[18px]">nest_eco_leaf</span>
+                <div class="flex flex-col">
+                  <span class="text-xs font-semibold text-white">CO2 Offset Protocol</span>
+                  <span class="text-[9px] font-mono text-slate-400">Validated by EPA Ghana</span>
+                </div>
+              </div>
+              <span class="text-sm font-mono font-bold text-emerald-400">AMA 2026 Goal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- ==================== BROADCAST MODAL (TOGGLEABLE) ==================== -->
+    <div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4"
+      id="broadcast-modal">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl max-w-lg w-full p-6 shadow-2xl flex flex-col gap-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-amber-400 text-[22px]">campaign</span>
+            <h2 class="text-sm font-display font-bold text-white tracking-wide">Fleet Push Broadcast</h2>
+          </div>
+          <button
+            class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+            onclick="document.getElementById('broadcast-modal').classList.add('hidden')">
+            <span class="material-symbols-outlined text-[16px]">close</span>
+          </button>
+        </div>
+        <p class="text-xs text-slate-300">
+          Instant Push Notification and SMS broadcast to all 52 active licensed haulers across Accra Metropolitan
+          Dispatch sectors.
+        </p>
+        <div class="space-y-1">
+          <label class="text-[11px] font-mono text-slate-400 uppercase font-semibold">Target Sector Corridor</label>
+          <select
+            class="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-sans focus:outline-none focus:border-brand-500">
+            <option>All Corridors (All 52 Operators)</option>
+            <option>Klottey Korle (18 Operators)</option>
+            <option>Ayawaso West (16 Operators)</option>
+            <option>Tricycle (Aboboyaa) Fleet Only (38 Operators)</option>
+            <option>Compactor Trucks Only (14 Operators)</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="text-[11px] font-mono text-slate-400 uppercase font-semibold">Broadcast Message (English / Twi /
+            Ga)</label>
+          <textarea
+            class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-sans placeholder:text-slate-500 focus:outline-none focus:border-brand-500"
+            placeholder="e.g. Surge alert near Osu Danquah Circle. Priority collection bonus active for next 60 mins."
+            rows="3">          </textarea>
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-800">
+          <button class="h-9 px-4 rounded-lg text-slate-400 hover:text-white text-xs font-mono transition-colors"
+            onclick="document.getElementById('broadcast-modal').classList.add('hidden')">
+            Cancel
+          </button>
+          <button
+            class="h-9 px-5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-mono font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(22,163,74,0.3)] transition-all"
+            onclick="alert('Fleet Alert transmitted to 52 Accra operators.'); document.getElementById('broadcast-modal').classList.add('hidden');">
+            <span class="material-symbols-outlined text-[16px]">send</span>
+            <span class="">Send Fleet Alert</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="../../shared-pwa.js"></script>
+</body>
+
+</html>

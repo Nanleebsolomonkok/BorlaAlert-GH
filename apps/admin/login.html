@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#15803D">
+  <title>Admin Login — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    body {
+      background: #15803D;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .admin-login-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN BRANDING -->
+  <div style="text-align: center; margin-bottom: 20px; color: white;">
+    <div style="width: 58px; height: 58px; border-radius: 16px; background: white; color: #15803D; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.2);">
+      <span class="material-icons-round" style="font-size: 32px; color: #15803D;">admin_panel_settings</span>
+    </div>
+    <h1 style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; line-height: 1.1;">
+      BorlaAlert GH
+    </h1>
+    <div style="font-size: 13px; color: rgba(255,255,255,0.9); margin-top: 2px;">
+      Admin &amp; Municipal Control Panel
+    </div>
+  </div>
+
+  <!-- LOGIN CARD -->
+  <div class="admin-login-card">
+    <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px;">
+      Staff Login
+    </h2>
+
+    <form onsubmit="event.preventDefault(); window.location.href='./dashboard.html';">
+      
+      <div style="margin-bottom: 14px;">
+        <label style="font-size: 12.5px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 5px;">
+          Username or Official Email
+        </label>
+        <input type="text" required value="solomon.nanleeb@borlaalertgh.com" style="width: 100%; height: 46px; border: 1.5px solid var(--border); border-radius: 10px; padding: 0 12px; font-family: var(--font-body); font-size: 13.5px; outline: none; background: #F8FAFC;">
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="font-size: 12.5px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 5px;">
+          Password
+        </label>
+        <div style="position: relative;">
+          <input type="password" id="adminPwd" required value="••••••••••••" style="width: 100%; height: 46px; border: 1.5px solid var(--border); border-radius: 10px; padding: 0 38px 0 12px; font-family: var(--font-body); font-size: 13.5px; outline: none; background: #F8FAFC;">
+          <button type="button" aria-label="Toggle password visibility" onclick="const p = document.getElementById('adminPwd'); const isPw = p.type === 'password'; p.type = isPw ? 'text' : 'password'; this.querySelector('.material-icons-round').textContent = isPw ? 'visibility_off' : 'visibility';" style="position: absolute; right: 8px; top: 11px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px;">
+            <span class="material-icons-round" style="font-size: 20px; color: var(--text-grey);">visibility</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; font-size: 12.5px;">
+        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--text-grey);">
+          <input type="checkbox" checked style="accent-color: var(--green-primary);">
+          <span>Remember device</span>
+        </label>
+        <a href="../../index.html" style="color: var(--green-primary); font-weight: 600; text-decoration: none;">
+          Exit to Public
+        </a>
+      </div>
+
+      <!-- SECURE LOGIN BUTTON -->
+      <button type="submit" class="btn btn-primary" style="height: 50px; font-size: 15.5px; font-weight: 700; border-radius: 10px;">
+        Secure Login →
+      </button>
+
+      <div style="text-align: center; margin-top: 14px; font-size: 11.5px; color: var(--text-grey); display: flex; align-items: center; justify-content: center; gap: 4px;">
+        <span class="material-icons-round" style="font-size: 14px;">lock</span> 256-bit SSL Encrypted • Authorized Staff Only
+      </div>
+
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top: 24px; text-align: center; color: rgba(255,255,255,0.8); font-size: 12px;">
+    <div>BorlaAlert GH Admin v1.0 • Built for AMA &amp; EPA</div>
+    <div style="font-weight: 700; color: white; margin-top: 2px;">Accra, Ghana</div>
+  </div>
+
+</body>
+</html>
