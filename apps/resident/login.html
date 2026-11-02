@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta content="mobile_stack" name="shell-type">
+  <meta name="theme-color" content="#006b2c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Resident Sign In — BorlaAlert GH</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/preconnect" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <style>
+    @layer base {
+      html, body { width: 100vw; margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    :focus-visible {
+      outline: 2px solid #006b2c;
+      outline-offset: 2px;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-slate-900 min-h-screen flex flex-col font-['Inter'] antialiased">
+  <!-- Top Navigation -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur-md pt-safe border-b border-slate-100">
+    <div class="h-14 px-4 max-w-md mx-auto flex items-center justify-between">
+      <a href="./onboarding.html" aria-label="Go back to Onboarding" class="w-10 h-10 -ml-2 flex items-center justify-center rounded-full text-slate-700 hover:bg-slate-100 active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+      </a>
+      <span class="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+        Resident Portal
+      </span>
+      <a href="../../support.html" class="h-9 px-3 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1 text-xs font-semibold transition-colors">
+        <span class="material-symbols-outlined text-[16px]">help_outline</span>
+        <span>Help</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col relative w-full pt-16 bg-white pb-safe max-w-md mx-auto px-5">
+    
+    <!-- Brand & Heading -->
+    <div class="mt-4 mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-xl bg-[#006e2d] p-1.5 flex items-center justify-center shadow-xs">
+          <img src="../../packages/brand-assets/logo.svg" alt="BorlaAlert Logo" class="w-full h-full object-contain">
+        </div>
+        <div class="flex items-baseline gap-1.5">
+          <span class="font-['Epilogue'] text-[18px] text-slate-900 font-bold tracking-tight">BorlaAlert</span>
+          <span class="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 text-[10px] font-bold">GH</span>
+        </div>
+      </div>
+      <h1 class="font-['Epilogue'] text-[26px] text-slate-900 font-bold tracking-tight text-left leading-tight">
+        Sign in to your household
+      </h1>
+      <p class="mt-2 text-slate-600 text-sm leading-relaxed">
+        Enter your mobile number to access your household pickup dashboard and Eco-Points balance.
+      </p>
+    </div>
+
+    <!-- Phone Input Form -->
+    <form class="flex flex-col gap-4" id="loginForm" novalidate onsubmit="event.preventDefault(); handleContinue();">
+      <div class="flex flex-col gap-1.5">
+        <label for="phoneInput" class="text-xs font-semibold text-slate-800">
+          Mobile Number (Ghana Network)
+        </label>
+        <div class="flex items-center w-full bg-slate-50 border border-slate-300 rounded-xl transition-all duration-200 focus-within:border-[#006b2c] focus-within:ring-2 focus-within:ring-emerald-700/15 focus-within:bg-white overflow-hidden shadow-xs" id="phoneInputContainer">
+          <div class="flex items-center gap-1.5 pl-3.5 pr-2.5 py-3 h-[54px] bg-slate-100/80 border-r border-slate-200 shrink-0">
+            <span class="text-[18px] leading-none" role="img" aria-label="Ghana Flag">🇬🇭</span>
+            <span class="text-sm text-slate-800 font-bold tracking-tight">+233</span>
+          </div>
+          <div class="flex-1 relative flex items-center px-3">
+            <input autocomplete="tel-national" class="w-full h-[54px] bg-transparent text-slate-900 font-mono text-[16px] font-semibold placeholder:text-slate-400 focus:outline-none tracking-wide" id="phoneInput" inputmode="numeric" maxlength="12" name="msisdn" placeholder="024 123 4567" required type="tel">
+            <button aria-label="Clear field" class="hidden w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" id="clearPhoneBtn" type="button">
+              <span class="material-symbols-outlined text-[18px]">cancel</span>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between px-1 min-h-[20px]">
+          <span class="text-[11px] text-red-600 font-medium hidden" id="loginPhoneError">Please enter a valid 10-digit Ghana mobile number.</span>
+          <span class="text-[11px] text-slate-500" id="carrierHint">4-digit verification code sent via SMS</span>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button class="w-full h-[52px] bg-[#006b2c] hover:bg-[#005423] active:scale-[0.985] text-white font-semibold text-[15px] rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#006b2c]" id="submitBtn" type="submit">
+        <span>Continue with Phone</span>
+        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+      </button>
+    </form>
+
+    <!-- Quick Demo Testing Shortcut -->
+    <div class="mt-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-2">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px] text-[#006b2c]">bolt</span>
+          Quick Evaluator Shortcut
+        </span>
+        <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded">Demo Data</span>
+      </div>
+      <p class="text-[12px] text-slate-600 leading-snug">
+        Load the pre-configured sample resident profile (Akua Mensah, East Legon) to review the app without filling forms.
+      </p>
+      <button type="button" onclick="loadSampleResident()" class="w-full h-10 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs">
+        <span class="material-symbols-outlined text-[16px] text-[#006b2c]">person</span>
+        <span>Sign in as Akua Mensah (Sample Profile)</span>
+      </button>
+    </div>
+
+    <!-- Create Account Link -->
+    <div class="pt-5 text-center">
+      <p class="text-sm text-slate-600">
+        New household in Greater Accra? 
+        <a href="./registration.html" class="font-bold text-[#006b2c] hover:underline ml-1">Create resident profile</a>
+      </p>
+    </div>
+
+    <!-- Bottom Legal & Disclaimers -->
+    <div class="mt-auto pt-8 pb-4 flex flex-col items-center text-center gap-2">
+      <p class="text-[11px] text-slate-500 leading-relaxed px-2">
+        By continuing, you agree to BorlaAlert's 
+        <a href="../../terms.html" class="font-semibold text-slate-700 underline hover:text-[#006b2c]">Terms of Service</a> &amp; 
+        <a href="../../privacy.html" class="font-semibold text-slate-700 underline hover:text-[#006b2c]">Privacy Policy</a>.
+      </p>
+      <div class="flex items-center gap-1.5 text-slate-400 text-[11px] font-medium">
+        <span class="material-symbols-outlined text-[14px]">shield</span>
+        <span>Local frontend demonstration • No sensitive data stored</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    (function() {
+      const input = document.getElementById('phoneInput');
+      const container = document.getElementById('phoneInputContainer');
+      const clearBtn = document.getElementById('clearPhoneBtn');
+      const carrierHint = document.getElementById('carrierHint');
+      const errorMsg = document.getElementById('loginPhoneError');
+
+      if (!input || !container) return;
+
+      // Ghana Phone formatter: "024 123 4567"
+      function formatGhanaNumber(value) {
+        const clean = value.replace(/\D/g, '').substring(0, 10);
+        if (clean.length === 0) return '';
+        if (clean.length <= 3) return clean;
+        if (clean.length <= 6) return clean.slice(0, 3) + ' ' + clean.slice(3);
+        return clean.slice(0, 3) + ' ' + clean.slice(3, 6) + ' ' + clean.slice(6, 10);
+      }
+
+      input.addEventListener('input', function(e) {
+        const formatted = formatGhanaNumber(e.target.value);
+        e.target.value = formatted;
+
+        const raw = formatted.replace(/\s/g, '');
+        if (raw.length > 0) {
+          clearBtn?.classList.remove('hidden');
+        } else {
+          clearBtn?.classList.add('hidden');
+        }
+
+        // Ghanaian telecom detection feedback
+        if (raw.length >= 3) {
+          const prefix = raw.substring(0, 3);
+          if (['024', '054', '055', '059', '025'].includes(prefix)) {
+            carrierHint.textContent = 'MTN MoMo network detected';
+            carrierHint.className = 'text-[11px] font-semibold text-amber-700';
+          } else if (['020', '050'].includes(prefix)) {
+            carrierHint.textContent = 'Telecel Cash network detected';
+            carrierHint.className = 'text-[11px] font-semibold text-red-600';
+          } else if (['027', '057', '026'].includes(prefix)) {
+            carrierHint.textContent = 'AT Money network detected';
+            carrierHint.className = 'text-[11px] font-semibold text-blue-700';
+          } else {
+            carrierHint.textContent = 'Standard network number';
+            carrierHint.className = 'text-[11px] text-slate-500';
+          }
+        } else {
+          carrierHint.textContent = 'Simulated 4-digit demo verification code';
+          carrierHint.className = 'text-[11px] text-slate-500';
+        }
+      });
+
+      clearBtn?.addEventListener('click', function() {
+        input.value = '';
+        clearBtn.classList.add('hidden');
+        carrierHint.textContent = 'Simulated 4-digit demo verification code';
+        carrierHint.className = 'text-[11px] text-slate-500';
+        input.focus();
+      });
+
+      window.handleContinue = function() {
+        const raw = input.value.replace(/\s/g, '');
+        if (raw.length < 10 || !raw.startsWith('0')) {
+          container.classList.add('border-red-500', 'bg-red-50');
+          errorMsg?.classList.remove('hidden');
+          return;
+        }
+        
+        container.classList.remove('border-red-500', 'bg-red-50');
+        errorMsg?.classList.add('hidden');
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.innerHTML = `
+          <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+          <span>Generating Demo Code...</span>
+        `;
+        submitBtn.disabled = true;
+
+        if (window.BorlaStore) {
+          const current = window.BorlaStore.get();
+          window.BorlaStore.set({ 
+            user: { 
+              ...(current.user || {}), 
+              phone: input.value.trim(),
+              isRegistered: true 
+            } 
+          });
+        }
+
+        setTimeout(() => {
+          window.location.href = './otp.html';
+        }, 300);
+      };
+
+      window.loadSampleResident = function() {
+        if (window.BorlaStore) {
+          window.BorlaStore.set({
+            user: {
+              name: 'Akua Mensah',
+              phone: '024 582 1928',
+              role: 'resident',
+              address: 'House 14, Lagos Ave, East Legon',
+              gpsAddress: 'GA-183-9021',
+              zone: 'East Legon',
+              landmark: 'House 14 Lagos Ave, adjacent Shell',
+              ecoPoints: 0,
+              wallet: 'MTN Mobile Money',
+              isRegistered: true
+            }
+          });
+        }
+        window.location.href = './home.html';
+      };
+
+      // If user has stored phone, populate it
+      try {
+        if (window.BorlaStore) {
+          const u = window.BorlaStore.get()?.user;
+          if (u && u.phone && !input.value) {
+            input.value = u.phone;
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>

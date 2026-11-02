@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta content="mobile_blank" name="shell-type">
+  <meta name="theme-color" content="#072415">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BorlaAlert">
+  <title>BorlaAlert GH — Doorstep Waste Pickup, Greater Accra</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100vh; overscroll-behavior: none; }
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+
+    body {
+      background: #072415;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :focus-visible {
+      outline: 2px solid #4ade80;
+      outline-offset: 2px;
+    }
+
+    /* Floating ambient orbs */
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.15; }
+      50% { transform: translateY(-18px) scale(1.04); opacity: 0.22; }
+    }
+    @keyframes floatOrbB {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.12; }
+      50% { transform: translateY(14px) scale(1.06); opacity: 0.2; }
+    }
+    @keyframes floatDot {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(-8px); opacity: 0.9; }
+    }
+    @keyframes pulseBtn {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.3); }
+      50% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .orb-a {
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 70%);
+      animation: floatOrb 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .orb-b {
+      position: absolute;
+      bottom: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(5, 150, 105, 0.16) 0%, transparent 70%);
+      animation: floatOrbB 9s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .eco-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(74, 222, 128, 0.45);
+      animation: floatDot 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .main-wrap {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.5s ease-out both;
+    }
+
+    /* Header */
+    .splash-header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 16px;
+    }
+
+    .region-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      color: rgba(167, 243, 208, 0.95);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .region-pill .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      flex-shrink: 0;
+    }
+
+    .explore-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.2s;
+    }
+    .explore-link:hover {
+      background: rgba(255,255,255,0.18);
+      color: white;
+    }
+    .explore-link .material-symbols-outlined { font-size: 14px; }
+
+    /* Brand Center */
+    .brand-center {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    .logo-frame {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .logo-glow {
+      position: absolute;
+      inset: -16px;
+      border-radius: 36px;
+      background: rgba(52, 211, 153, 0.18);
+      filter: blur(16px);
+    }
+    .logo-box {
+      position: relative;
+      width: 96px; height: 96px;
+      border-radius: 24px;
+      background: linear-gradient(to bottom, #0f4b28, #062916);
+      padding: 2px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(52,211,153,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-inner {
+      width: 100%; height: 100%;
+      border-radius: 22px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .logo-inner img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+
+    .wordmark {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: white;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .wordmark .accent { color: #34d399; }
+
+    .tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+      max-width: 280px;
+      margin-bottom: 18px;
+    }
+
+    /* Trust strip inside brand area */
+    .trust-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(167, 243, 208, 0.9);
+    }
+    .trust-item .material-symbols-outlined { font-size: 14px; color: #34d399; }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(6, 78, 59, 0.5);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      color: #6ee7b7;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .status-badge .material-symbols-outlined { font-size: 15px; color: #34d399; }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 8px;
+    }
+    .meta-row .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .meta-row .meta-item .material-symbols-outlined { font-size: 13px; color: #34d399; }
+
+    /* Footer */
+    .splash-footer {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 0 28px;
+    }
+
+    .btn-get-started {
+      width: 100%;
+      height: 54px;
+      border-radius: 14px;
+      background: #16a34a;
+      color: white;
+      font-family: 'Epilogue', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 24px rgba(22, 163, 74, 0.35), 0 1px 3px rgba(0,0,0,0.3);
+      border: none;
+      cursor: pointer;
+      animation: pulseBtn 3s ease-in-out infinite;
+    }
+    .btn-get-started:hover {
+      background: #15803d;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(22, 163, 74, 0.45);
+    }
+    .btn-get-started:active {
+      transform: scale(0.98);
+      animation: none;
+    }
+    .btn-get-started .material-symbols-outlined { font-size: 20px; }
+
+    .secondary-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .secondary-links a {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.15s;
+      text-decoration: none;
+    }
+    .link-signin { color: rgba(255,255,255,0.65); }
+    .link-signin:hover { background: rgba(255,255,255,0.06); color: white; }
+    .link-explore { color: #6ee7b7; }
+    .link-explore:hover { background: rgba(52,211,153,0.08); }
+
+    .sep { color: rgba(255,255,255,0.2); }
+
+    /* Partnership badges */
+    .partner-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+    .partner-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 10.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+    }
+    .partner-badge .material-symbols-outlined { font-size: 14px; color: rgba(167,243,208,0.7); }
+
+    .footer-legal {
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body class="pt-safe pb-safe">
+  <main class="main-wrap">
+    <!-- Ambient background -->
+    <div aria-hidden="true">
+      <div class="orb-a"></div>
+      <div class="orb-b"></div>
+      <div class="eco-dot" style="width:6px;height:6px;top:28%;left:12%;animation-delay:0s;animation-duration:3.8s;"></div>
+      <div class="eco-dot" style="width:4px;height:4px;top:55%;left:88%;animation-delay:1.2s;animation-duration:5.2s;"></div>
+      <div class="eco-dot" style="width:5px;height:5px;top:70%;left:20%;animation-delay:0.6s;animation-duration:4.5s;"></div>
+    </div>
+
+    <!-- Top Header -->
+    <header class="splash-header">
+      <div class="region-pill">
+        <span class="dot"></span>
+        <span>Greater Accra</span>
+        <span style="color:rgba(255,255,255,0.35)">•</span>
+        <span style="color:rgba(255,255,255,0.6)">Ghana 🇬🇭</span>
+      </div>
+      <a href="./home.html" class="explore-link" aria-label="Explore the dashboard">
+        <span>Explore App</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </a>
+    </header>
+
+    <!-- Brand Center -->
+    <section class="brand-center">
+      <!-- App Icon -->
+      <div class="logo-frame">
+        <div class="logo-glow" aria-hidden="true"></div>
+        <div class="logo-box">
+          <div class="logo-inner">
+            <img src="../../packages/brand-assets/logo.svg" alt="BorlaAlert Logo">
+          </div>
+        </div>
+      </div>
+
+      <!-- Wordmark -->
+      <div class="wordmark">BorlaAlert<span class="accent">.</span></div>
+
+      <!-- Tagline -->
+      <p class="tagline">Doorstep waste pickup &amp; Eco-Points for Greater Accra households</p>
+
+      <!-- Trust signals -->
+      <div class="trust-strip" role="list" aria-label="Key features">
+        <div class="trust-item" role="listitem">
+          <span class="material-symbols-outlined">verified</span>
+          Verified Operators
+        </div>
+        <div class="trust-item" role="listitem">
+          <span class="material-symbols-outlined">explore</span>
+          GhanaPost GPS
+        </div>
+        <div class="trust-item" role="listitem">
+          <span class="material-symbols-outlined">payments</span>
+          MoMo Payments
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="status-badge" id="local-status-badge">
+        <span class="material-symbols-outlined">check_circle</span>
+        <span id="local-status-text">Platform preview ready</span>
+      </div>
+
+      <!-- Meta -->
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="material-symbols-outlined">shield</span>
+          <span>Secure Local Preview</span>
+        </div>
+        <span>•</span>
+        <div class="meta-item">
+          <span class="material-symbols-outlined">offline_pin</span>
+          <span>Works Offline</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Actions -->
+    <footer class="splash-footer">
+      <a href="./onboarding.html" id="btn-get-started" class="btn-get-started">
+        <span>Get Started</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </a>
+
+      <div class="secondary-links">
+        <a href="./login.html" class="link-signin">Sign In</a>
+        <span class="sep">•</span>
+        <a href="./home.html" class="link-explore">Explore Dashboard</a>
+      </div>
+
+      <!-- Partnership indicators -->
+      <div class="partner-row" aria-label="Platform integrations">
+        <span style="font-size:10px;color:rgba(255,255,255,0.3);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Integrates with</span>
+        <div class="partner-badge">
+          <span class="material-symbols-outlined">explore</span>
+          GhanaPost GPS
+        </div>
+        <div class="partner-badge">
+          <span class="material-symbols-outlined">phone_iphone</span>
+          MTN MoMo
+        </div>
+      </div>
+
+      <p class="footer-legal">Greater Accra Metropolitan Area &bull; Civic Cleantech Platform</p>
+    </footer>
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    (function() {
+      const statusText = document.getElementById('local-status-text');
+      try {
+        if (window.BorlaStore) {
+          const state = window.BorlaStore.get();
+          if (state && state.user && state.user.isRegistered && state.user.name) {
+            if (statusText) statusText.textContent = `Welcome back, ${state.user.name}`;
+          }
+        }
+      } catch (e) {
+        if (statusText) statusText.textContent = 'Platform preview ready';
+      }
+    })();
+  </script>
+</body>
+</html>

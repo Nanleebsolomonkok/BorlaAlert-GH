@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>Collector Match — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+    }
+    .fee-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .fee-box {
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 11.5px;
+    }
+    .fee-box.platform {
+      background: #f0fdf4;
+      border: 1.5px solid #dcfce7;
+    }
+    .fee-box.collector {
+      background: #ffffff;
+      border: 1.5px solid #e2e8e3;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP NAV WITH BACK BUTTON -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="./request.html" class="nav-icon-btn" aria-label="Go back to request form" style="text-decoration: none; color: #17211b;">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <h1 style="font-family: 'Epilogue', sans-serif; font-size: 16px; font-weight: 700; color: #17211b; margin: 0;">
+        Collector Match
+      </h1>
+    </div>
+    
+    <span class="badge badge-green" style="font-size: 11px; display: inline-flex; align-items: center; gap: 3px;">
+      <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: 'FILL' 1;">verified</span>
+      Verified Operator
+    </span>
+  </header>
+
+  <main class="page-content" style="padding-bottom: 30px;">
+
+    <!-- DISPATCH STATUS NOTICE -->
+    <div style="margin: 14px 16px 10px; padding: 12px 14px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; display: flex; gap: 10px; align-items: flex-start;">
+      <span class="material-symbols-outlined" style="color: #065f46; font-size: 22px;">verified_user</span>
+      <div>
+        <div style="font-weight: 700; font-size: 13px; color: #065f46;">
+          Collector Assigned &amp; En Route
+        </div>
+        <div style="font-size: 11.5px; color: #047857; margin-top: 2px; line-height: 1.4;">
+          Assigned to your zone's nearest licensed tricycle operator. You can track their real-time arrival to your gate.
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIMARY MATCH CARD -->
+    <div class="card card-bordered" style="border: 2px solid #16a34a; box-shadow: 0 4px 12px rgba(0,0,0,0.06); position: relative; margin-top: 6px;">
+      
+      <!-- Top Pick Badge -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span class="badge badge-amber" style="font-size: 11px; font-weight: 700; padding: 4px 10px; display: inline-flex; align-items: center; gap: 3px;">
+          <span class="material-symbols-outlined" style="font-size: 14px;">star</span> ASSIGNED OPERATOR
+        </span>
+        <span style="font-size: 12px; font-weight: 700; color: #15803d; display: flex; align-items: center; gap: 3px;">
+          <span class="material-symbols-outlined" style="font-size: 16px;">near_me</span> ~4 mins away
+        </span>
+      </div>
+
+      <!-- Collector Header Info -->
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="width: 58px; height: 58px; border-radius: 50%; background: #dcfce7; border: 2.5px solid #16a34a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <span class="material-symbols-outlined" style="font-size: 28px; color: #15803d;">electric_rickshaw</span>
+        </div>
+        <div>
+          <div style="font-family: 'Epilogue', sans-serif; font-size: 16px; font-weight: 700; color: #17211b;">
+            Emmanuel Mensah
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px;">
+            <span class="badge badge-green" style="font-size: 10px; display: inline-flex; align-items: center; gap: 2px;">
+              <span class="material-symbols-outlined" style="font-size: 12px;">badge</span> Ghana Card Vetted
+            </span>
+            <span class="badge badge-green" style="font-size: 10px;">GW-4921-24</span>
+          </div>
+          <div style="font-size: 12px; color: #5f6b62; margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+            <span>⭐ <strong>4.9</strong> (342 pickups) • East Legon Sector</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Itemized Fee Boxes -->
+      <div class="fee-grid">
+        <div class="fee-box platform">
+          <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #166534;">
+            Platform Booking Fee
+          </div>
+          <div style="font-family: 'Epilogue', sans-serif; font-size: 18px; font-weight: 800; color: #15803d; margin: 3px 0;">
+            GH₵ 2.00
+          </div>
+          <div style="font-size: 10.5px; color: #17211b; font-weight: 600;">
+            Mobile Money booking fee
+          </div>
+        </div>
+
+        <div class="fee-box collector">
+          <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #b45309;">
+            Estimated Carting Fee
+          </div>
+          <div id="carting-fee-display" style="font-family: 'Epilogue', sans-serif; font-size: 18px; font-weight: 800; color: #17211b; margin: 3px 0;">
+            GH₵ 15.00
+          </div>
+          <div style="font-size: 10.5px; color: #b45309; font-weight: 700;">
+            Paid directly at gate
+          </div>
+        </div>
+      </div>
+
+      <!-- Gate Location Details -->
+      <div style="background: #f8faf7; border: 1px solid #e2e8e3; border-radius: 10px; padding: 10px 12px; font-size: 12px; color: #17211b; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span class="material-symbols-outlined" style="font-size: 18px; color: #15803d;">location_on</span>
+          <span id="match-address">House 14, Lagos Ave, East Legon</span>
+        </div>
+        <span id="match-category" class="badge badge-green" style="font-size: 10px;">Standard Borla</span>
+      </div>
+    </div>
+
+    <!-- MAIN CONTINUE ACTION -->
+    <div style="padding: 10px 16px;">
+      <a href="./payment.html" class="btn btn-primary" style="height: 52px; font-size: 15px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;">
+        <span>Proceed to Secure Checkout (GH₵ 2.00)</span>
+        <span class="material-symbols-outlined" style="font-size: 20px;">arrow_forward</span>
+      </a>
+
+      <div style="text-align: center; margin-top: 10px;">
+        <a href="./request.html" style="font-size: 12.5px; color: #5f6b62; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span> Change Request Details
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        if (window.BorlaStore) {
+          const active = window.BorlaStore.get().activePickup;
+          if (active) {
+            if (active.address) document.getElementById('match-address').textContent = active.address;
+            if (active.category) document.getElementById('match-category').textContent = active.category;
+            if (active.cartingFee) document.getElementById('carting-fee-display').textContent = active.cartingFee;
+          }
+        }
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>

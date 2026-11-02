@@ -1,0 +1,66 @@
+{
+  "name": "BorlaAlert GH — Civic Cleantech Waste Platform",
+  "short_name": "BorlaAlert GH",
+  "description": "On-demand civic waste collection, GIS tricycle dispatch & Mobile Money micro-payments across Greater Accra",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#072415",
+  "theme_color": "#006b2c",
+  "orientation": "portrait-primary",
+  "categories": ["utilities", "lifestyle", "productivity"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Request Waste Pickup",
+      "short_name": "Pickup",
+      "description": "Request immediate waste collection at your gate",
+      "url": "./apps/resident/home.html",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Collector Duty Radar",
+      "short_name": "Driver Radar",
+      "description": "Toggle driver online and accept dispatch jobs",
+      "url": "./apps/collector/home.html",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Operations Command Center",
+      "short_name": "Admin Portal",
+      "description": "Live municipal fleet GIS radar and dispatch control",
+      "url": "./apps/admin/admin.html",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

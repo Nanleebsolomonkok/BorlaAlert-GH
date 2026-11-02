@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>Pickup Confirmed — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+    }
+    .check-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #006b2c;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 18px auto 14px;
+      box-shadow: 0 10px 25px rgba(0, 107, 44, 0.3);
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <main style="padding: 20px 16px 40px; text-align: center;">
+
+    <!-- CHECKMARK ICON -->
+    <div class="check-circle">
+      <span class="material-symbols-outlined" style="font-size: 38px;">check</span>
+    </div>
+
+    <!-- MAIN TITLE -->
+    <h1 style="font-family: 'Epilogue', sans-serif; font-size: 22px; font-weight: 800; color: #006b2c; margin-bottom: 2px;">
+      Pickup Confirmed!
+    </h1>
+    <p style="font-size: 13px; color: #5f6b62; margin-bottom: 16px;">
+      Reference Code: <strong id="conf-ref-id" class="font-mono text-slate-900 font-bold">BLA-GH-77402</strong>
+    </p>
+
+    <!-- COLLECTOR SUMMARY CARD -->
+    <div class="card card-bordered" style="text-align: left; padding: 16px; margin: 0 0 14px; background: white;">
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="width: 52px; height: 52px; border-radius: 50%; background: #dcfce7; border: 2px solid #16a34a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <span class="material-symbols-outlined" style="font-size: 26px; color: #15803d;">electric_rickshaw</span>
+        </div>
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div id="conf-collector-name" style="font-family: 'Epilogue', sans-serif; font-size: 15px; font-weight: 700; color: #17211b;">
+              Emmanuel Mensah
+            </div>
+            <span class="badge badge-green" style="font-size: 10px;">Assigned</span>
+          </div>
+          <div style="font-size: 12px; color: #5f6b62; margin-top: 2px;">
+            <span id="conf-collector-vehicle">Aboboyaa (GW-4921-24)</span> • <span id="conf-category">Standard Household Waste</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location & ETA -->
+      <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid #e2e8e3; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+        <div style="display: flex; align-items: center; gap: 4px; color: #17211b; font-weight: 600;">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: #15803d;">place</span>
+          <span id="conf-address">House 14, Lagos Ave, East Legon</span>
+        </div>
+        <span class="badge badge-green" style="font-weight: 700; font-size: 11px;">
+          ETA: ~4 mins
+        </span>
+      </div>
+    </div>
+
+    <!-- REMINDER: CARTING FEE AT GATE -->
+    <div class="card card-amber" style="text-align: left; margin: 0 0 16px; padding: 12px 14px;">
+      <div style="font-weight: 700; color: #92400e; font-size: 12.5px; display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+        <span class="material-symbols-outlined" style="font-size: 16px; color: #b45309;">payments</span>
+        <span>Payment Due at Gate</span>
+      </div>
+      <p style="font-size: 11.5px; color: #92400e; line-height: 1.45; margin: 0;">
+        Please prepare <strong id="conf-carting-fee">GH₵ 15.00</strong> to pay Emmanuel directly at your gate in cash or personal Mobile Money upon waste loading.
+      </p>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <a href="./tracking.html" class="btn btn-primary" style="height: 50px; font-size: 15px; font-weight: 700; border-radius: 12px; text-decoration: none;">
+        <span class="material-symbols-outlined" style="font-size: 20px;">navigation</span>
+        <span>Track Driver on Live Map →</span>
+      </a>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <a href="./receipt.html" class="btn btn-grey btn-sm" style="height: 42px; font-size: 12.5px; text-decoration: none; font-weight: 600;">
+          <span class="material-symbols-outlined" style="font-size: 16px;">receipt_long</span>
+          <span>View Receipt</span>
+        </a>
+        <a href="./home.html" class="btn btn-outline btn-sm" style="height: 42px; font-size: 12.5px; text-decoration: none; font-weight: 600;">
+          <span>Resident Home</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        if (window.BorlaStore) {
+          const s = window.BorlaStore.get();
+          const active = s.activePickup;
+          if (active) {
+            if (active.id) document.getElementById('conf-ref-id').textContent = active.id;
+            if (active.collectorName) document.getElementById('conf-collector-name').textContent = active.collectorName;
+            if (active.collectorVehicle) document.getElementById('conf-collector-vehicle').textContent = active.collectorVehicle;
+            if (active.category) document.getElementById('conf-category').textContent = active.category;
+            if (active.address) document.getElementById('conf-address').textContent = active.address;
+            if (active.cartingFee) document.getElementById('conf-carting-fee').textContent = active.cartingFee;
+          }
+        }
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>

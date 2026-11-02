@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta content="mobile_blank" name="shell-type">
+  <meta name="theme-color" content="#006b2c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BorlaAlert">
+  <title>Welcome to BorlaAlert GH — Household Resident Onboarding</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/preconnect" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <style>
+    @layer base {
+      html, body { width: 100vw; margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    :focus-visible {
+      outline: 2px solid #006b2c;
+      outline-offset: 2px;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f9f9ff] font-['Inter'] text-[#141b2b] antialiased pt-safe pb-safe min-h-screen flex flex-col">
+  <main class="flex flex-col relative w-full min-h-screen bg-[#f9f9ff] max-w-md mx-auto">
+    <div class="flex flex-col justify-between min-h-screen w-full px-5 pt-4 pb-8">
+      
+      <!-- Top Header: Local Project Brand Wordmark & Region Pill -->
+      <header class="flex items-center justify-between w-full pt-1 pb-3 z-10">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-[#006e2d] p-1.5 flex items-center justify-center shadow-xs">
+            <img src="../../packages/brand-assets/logo.svg" alt="BorlaAlert Logo" class="w-full h-full object-contain">
+          </div>
+          <div class="flex flex-col">
+            <span class="font-['Epilogue'] text-[18px] font-bold tracking-tight text-[#141b2b] leading-none">
+              BorlaAlert<span class="text-[#006b2c]">.</span>
+            </span>
+            <span class="text-[10px] tracking-wider uppercase text-slate-500 font-semibold mt-0.5">
+              Greater Accra Metropolitan
+            </span>
+          </div>
+        </div>
+        
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 shadow-xs">
+          <span class="text-[13px]">🇬🇭</span>
+          <span class="text-xs font-bold text-slate-800">GH</span>
+          <span class="text-slate-300 text-[10px]">•</span>
+          <span class="text-xs font-semibold text-[#006b2c]">Civic Cleantech</span>
+        </div>
+      </header>
+
+      <!-- Hero Visual Card: Clean, Honest Civic Cleantech Visual -->
+      <div class="relative w-full rounded-2xl overflow-hidden my-auto py-6 bg-gradient-to-b from-white to-[#f1f4f9] border border-slate-200/80 shadow-xs flex flex-col items-center justify-center min-h-[220px]">
+        <!-- Soft Cleantech Accent -->
+        <div class="absolute -top-12 -right-12 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute -bottom-12 -left-12 w-44 h-44 bg-teal-500/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
+        
+        <!-- Center Graphic -->
+        <div class="relative flex flex-col items-center justify-center py-2 z-10">
+          <div class="relative flex items-center justify-center mb-3">
+            <div class="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#006b2c] shadow-xs">
+              <span class="material-symbols-outlined text-[34px]" style="font-variation-settings: 'FILL' 1;">electric_rickshaw</span>
+            </div>
+          </div>
+          
+          <!-- Honest Informational Badges -->
+          <div class="flex flex-wrap items-center justify-center gap-2 mt-1 px-4">
+            <div class="flex items-center gap-1.5 px-3 py-1 bg-white rounded-full shadow-xs border border-slate-200">
+              <span class="material-symbols-outlined text-[15px] text-[#006b2c]">pin_drop</span>
+              <span class="text-xs text-slate-800 font-semibold">Doorstep Gate Pickup</span>
+            </div>
+            <div class="flex items-center gap-1.5 px-3 py-1 bg-white rounded-full shadow-xs border border-slate-200">
+              <span class="text-xs text-[#006b2c] font-bold">GH₵ 2.00</span>
+              <span class="text-xs text-slate-600 font-medium">Standard booking fee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honest Product Value Proposition -->
+      <div class="flex flex-col w-full mt-3 mb-5">
+        <h1 class="font-['Epilogue'] text-[24px] sm:text-[26px] font-bold text-[#141b2b] tracking-tight mb-2 leading-tight">
+          Convenient doorstep waste pickup for your home.
+        </h1>
+        <p class="text-[14px] text-slate-600 leading-relaxed">
+          Request licensed local tricycle (aboboyaa) operators, earn Eco-Points for segregated plastics, and help keep Greater Accra clean.
+        </p>
+      </div>
+
+      <!-- Action Choices: Clear Household Primary Journey -->
+      <div class="flex flex-col gap-3 w-full">
+        <!-- Primary Action: Continue as Household Resident -->
+        <a href="./registration.html" id="btn-household" class="w-full h-[52px] rounded-xl bg-[#006b2c] hover:bg-[#005221] active:scale-[0.99] text-white font-semibold text-[15px] flex items-center justify-between px-5 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#006b2c] focus:ring-offset-2">
+          <span class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">home</span>
+            <span>Continue as Household</span>
+          </span>
+          <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+        </a>
+
+        <!-- Secondary Action: Collector / Aboboyaa Partner Portal -->
+        <a href="../collector/login.html" id="btn-collector" class="w-full h-[52px] rounded-xl bg-white hover:bg-slate-50 active:scale-[0.99] border border-slate-300 text-slate-800 font-medium text-[14px] flex items-center justify-between px-5 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400">
+          <span class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[22px] text-emerald-700">local_shipping</span>
+            <span>Collector &amp; Aboboyaa Partners</span>
+          </span>
+          <span class="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">
+            Partner App
+          </span>
+        </a>
+      </div>
+
+      <!-- Sign In & Legal Links -->
+      <div class="flex flex-col items-center text-center mt-4 pt-2 gap-2.5">
+        <div class="text-[13px] text-slate-600">
+          <span>Already registered?</span>
+          <a href="./login.html" id="btn-signin" class="text-[#006b2c] font-bold hover:underline ml-1 focus:outline-none focus:ring-1 focus:ring-[#006b2c] rounded px-1">
+            Sign In
+          </a>
+        </div>
+
+        <p class="text-[11px] text-slate-500 leading-normal max-w-xs">
+          By continuing, you agree to our 
+          <a href="../../terms.html" class="underline text-slate-700 hover:text-[#006b2c]">Terms of Service</a> &amp; 
+          <a href="../../privacy.html" class="underline text-slate-700 hover:text-[#006b2c]">Privacy Policy</a>.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+</body>
+</html>

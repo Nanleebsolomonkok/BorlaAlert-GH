@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>Rate Collector — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+    }
+    .star-btn {
+      font-size: 36px;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: color 0.15s;
+      background: none;
+      border: none;
+      padding: 0 4px;
+    }
+    .star-btn.gold {
+      color: #f59e0b;
+    }
+    .tag-chip {
+      background: white;
+      border: 1.5px solid #e2e8e3;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #17211b;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tag-chip.selected {
+      border-color: #006b2c;
+      background: #f0fdf4;
+      color: #006b2c;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP NAV WITH BACK BUTTON -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="./complete.html" class="nav-icon-btn" aria-label="Back" style="text-decoration: none; color: #17211b;">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <h1 style="font-family: 'Epilogue', sans-serif; font-size: 16px; font-weight: 700; color: #17211b; margin: 0;">
+        Rate Your Collector
+      </h1>
+    </div>
+    
+    <span class="badge badge-green" style="font-size: 10.5px;">Resident Review</span>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 24px;">
+
+    <!-- COLLECTOR INFO HEADER -->
+    <div class="card card-bordered" style="text-align: center; margin-top: 14px; padding: 18px 16px;">
+      <div style="width: 64px; height: 64px; border-radius: 50%; background: #dcfce7; border: 2.5px solid #16a34a; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
+        <span class="material-symbols-outlined" style="font-size: 32px; color: #15803d;">electric_rickshaw</span>
+      </div>
+      <h2 id="rate-collector-name" style="font-family: 'Epilogue', sans-serif; font-size: 17px; font-weight: 700; color: #17211b; margin: 0;">
+        Emmanuel Mensah
+      </h2>
+      <div id="rate-details" style="font-size: 12px; color: #5f6b62; margin-top: 2px;">
+        Standard Aboboyaa Pickup • GW-4921-24
+      </div>
+      <div style="font-size: 11.5px; color: #15803d; font-weight: 600; margin-top: 4px;">
+        East Legon Sector Collection
+      </div>
+    </div>
+
+    <!-- MAIN 5-STAR RATING -->
+    <div class="card card-bordered" style="text-align: center;">
+      <div style="font-family: 'Epilogue', sans-serif; font-size: 15px; font-weight: 700; color: #17211b;">
+        How was your collection experience?
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 6px; margin: 10px 0;" id="main-stars" role="group" aria-label="5 star rating">
+        <button type="button" class="star-btn gold" onclick="setStar(1)" aria-label="1 star">★</button>
+        <button type="button" class="star-btn gold" onclick="setStar(2)" aria-label="2 stars">★</button>
+        <button type="button" class="star-btn gold" onclick="setStar(3)" aria-label="3 stars">★</button>
+        <button type="button" class="star-btn gold" onclick="setStar(4)" aria-label="4 stars">★</button>
+        <button type="button" class="star-btn gold" onclick="setStar(5)" aria-label="5 stars">★</button>
+      </div>
+
+      <!-- Quick Feedback Tags -->
+      <div style="margin-top: 14px; text-align: left;">
+        <span style="font-size: 11.5px; font-weight: 700; color: #5f6b62; text-transform: uppercase;">Highlights:</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+          <span class="tag-chip selected" onclick="toggleTag(this)">Punctual Arrival</span>
+          <span class="tag-chip selected" onclick="toggleTag(this)">Courteous &amp; Polite</span>
+          <span class="tag-chip selected" onclick="toggleTag(this)">Gate Area Kept Clean</span>
+          <span class="tag-chip" onclick="toggleTag(this)">Careful Waste Handling</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WRITTEN REVIEW TEXTAREA -->
+    <div class="card card-bordered">
+      <label for="review-text" style="font-size: 13px; font-weight: 700; color: #17211b; display: block; margin-bottom: 6px;">
+        Add a comment for the driver (Optional)
+      </label>
+      <textarea id="review-text" rows="2" placeholder="e.g. Arrived quickly and helped lift the heavy bin cleanly..." style="width: 100%; border: 1px solid #e2e8e3; border-radius: 8px; padding: 10px; font-family: 'Inter', sans-serif; font-size: 12.5px; outline: none; resize: none;"></textarea>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div style="padding: 10px 16px;">
+      <button type="button" onclick="submitRating()" id="submitRatingBtn" class="btn btn-primary" style="height: 50px; font-size: 15px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span class="material-symbols-outlined" style="font-size: 20px;">check</span>
+        <span>Submit Rating &amp; Feedback</span>
+      </button>
+
+      <div style="text-align: center; margin-top: 14px;">
+        <a href="../../support.html" style="font-size: 12px; color: #b91c1c; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <span class="material-symbols-outlined" style="font-size: 16px;">report_problem</span>
+          <span>Report an issue with this pickup</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    function setStar(n) {
+      const stars = document.querySelectorAll('#main-stars .star-btn');
+      stars.forEach((s, i) => {
+        if (i < n) s.classList.add('gold');
+        else s.classList.remove('gold');
+      });
+    }
+
+    function toggleTag(el) {
+      el.classList.toggle('selected');
+    }
+
+    function submitRating() {
+      const btn = document.getElementById('submitRatingBtn');
+      btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">task_alt</span><span>Review Saved!</span>';
+      btn.disabled = true;
+      setTimeout(() => {
+        window.location.href = './receipt.html';
+      }, 400);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        if (window.BorlaStore) {
+          const s = window.BorlaStore.get();
+          const active = s.activePickup;
+          if (active) {
+            if (active.collectorName) document.getElementById('rate-collector-name').textContent = active.collectorName;
+            if (active.collectorVehicle) document.getElementById('rate-details').textContent = `${active.category || 'Household Waste'} • ${active.collectorVehicle}`;
+          }
+        }
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>

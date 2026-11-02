@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#006b2c">
+  <title>Staff sign-in — BorlaAlert GH</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { 600: '#16a34a', 700: '#006b2c' }, ink: '#141b2b' },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Epilogue', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="min-h-screen bg-slate-50 font-sans text-ink antialiased flex flex-col">
+  <header class="h-16 px-6 flex items-center border-b border-slate-200 bg-white">
+    <a href="../../index.html" class="flex items-center gap-2">
+      <img src="../../packages/brand-assets/logo.svg" alt="" class="w-8 h-8">
+      <span class="font-display font-bold">BorlaAlert GH</span>
+    </a>
+  </header>
+  <main class="flex-1 flex items-center justify-center px-4 py-12">
+    <form class="w-full max-w-sm bg-white border border-slate-200 rounded-xl p-6 shadow-sm" onsubmit="event.preventDefault(); window.location.href='./dashboard.html';">
+      <h1 class="font-display font-bold text-2xl">Staff sign-in</h1>
+      <p class="mt-2 text-sm text-slate-600">For dispatch and operations teams only.</p>
+      <label class="block mt-6 text-sm font-medium">Work email</label>
+      <input type="email" required autocomplete="username" class="mt-1.5 w-full h-12 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700/30 focus:border-brand-700" placeholder="you@borlaalert.gh" value="ops@borlaalert.gh">
+      <label class="block mt-4 text-sm font-medium">Password</label>
+      <input type="password" required autocomplete="current-password" class="mt-1.5 w-full h-12 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700/30 focus:border-brand-700" value="••••••••">
+      <button type="submit" class="mt-6 w-full h-12 rounded-lg bg-brand-700 hover:bg-brand-600 text-white font-semibold text-sm">
+        Sign in →
+      </button>
+      <p class="mt-4 text-xs text-slate-500 text-center">Need access? Ask your operations lead, or <a class="text-brand-700 font-semibold" href="./login.html">open Admin Login</a>.</p>
+    </form>
+  </main>
+  <script src="../../shared-pwa.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+/* BorlaAlert GH Civic Cleantech Design Tokens
+   Preserving brand identity with accessible, restrained, professional palette */
+:root {
+  /* Brand Cleantech Palette */
+  --green-forest: #166534;
+  --green-primary: #15803D;
+  --green-dark: #166534;
+  --green-supporting: #22C55E;
+  --green-light: #F0FDF4;
+  --green-border: #DCFCE7;
+
+  --amber: #D97706;
+  --amber-light: #FFFBEB;
+  --amber-dark: #B45309;
+
+  --red: #DC2626;
+  --red-light: #FEF2F2;
+
+  --white: #FFFFFF;
+  --bg-light: #F8FAF7;
+  --surface-warm: #F8FAF7;
+  --surface-card: #FFFFFF;
+  --border: #E2E8E3;
+  --border-subtle: #EDF2EE;
+
+  --text-dark: #17211B;
+  --text-grey: #5F6B62;
+  --text-light: #8B978E;
+
+  /* Typography */
+  --font-heading: 'Epilogue', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Layout & Touch Constraints */
+  --nav-height: 60px;
+  --bottom-nav: 64px;
+  --border-radius-sm: 8px;
+  --border-radius: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-full: 9999px;
+  --btn-height: 48px;
+  --min-touch-target: 44px;
+
+  /* Restrained Shadows & Elevation */
+  --shadow-sm: 0 1px 3px rgba(23, 33, 27, 0.05);
+  --shadow-md: 0 4px 12px rgba(23, 33, 27, 0.08);
+  --shadow-lg: 0 8px 24px rgba(23, 33, 27, 0.10);
+  --focus-ring: 0 0 0 3px rgba(21, 128, 61, 0.25);
+}

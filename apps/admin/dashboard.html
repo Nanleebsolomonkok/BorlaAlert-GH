@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
+  <title>Admin Dashboard — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .admin-nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: var(--nav-height);
+      background: #0F172A;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 16px 10px;
+    }
+
+    .metric-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .metric-num {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-top: 2px;
+    }
+    .metric-title {
+      font-size: 11px;
+      color: var(--text-grey);
+      font-weight: 600;
+    }
+
+    .gis-canvas-admin {
+      height: 140px;
+      background: #0B1329;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      margin: 6px 16px 12px;
+      border: 1px solid #1E293B;
+    }
+
+    /* 5 tab bottom nav for admin */
+    .admin-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: var(--bottom-nav);
+      background: #0F172A;
+      border-top: 1px solid #1E293B;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      z-index: 100;
+    }
+    .admin-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-decoration: none;
+      color: #94A3B8;
+    }
+    .admin-tab.active {
+      color: #22C55E;
+    }
+    .admin-tab-icon {
+      font-size: 18px;
+    }
+    .admin-tab-label {
+      font-size: 9.5px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN TOP BAR -->
+  <header class="admin-nav">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--green-primary); color: white; display: flex; align-items: center; justify-content: center;">
+        <span class="material-icons-round" style="font-size: 18px;">admin_panel_settings</span>
+      </div>
+      <div>
+        <div style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: white;">
+          Admin Panel
+        </div>
+        <div style="font-size: 10.5px; color: #94A3B8;">Operations Console</div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button type="button" aria-label="Notifications" style="background: none; border: none; cursor: pointer; color: #94A3B8; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; position: relative;">
+        <span class="material-icons-round" style="font-size: 20px;">notifications</span>
+        <span style="position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%; background: #F59E0B;"></span>
+      </button>
+      <div style="width: 30px; height: 30px; border-radius: 50%; background: #1E293B; color: #22C55E; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; border: 1px solid #334155;">
+        SN
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-top: var(--nav-height); padding-bottom: calc(var(--bottom-nav) + 24px);">
+
+    <!-- WELCOME BANNER GREEN -->
+    <div style="background: linear-gradient(135deg, var(--green-primary), var(--green-dark)); color: white; padding: 16px; margin: 12px 16px; border-radius: 12px; box-shadow: var(--shadow-sm);">
+      <div style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+        <span class="material-icons-round" style="font-size: 22px;">waving_hand</span>
+        Good morning, Solomon!
+      </div>
+      <div style="font-size: 12.5px; color: rgba(255,255,255,0.9); margin-top: 2px;">
+        Here's BorlaAlert GH fleet &amp; dispatch activity today
+      </div>
+      <div style="font-size: 11px; color: #DCFCE7; font-weight: 600; margin-top: 6px; display: flex; align-items: center; gap: 5px;">
+        <span class="material-icons-round" style="font-size: 14px;">calendar_today</span>
+        Saturday 24 Oct 2026 · Greater Accra Command
+      </div>
+    </div>
+
+    <!-- 4 METRIC CARDS (2x2 GRID) -->
+    <div class="metric-grid-2x2">
+      <!-- Card 1: Revenue -->
+      <a href="./revenue.html" class="metric-box" style="text-decoration: none;">
+        <div class="metric-title">Platform Revenue</div>
+        <div class="metric-num" style="color: var(--green-primary);">GH₵ 847.00</div>
+        <div style="font-size: 10px; color: var(--text-grey); margin-top: 2px;">423 × GH₵ 2.00 fee</div>
+      </a>
+
+      <!-- Card 2: Requests -->
+      <div class="metric-box">
+        <div class="metric-title">Requests Today</div>
+        <div class="metric-num">423</div>
+        <div style="font-size: 10px; color: var(--green-dark); font-weight: 600; margin-top: 2px;">+18% vs yesterday</div>
+      </div>
+
+      <!-- Card 3: Active Collectors -->
+      <a href="./users.html" class="metric-box" style="text-decoration: none;">
+        <div class="metric-title">Active Collectors</div>
+        <div class="metric-num" style="color: var(--amber-dark);">127</div>
+        <div style="font-size: 10px; color: var(--text-grey); margin-top: 2px;">Across 8 zones</div>
+      </a>
+
+      <!-- Card 4: Total Households -->
+      <div class="metric-box">
+        <div class="metric-title">Total Households</div>
+        <div class="metric-num">2,847</div>
+        <div style="font-size: 10px; color: var(--green-dark); font-weight: 600; margin-top: 2px;">Accra East &amp; West</div>
+      </div>
+    </div>
+
+    <!-- QUICK STATS ROW -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0 16px 10px;">
+      <div style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center;">
+        <div style="font-size: 14px; font-weight: 800; color: var(--amber-dark); display: flex; align-items: center; justify-content: center; gap: 3px;"><span class="material-icons-round" style="font-size: 14px; color: #F59E0B;">star</span> 4.8</div>
+        <div style="font-size: 10px; color: var(--text-grey);">Avg Rating</div>
+      </div>
+      <div style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center;">
+        <div style="font-size: 14px; font-weight: 800; color: var(--green-primary);">94%</div>
+        <div style="font-size: 10px; color: var(--text-grey);">Completion</div>
+      </div>
+      <div style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center;">
+        <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);">6.2m</div>
+        <div style="font-size: 10px; color: var(--text-grey);">Response Time</div>
+      </div>
+    </div>
+
+    <!-- LIVE GIS ACTIVITY MAP (ACCRA RADAR) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 16px;">
+      <span class="section-title">LIVE ACCRA FLEET RADAR</span>
+      <a href="./live-map.html" class="section-link">Expand Map →</a>
+    </div>
+
+    <div class="gis-canvas-admin" onclick="window.location.href='./live-map.html'">
+      <!-- Dot Matrix Simulation of Greater Accra -->
+      <div style="position: absolute; top: 30%; left: 40%; width: 8px; height: 8px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 8px #22C55E;"></div>
+      <div style="position: absolute; top: 45%; left: 45%; width: 8px; height: 8px; border-radius: 50%; background: #F59E0B; box-shadow: 0 0 8px #F59E0B;"></div>
+      <div style="position: absolute; top: 60%; left: 35%; width: 8px; height: 8px; border-radius: 50%; background: #22C55E;"></div>
+      <div style="position: absolute; top: 25%; left: 65%; width: 8px; height: 8px; border-radius: 50%; background: #22C55E;"></div>
+      <div style="position: absolute; top: 70%; left: 70%; width: 8px; height: 8px; border-radius: 50%; background: #3B82F6;"></div>
+
+      <div style="position: absolute; top: 10px; left: 12px; color: #94A3B8; font-size: 11px; font-family: monospace;">
+        ZONES: EAST LEGON • SPINTEX • MADINA • OSU
+      </div>
+
+      <div style="position: absolute; bottom: 8px; right: 10px; background: rgba(0,0,0,0.6); padding: 3px 8px; border-radius: 4px; font-size: 10.5px; color: #4ADE80; font-family: monospace;">
+        127 Units Broadcasting
+      </div>
+    </div>
+
+    <!-- PENDING ACTIONS CARD (AMBER) -->
+    <div class="card card-amber" style="margin-bottom: 12px; padding: 12px 14px;">
+      <div style="font-weight: 700; color: #92400E; font-size: 12.5px; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+        <span class="material-icons-round" style="font-size: 16px;">warning</span> Action Required (Staff Tasks)
+      </div>
+      <div style="font-size: 12px; color: #92400E; display: flex; flex-direction: column; gap: 4px;">
+        <div style="display: flex; justify-content: space-between;">
+          <span>• 8 collectors pending Ghana Card verification</span>
+          <a href="./users.html" style="font-weight: 700; color: #B45309; text-decoration: none;">Review →</a>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>• 3 household gate dispute inquiries</span>
+          <a href="./users.html" style="font-weight: 700; color: #B45309; text-decoration: none;">Resolve →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENT REQUESTS TABLE -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">LIVE DISPATCH STREAM</div>
+      
+      <div class="card" style="padding: 0; border: 1px solid var(--border); overflow: hidden;">
+        <!-- Row 1 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 12.5px;">
+          <div>
+            <div style="font-weight: 700; color: var(--text-dark);">Gate 14, Lagos Ave</div>
+            <div style="font-size: 11px; color: var(--text-grey);">Emmanuel M. (Aboboyaa) • 10:32 AM</div>
+          </div>
+          <span class="badge badge-green" style="display: flex; align-items: center; gap: 3px;"><span class="material-icons-round" style="font-size: 13px;">check_circle</span> Cleared</span>
+        </div>
+
+        <!-- Row 2 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 12.5px;">
+          <div>
+            <div style="font-weight: 700; color: var(--text-dark);">Apt 4B, Boundary Road</div>
+            <div style="font-size: 11px; color: var(--text-grey);">Kofi M. • 10:28 AM</div>
+          </div>
+          <span class="badge badge-amber">En Route</span>
+        </div>
+
+        <!-- Row 3 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; font-size: 12.5px;">
+          <div>
+            <div style="font-weight: 700; color: var(--text-dark);">House 22, Spintex Road</div>
+            <div style="font-size: 11px; color: var(--text-grey);">Ibrahim S. • 10:15 AM</div>
+          </div>
+          <span class="badge badge-green" style="display: flex; align-items: center; gap: 3px;"><span class="material-icons-round" style="font-size: 13px;">check_circle</span> Cleared</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ADMIN BOTTOM NAV (5 TABS) -->
+  <nav class="admin-bottom-nav" aria-label="Admin Navigation">
+    <a href="./dashboard.html" class="admin-tab active" aria-current="page">
+      <span class="material-icons-round admin-tab-icon">dashboard</span>
+      <span class="admin-tab-label">Dashboard</span>
+    </a>
+    <a href="./live-map.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">map</span>
+      <span class="admin-tab-label">Live Map</span>
+    </a>
+    <a href="./users.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">group</span>
+      <span class="admin-tab-label">Users</span>
+    </a>
+    <a href="./revenue.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">payments</span>
+      <span class="admin-tab-label">Revenue</span>
+    </a>
+    <a href="./settings.html" class="admin-tab">
+      <span class="material-icons-round admin-tab-icon">settings</span>
+      <span class="admin-tab-label">Settings</span>
+    </a>
+  </nav>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help &amp; Support — BorlaAlert GH</title>
+  <meta name="description" content="Customer support and contact channels for BorlaAlert GH waste collection platform in Greater Accra, Ghana.">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    body {
+      background-color: var(--surface-warm);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .support-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+      flex: 1;
+    }
+    .support-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    @media (max-width: 640px) {
+      .support-card {
+        padding: 24px 18px;
+      }
+    }
+    .support-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--green-forest);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .brand-logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--green-forest);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-dark);
+      background: #ffffff;
+      transition: all var(--transition-fast);
+    }
+    .channel-item:hover, .channel-item:focus-visible {
+      border-color: var(--green-primary);
+      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.08);
+      transform: translateY(-1px);
+    }
+    .channel-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .channel-icon.whatsapp {
+      background: #DCFCE7;
+      color: #15803D;
+    }
+    .channel-icon.call {
+      background: #FEF3C7;
+      color: #D97706;
+    }
+    .channel-icon.email {
+      background: #E0F2FE;
+      color: #0284C7;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      background: var(--surface-warm);
+    }
+    .faq-q {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .faq-a {
+      font-size: 14px;
+      color: var(--text-grey);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .footer-simple {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 24px 20px;
+      text-align: center;
+      font-size: 13.5px;
+      color: var(--text-grey);
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-grey);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-links a:hover {
+      color: var(--green-primary);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="support-header">
+    <div class="header-inner">
+      <a href="./index.html" class="brand-logo" aria-label="BorlaAlert GH Home">
+        <div class="brand-logo-icon" aria-hidden="true">
+          <span class="material-icons-round" style="font-size: 20px;">recycling</span>
+        </div>
+        <span>BorlaAlert GH</span>
+      </a>
+      <a href="./index.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 4px;">
+        <span class="material-icons-round icon-sm" aria-hidden="true">arrow_back</span>
+        <span>Back to Home</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content" class="support-container">
+    <div class="support-card">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <span class="badge badge-primary">Support Desk</span>
+        <span style="font-size: 13px; color: var(--text-grey);">Greater Accra Operations</span>
+      </div>
+
+      <h1 style="font-family: var(--font-heading); font-size: 28px; font-weight: 800; color: var(--text-dark); margin: 0 0 12px;">
+        How Can We Help You?
+      </h1>
+      
+      <p style="font-size: 15px; color: var(--text-grey); margin: 0 0 24px;">
+        Need help with an on-demand pickup, Mobile Money authorization, collector arrival, or registration? Our team is available 7 days a week from 6:00 AM to 7:00 PM GMT.
+      </p>
+
+      <div class="channel-list">
+        <a href="https://wa.me/233245821928" class="channel-item" target="_blank" rel="noopener noreferrer">
+          <div class="channel-icon whatsapp" aria-hidden="true">
+            <span class="material-icons-round" style="font-size: 24px;">chat</span>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 2px;">Chat via WhatsApp</div>
+            <div style="font-size: 13.5px; color: var(--text-grey);">+233 24 582 1928 &middot; Fastest response for active pickups</div>
+          </div>
+          <span class="material-icons-round" style="color: var(--text-grey); font-size: 20px;" aria-hidden="true">arrow_forward</span>
+        </a>
+
+        <a href="tel:+233245821928" class="channel-item">
+          <div class="channel-icon call" aria-hidden="true">
+            <span class="material-icons-round" style="font-size: 24px;">phone</span>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 2px;">Direct Phone Call</div>
+            <div style="font-size: 13.5px; color: var(--text-grey);">+233 24 582 1928 &middot; Immediate dispatcher escalation</div>
+          </div>
+          <span class="material-icons-round" style="color: var(--text-grey); font-size: 20px;" aria-hidden="true">arrow_forward</span>
+        </a>
+
+        <a href="mailto:support@borlaalert.gh" class="channel-item">
+          <div class="channel-icon email" aria-hidden="true">
+            <span class="material-icons-round" style="font-size: 24px;">email</span>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 2px;">Email Inquiries</div>
+            <div style="font-size: 13.5px; color: var(--text-grey);">support@borlaalert.gh &middot; Account verification &amp; partnership</div>
+          </div>
+          <span class="material-icons-round" style="color: var(--text-grey); font-size: 20px;" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+
+      <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--text-dark); margin: 32px 0 16px;">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="material-icons-round" style="color: var(--green-primary); font-size: 18px;" aria-hidden="true">help_outline</span>
+          What happens if my assigned collector does not arrive?
+        </div>
+        <p class="faq-a">
+          Open your Pickups tab in the app to view collector location. If a collector cannot reach your gate, you can cancel without penalty or request an instant refund of the GH₵ 2.00 software booking fee.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="material-icons-round" style="color: var(--green-primary); font-size: 18px;" aria-hidden="true">help_outline</span>
+          How do I pay the collector for waste carting?
+        </div>
+        <p class="faq-a">
+          The GH₵ 2.00 software booking fee covers dispatch coordination on the platform. The physical carting fee (typically GH₵ 15 – 25 based on bin size) is paid directly to the collector at your gate in cash or personal MoMo.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="material-icons-round" style="color: var(--green-primary); font-size: 18px;" aria-hidden="true">help_outline</span>
+          How do I register as an independent waste collector?
+        </div>
+        <p class="faq-a">
+          Visit the Collector Portal from the home page, enter your personal details, and upload your Ghana Card and Aboboyaa vehicle registration for verification by our municipal onboarding officers.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-simple">
+    <div class="footer-links">
+      <a href="./index.html">Home</a>
+      <a href="./preview.html">Screen Directory</a>
+      <a href="./terms.html">Terms of Service</a>
+      <a href="./privacy.html">Privacy Policy</a>
+      <a href="./support.html" style="font-weight: 700; color: var(--green-primary);">Help &amp; Support</a>
+    </div>
+    <div>&copy; 2026 BorlaAlert GH. Cleantech initiative for Greater Accra, Ghana.</div>
+  </footer>
+</body>
+</html>

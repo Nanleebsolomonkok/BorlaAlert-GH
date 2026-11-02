@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta content="mobile_stack" name="shell-type">
+  <meta name="theme-color" content="#006b2c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Verify Code — BorlaAlert GH</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/preconnect" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <style>
+    @layer base {
+      html, body { width: 100vw; margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    :focus-visible {
+      outline: 2px solid #006b2c;
+      outline-offset: 2px;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f9f9ff] font-['Inter'] text-[#141b2b] antialiased">
+  <!-- Top Bar -->
+  <header class="fixed top-0 w-full z-40 pt-safe bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-md mx-auto w-full">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <a href="./login.html" aria-label="Go Back" class="w-10 h-10 flex items-center justify-center rounded-full text-slate-700 hover:bg-slate-100 transition-colors">
+          <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+        </a>
+        <div class="flex flex-col items-center">
+          <span class="text-xs font-bold text-slate-800">Verification</span>
+          <span class="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.2 rounded-full border border-emerald-200">SMS Security</span>
+        </div>
+        <div class="w-10 h-10"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex flex-col relative w-full pt-16 pb-safe bg-[#f9f9ff] min-h-screen">
+    <div class="flex flex-col w-full pb-8">
+      <div class="flex flex-col px-4 pt-4 max-w-md mx-auto w-full flex-1 justify-between">
+        
+        <div>
+          <!-- Title & Notice -->
+          <h1 class="font-['Epilogue'] text-[24px] text-slate-900 font-bold tracking-tight mb-1.5">
+            Enter 4-digit code
+          </h1>
+
+          <div class="flex flex-wrap items-center gap-1.5 text-slate-600 text-sm mb-4">
+            <span>Code sent to</span>
+            <span id="targetPhone" class="font-bold text-slate-900 tracking-wide font-mono">+233 24 582 1928</span>
+            <a href="./registration.html" class="text-[#006b2c] font-semibold hover:underline text-xs ml-1">
+              Change
+            </a>
+          </div>
+
+          <!-- Security Notice -->
+          <div class="mb-5 p-3 rounded-xl bg-emerald-50/80 border border-emerald-200/80 text-xs text-emerald-950 flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-[#006b2c] shrink-0 mt-0.5">verified_user</span>
+            <div class="leading-relaxed">
+              <strong>Instant Verification:</strong> Enter the 4-digit code sent to your phone or use <strong>1 2 3 4</strong> to quickly authenticate.
+            </div>
+          </div>
+
+          <!-- Hidden Native Input for Keyboard Support (Physical & Soft Mobile Keyboard) -->
+          <input type="text" id="hiddenOtpInput" inputmode="numeric" maxlength="4" class="opacity-0 absolute -z-10 w-0 h-0" autocomplete="one-time-code" aria-label="4-digit verification code">
+
+          <!-- 4-Digit Display Slots (Clicking focuses input) -->
+          <div class="flex justify-between items-center gap-3 mb-4 cursor-pointer" id="otp-container" role="group" aria-label="Verification code digits" onclick="focusOtpInput()">
+            <div class="otp-slot flex-1 h-16 rounded-2xl bg-white border-2 border-[#006b2c] ring-4 ring-emerald-700/10 flex items-center justify-center font-['Epilogue'] text-[26px] text-slate-900 font-bold select-none shadow-sm transition-all" data-index="0">
+              <span class="digit-val"></span>
+            </div>
+            <div class="otp-slot flex-1 h-16 rounded-2xl bg-slate-100 border-2 border-slate-200 flex items-center justify-center font-['Epilogue'] text-[26px] text-slate-900 font-bold select-none transition-all" data-index="1">
+              <span class="digit-val"></span>
+            </div>
+            <div class="otp-slot flex-1 h-16 rounded-2xl bg-slate-100 border-2 border-slate-200 flex items-center justify-center font-['Epilogue'] text-[26px] text-slate-900 font-bold select-none transition-all" data-index="2">
+              <span class="digit-val"></span>
+            </div>
+            <div class="otp-slot flex-1 h-16 rounded-2xl bg-slate-100 border-2 border-slate-200 flex items-center justify-center font-['Epilogue'] text-[26px] text-slate-900 font-bold select-none transition-all" data-index="3">
+              <span class="digit-val"></span>
+            </div>
+          </div>
+
+          <!-- 1-Tap Convenience Shortcut -->
+          <div class="flex items-center justify-between gap-2 mb-5">
+            <button type="button" onclick="fillDemoCode()" class="flex-1 h-10 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors">
+              <span class="material-symbols-outlined text-[16px] text-[#006b2c]">bolt</span>
+              <span>Use Demo Code: <strong>1 2 3 4</strong></span>
+            </button>
+            <button type="button" onclick="clearCode()" class="px-3 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition-colors">
+              Clear
+            </button>
+          </div>
+
+          <!-- Primary Verify Button -->
+          <button id="verifyBtn" onclick="handleVerify()" class="w-full h-12 rounded-xl bg-[#006b2c] hover:bg-[#005423] active:scale-[0.99] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-all mb-4 focus:outline-none focus:ring-2 focus:ring-[#006b2c]">
+            <span>Verify &amp; Enter Dashboard</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+
+        <!-- On-Screen Numeric Keypad for Touch / Mouse -->
+        <div class="w-full bg-white rounded-2xl p-3 shadow-xs border border-slate-200/80 mt-auto">
+          <div class="grid grid-cols-3 gap-2">
+            <button data-num="1" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">1</button>
+            <button data-num="2" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>2</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">ABC</span>
+            </button>
+            <button data-num="3" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>3</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">DEF</span>
+            </button>
+            <button data-num="4" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>4</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">GHI</span>
+            </button>
+            <button data-num="5" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>5</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">JKL</span>
+            </button>
+            <button data-num="6" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>6</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">MNO</span>
+            </button>
+            <button data-num="7" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>7</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">PQRS</span>
+            </button>
+            <button data-num="8" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>8</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">TUV</span>
+            </button>
+            <button data-num="9" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex flex-col items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">
+              <span>9</span><span class="text-[9px] text-slate-400 -mt-1 font-normal">WXYZ</span>
+            </button>
+            <div class="h-12 flex items-center justify-center"></div>
+            <button data-num="0" class="key-btn h-12 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 font-bold text-lg flex items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-200" type="button">0</button>
+            <button id="backspaceBtn" aria-label="Backspace" class="h-12 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center active:scale-95 transition-all shadow-xs border border-slate-300" type="button">
+              <span class="material-symbols-outlined text-[22px]">backspace</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    let enteredOtp = [];
+    const slots = document.querySelectorAll('.otp-slot');
+    const targetPhoneEl = document.getElementById('targetPhone');
+    const hiddenInput = document.getElementById('hiddenOtpInput');
+
+    // Populate phone number from BorlaStore
+    try {
+      if (window.BorlaStore) {
+        const u = window.BorlaStore.get()?.user;
+        if (u && u.phone) {
+          targetPhoneEl.textContent = u.phone;
+        }
+      }
+    } catch(e) {}
+
+    function updateSlots() {
+      slots.forEach((slot, idx) => {
+        const valSpan = slot.querySelector('.digit-val');
+        if (idx < enteredOtp.length) {
+          valSpan.textContent = enteredOtp[idx];
+          slot.className = 'otp-slot flex-1 h-16 rounded-2xl bg-white border-2 border-[#006b2c] flex items-center justify-center font-[\'Epilogue\'] text-[26px] text-slate-900 font-bold select-none shadow-sm transition-all';
+        } else if (idx === enteredOtp.length) {
+          valSpan.textContent = '';
+          slot.className = 'otp-slot flex-1 h-16 rounded-2xl bg-white border-2 border-[#006b2c] ring-4 ring-emerald-700/10 flex items-center justify-center font-[\'Epilogue\'] text-[26px] text-slate-900 font-bold select-none shadow-sm transition-all';
+        } else {
+          valSpan.textContent = '';
+          slot.className = 'otp-slot flex-1 h-16 rounded-2xl bg-slate-100 border-2 border-slate-200 flex items-center justify-center font-[\'Epilogue\'] text-[26px] text-slate-900 font-bold select-none transition-all';
+        }
+      });
+
+      if (enteredOtp.length === 4) {
+        setTimeout(handleVerify, 250);
+      }
+    }
+
+    function focusOtpInput() {
+      hiddenInput?.focus();
+    }
+
+    // Handle physical keyboard input
+    document.addEventListener('keydown', (e) => {
+      if (e.key >= '0' && e.key <= '9') {
+        if (enteredOtp.length < 4) {
+          enteredOtp.push(e.key);
+          updateSlots();
+        }
+      } else if (e.key === 'Backspace') {
+        if (enteredOtp.length > 0) {
+          enteredOtp.pop();
+          updateSlots();
+        }
+      } else if (e.key === 'Enter') {
+        handleVerify();
+      }
+    });
+
+    // Handle on-screen keypad clicks
+    document.querySelectorAll('.key-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const num = btn.getAttribute('data-num');
+        if (enteredOtp.length < 4) {
+          enteredOtp.push(num);
+          updateSlots();
+        }
+      });
+    });
+
+    document.getElementById('backspaceBtn')?.addEventListener('click', () => {
+      if (enteredOtp.length > 0) {
+        enteredOtp.pop();
+        updateSlots();
+      }
+    });
+
+    function fillDemoCode() {
+      enteredOtp = ['1', '2', '3', '4'];
+      updateSlots();
+    }
+
+    function clearCode() {
+      enteredOtp = [];
+      updateSlots();
+      focusOtpInput();
+    }
+
+    function handleVerify() {
+      const verifyBtn = document.getElementById('verifyBtn');
+      if (verifyBtn) {
+        verifyBtn.disabled = true;
+        verifyBtn.innerHTML = `
+          <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+          <span>Entering Dashboard...</span>
+        `;
+      }
+      setTimeout(() => {
+        window.location.href = './home.html';
+      }, 300);
+    }
+
+    // Auto-focus on load
+    window.addEventListener('load', () => {
+      updateSlots();
+      focusOtpInput();
+    });
+  </script>
+</body>
+</html>

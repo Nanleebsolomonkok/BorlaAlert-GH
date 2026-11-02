@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>Official Receipt — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+    }
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px dashed #e2e8e3;
+      font-size: 12.5px;
+    }
+    .receipt-row:last-child {
+      border-bottom: none;
+    }
+    .receipt-label {
+      color: #5f6b62;
+    }
+    .receipt-value {
+      font-weight: 600;
+      color: #17211b;
+      text-align: right;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP NAV WITH BACK BUTTON -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="./home.html" class="nav-icon-btn" aria-label="Back to dashboard" style="text-decoration: none; color: #17211b;">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <h1 style="font-family: 'Epilogue', sans-serif; font-size: 16px; font-weight: 700; color: #17211b; margin: 0;">
+        Official Receipt
+      </h1>
+    </div>
+
+    <span class="badge badge-green" style="display: inline-flex; align-items: center; gap: 4px; font-size: 11px;">
+      <span class="material-symbols-outlined" style="font-size: 13px;">check_circle</span> Settled
+    </span>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 30px;">
+
+    <!-- RECEIPT CONTAINER CARD -->
+    <div class="card card-bordered" style="margin-top: 14px; padding: 0; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.06); background: white;">
+      
+      <!-- Receipt Header Pattern -->
+      <div style="background: linear-gradient(135deg, #005a24, #007a33); color: white; padding: 18px 16px; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 4px;">
+          <img src="../../packages/brand-assets/logo.svg" alt="BorlaAlert" style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
+          <span style="font-family: 'Epilogue', sans-serif; font-size: 18px; font-weight: 800;">BorlaAlert GH</span>
+        </div>
+        <div style="font-size: 11.5px; color: rgba(255,255,255,0.85);">
+          Civic Cleantech Platform • Greater Accra
+        </div>
+        <div style="margin-top: 10px; display: inline-block; background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;">
+          Platform Booking Receipt
+        </div>
+      </div>
+
+      <!-- Receipt Content Rows -->
+      <div style="padding: 16px;">
+        <div class="receipt-row">
+          <span class="receipt-label">Receipt Reference</span>
+          <span class="receipt-value font-mono" id="rec-id">BLA-GH-77402</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Date &amp; Time</span>
+          <span class="receipt-value" id="rec-date">Today, 10:45 AM</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Resident Account</span>
+          <span class="receipt-value" id="rec-user">Akua Mensah</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">GhanaPost GPS</span>
+          <span class="receipt-value font-mono text-emerald-800" id="rec-gps">GA-183-9021</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Pickup Location</span>
+          <span class="receipt-value" id="rec-address">House 14, Lagos Ave, East Legon</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Waste Category</span>
+          <span class="receipt-value" id="rec-category">Standard Household Waste</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Assigned Collector</span>
+          <span class="receipt-value" id="rec-collector">Emmanuel Mensah (Aboboyaa)</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Payment Channel</span>
+          <span class="receipt-value">MTN Mobile Money</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Eco-Points Awarded</span>
+          <span class="receipt-value text-amber-800" id="rec-eco">+150 Points</span>
+        </div>
+
+        <!-- Total Paid Line -->
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 2px solid #17211b; display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-size: 14px; font-weight: 700; color: #17211b;">Platform Fee Paid</span>
+          <span style="font-family: 'Epilogue', sans-serif; font-size: 24px; font-weight: 800; color: #15803d;">GH₵ 2.00</span>
+        </div>
+
+        <div style="font-size: 11px; color: #5f6b62; margin-top: 6px; line-height: 1.4; border-top: 1px dashed #e2e8e3; padding-top: 8px;">
+          * Note: Collector gate carting service fee is settled directly at your gate in cash or personal Mobile Money to the driver.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="padding: 4px 16px; display: flex; flex-direction: column; gap: 8px;">
+      <button type="button" onclick="window.print()" class="btn btn-primary" style="height: 48px; font-size: 14px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span class="material-symbols-outlined" style="font-size: 18px;">print</span>
+        <span>Print / Save Receipt</span>
+      </button>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <a href="./receipts.html" class="btn btn-grey btn-sm" style="height: 42px; font-size: 12.5px; text-decoration: none; font-weight: 600;">
+          <span class="material-symbols-outlined" style="font-size: 16px;">receipt_long</span>
+          <span>All Receipts</span>
+        </a>
+        <a href="./home.html" class="btn btn-outline btn-sm" style="height: 42px; font-size: 12.5px; text-decoration: none; font-weight: 600;">
+          <span>Home Dashboard</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        if (window.BorlaStore) {
+          const s = window.BorlaStore.get();
+          const active = s.activePickup;
+          const u = s.user || {};
+          if (active) {
+            if (active.id) document.getElementById('rec-id').textContent = active.id;
+            if (active.category) document.getElementById('rec-category').textContent = active.category;
+            if (active.address) document.getElementById('rec-address').textContent = active.address;
+            if (active.gpsAddress) document.getElementById('rec-gps').textContent = active.gpsAddress;
+            if (active.collectorName) document.getElementById('rec-collector').textContent = `${active.collectorName} (${active.collectorVehicle || 'Aboboyaa'})`;
+            if (active.ecoPoints) document.getElementById('rec-eco').textContent = `+${active.ecoPoints} Points`;
+          }
+          if (u.name) document.getElementById('rec-user').textContent = `${u.name} (${u.phone || ''})`;
+          document.getElementById('rec-date').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>

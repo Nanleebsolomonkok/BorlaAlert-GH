@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>Processing Payment — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px;
+      text-align: center;
+    }
+    .pulse-center {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #006b2c;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 25px rgba(0, 107, 44, 0.35);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(0, 107, 44, 0.4); }
+      70% { transform: scale(1.04); box-shadow: 0 0 0 16px rgba(0, 107, 44, 0); }
+      100% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(0, 107, 44, 0); }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <main style="max-width: 360px; width: 100%;">
+    <div class="pulse-center">
+      <span class="material-symbols-outlined" style="font-size: 36px;">recycling</span>
+    </div>
+
+    <h1 style="font-family: 'Epilogue', sans-serif; font-size: 20px; font-weight: 700; color: #17211b; margin-bottom: 4px;">
+      Authorizing Payment...
+    </h1>
+    <p style="font-size: 13px; color: #5f6b62; margin-bottom: 24px;">
+      Confirming GH₵ 2.00 platform booking fee
+    </p>
+
+    <!-- Step Progress Box -->
+    <div style="background: white; border: 1px solid #e2e8e3; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; text-align: left; font-size: 12px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+      <div style="display: flex; align-items: center; gap: 8px; color: #15803d; font-weight: 600;">
+        <span class="material-symbols-outlined" style="font-size: 18px;">check_circle</span>
+        <span>Payment gateway handshake complete</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; color: #15803d; font-weight: 600;">
+        <span class="material-symbols-outlined" style="font-size: 18px;">check_circle</span>
+        <span>Booking receipt generated</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; color: #006b2c; font-weight: 700;">
+        <span class="material-symbols-outlined" style="font-size: 18px; animation: spin 1s infinite linear;">sync</span>
+        <span>Dispatching local collector...</span>
+      </div>
+    </div>
+
+    <!-- Continue Button -->
+    <a href="./confirmed.html" class="btn btn-primary" style="height: 44px; font-size: 13px; font-weight: 700; text-decoration: none; border-radius: 10px;">
+      <span>View Confirmation →</span>
+    </a>
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    // Automatically redirect after brief demonstration preview
+    setTimeout(() => {
+      window.location.href = './confirmed.html';
+    }, 1400);
+  </script>
+</body>
+</html>

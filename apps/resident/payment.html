@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>Platform Fee Settlement — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+    }
+    .momo-option {
+      border: 1.5px solid #e2e8e3;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      background: white;
+      transition: all 0.2s;
+    }
+    .momo-option.active {
+      border-color: #15803d;
+      background: #f0fdf4;
+      border-left: 4px solid #15803d;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP NAV WITH BACK BUTTON -->
+  <header class="top-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="./collector-match.html" class="nav-icon-btn" aria-label="Go back to match screen" style="text-decoration: none; color: #17211b;">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <h1 style="font-family: 'Epilogue', sans-serif; font-size: 16px; font-weight: 700; color: #17211b; margin: 0;">
+        Platform Fee Settlement
+      </h1>
+    </div>
+    
+    <span class="badge badge-green" style="font-size: 11px; display: inline-flex; align-items: center; gap: 3px;">
+      <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: 'FILL' 1;">lock</span>
+      Secure Checkout
+    </span>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 30px;">
+
+    <!-- TRUST NOTICE -->
+    <div style="margin: 14px 16px 10px; padding: 12px 14px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; font-size: 12px; color: #065f46; line-height: 1.45; display: flex; align-items: center; gap: 10px;">
+      <span class="material-symbols-outlined" style="font-size: 22px; color: #059669; flex-shrink: 0;">shield</span>
+      <div>
+        <strong>Mobile Money Gateway:</strong> Encrypted transaction prompt will be sent directly to your registered phone.
+      </div>
+    </div>
+
+    <!-- AMOUNT DISPLAY CARD -->
+    <div class="card" style="text-align: center; background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 16px; margin: 0 16px 12px;">
+      <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: #166534; letter-spacing: 0.05em;">
+        Platform Booking Fee
+      </div>
+      <div style="font-family: 'Epilogue', sans-serif; font-size: 34px; font-weight: 800; color: #15803d; line-height: 1.1; margin: 4px 0;">
+        GH₵ 2.00
+      </div>
+      <div style="font-size: 11.5px; color: #5f6b62;">
+        Doorstep tricycle dispatch platform booking fee
+      </div>
+    </div>
+
+    <!-- ORDER SUMMARY CARD -->
+    <div class="card card-bordered" style="margin: 0 16px 12px; padding: 12px 14px;">
+      <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #5f6b62; margin-bottom: 6px;">
+        Request Details
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; font-size: 12.5px;">
+        <div>
+          <strong id="pay-category" class="text-slate-900 block font-semibold">Standard Household Waste</strong>
+          <span id="pay-address" class="text-slate-600 text-xs block mt-0.5">House 14, Lagos Ave, East Legon</span>
+        </div>
+        <span class="badge badge-green" style="font-size: 10.5px;">Assigned</span>
+      </div>
+    </div>
+
+    <!-- PAYMENT METHOD SELECTION -->
+    <div style="padding: 0 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">Select Mobile Money Network</div>
+
+      <!-- Option 1: MTN MoMo -->
+      <div class="momo-option active" onclick="selectMomo(this, 'MTN')">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #ffcc02; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; color: black; shrink-0;">
+            MTN
+          </div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 700; color: #17211b;">MTN Mobile Money</div>
+            <div style="font-size: 11.5px; color: #15803d; font-weight: 600;" id="momo-phone-display">
+              024 123 4567 • Primary Wallet
+            </div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined" style="font-size: 20px; color: #15803d;">radio_button_checked</span>
+      </div>
+
+      <!-- Option 2: Telecel Cash -->
+      <div class="momo-option" onclick="selectMomo(this, 'Telecel')">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #e30613; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 10px; color: white; shrink-0;">
+            TEL
+          </div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 700; color: #17211b;">Telecel Cash</div>
+            <div style="font-size: 11.5px; color: #5f6b62;">Instant Prompt</div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined" style="font-size: 20px; color: #cbd5e1;">radio_button_unchecked</span>
+      </div>
+
+      <!-- Option 3: AT Money -->
+      <div class="momo-option" onclick="selectMomo(this, 'AT')">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #0056a2; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 10px; color: white; shrink-0;">
+            AT
+          </div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 700; color: #17211b;">AT Money</div>
+            <div style="font-size: 11.5px; color: #5f6b62;">Instant Prompt</div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined" style="font-size: 20px; color: #cbd5e1;">radio_button_unchecked</span>
+      </div>
+    </div>
+
+    <!-- Critical Notice: Gate Carting Fee -->
+    <div style="margin: 10px 16px 14px; padding: 12px 14px; background: #fffbe8; border: 1.5px solid #fde68a; border-radius: 10px; font-size: 12px; color: #92400e; line-height: 1.45;">
+      <div style="font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+        <span class="material-symbols-outlined" style="font-size: 16px; color: #b45309;">info</span> Important Fee Notice
+      </div>
+      The collector carting fee is settled directly at your gate in cash or personal MoMo to the collector upon collection. <strong>It is NOT debited through this platform.</strong>
+    </div>
+
+    <!-- MAIN PAY BUTTON -->
+    <div style="padding: 6px 16px;">
+      <a href="./processing.html" class="btn btn-primary" style="height: 52px; font-size: 15px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+        <span class="material-symbols-outlined" style="font-size: 20px;">lock</span>
+        <span>Authorize Payment (GH₵ 2.00)</span>
+      </a>
+    </div>
+
+  </main>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    function selectMomo(elem, network) {
+      document.querySelectorAll('.momo-option').forEach(opt => {
+        opt.classList.remove('active');
+        const icon = opt.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.textContent = 'radio_button_unchecked';
+          icon.style.color = '#cbd5e1';
+        }
+      });
+      elem.classList.add('active');
+      const icon = elem.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = 'radio_button_checked';
+        icon.style.color = '#15803d';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        if (window.BorlaStore) {
+          const s = window.BorlaStore.get();
+          const active = s.activePickup;
+          const user = s.user || {};
+          if (active) {
+            if (active.category) document.getElementById('pay-category').textContent = active.category;
+            if (active.address) document.getElementById('pay-address').textContent = active.address;
+          }
+          if (user.phone) {
+            const p = document.getElementById('momo-phone-display');
+            if (p) p.textContent = `${user.phone} • Primary Wallet`;
+          }
+        }
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>

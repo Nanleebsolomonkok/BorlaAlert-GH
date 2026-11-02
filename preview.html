@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BorlaAlert GH — Mobile Device Simulator & Phone Preview</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: '#10b981',
+              600: '#16a34a',
+              700: '#006b2c',
+              900: '#072415'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Epilogue', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Phone chassis scale wrapper */
+    .phone-scaler {
+      transform-origin: center center;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(51, 65, 85, 0.8);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased h-full flex flex-col overflow-hidden selection:bg-brand-600 selection:text-white">
+
+  <!-- Top Simulator Control Bar -->
+  <header class="h-14 px-4 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between shrink-0 z-20 backdrop-blur-md gap-2">
+    <!-- Brand & Status -->
+    <div class="flex items-center gap-3 shrink-0">
+      <a href="./index.html" class="flex items-center gap-2 text-white hover:text-emerald-400 transition-colors">
+        <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+        <span class="font-display font-bold text-sm tracking-tight hidden md:inline">BorlaAlert GH</span>
+      </a>
+      <div class="h-4 w-[1px] bg-slate-800"></div>
+      <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Mobile Simulator</span>
+      </div>
+    </div>
+
+    <!-- Center Controls: Screen Selector & Device Switcher -->
+    <div class="flex items-center gap-2 overflow-x-auto py-1">
+      <!-- Direct Screen Dropdown -->
+      <div class="relative flex items-center">
+        <span class="material-symbols-outlined absolute left-2.5 text-[16px] text-slate-400 pointer-events-none">swap_calls</span>
+        <select id="screen-select" onchange="onScreenSelect(this.value)" class="h-8 pl-8 pr-7 rounded-lg bg-slate-800/90 border border-slate-700/80 text-xs font-medium text-slate-200 focus:outline-none focus:border-emerald-500 cursor-pointer appearance-none transition-colors">
+          <optgroup label="Resident Experience">
+            <option value="./apps/resident/home.html">Resident: Home Radar Map</option>
+            <option value="./apps/resident/request.html">Resident: Choose Service (Step 1)</option>
+            <option value="./apps/resident/collector-match.html">Resident: AI Collector Match (Step 2)</option>
+            <option value="./apps/resident/payment.html">Resident: Secure MoMo Payment (Step 3)</option>
+            <option value="./apps/resident/processing.html">Resident: Processing Payment</option>
+            <option value="./apps/resident/confirmed.html">Resident: Pickup Confirmed</option>
+            <option value="./apps/resident/tracking.html">Resident: Live GPS Tracker</option>
+            <option value="./apps/resident/complete.html">Resident: Borla Cleared (Gate Fee)</option>
+            <option value="./apps/resident/rating.html">Resident: Rate Collector</option>
+            <option value="./apps/resident/receipt.html">Resident: Official MoMo Receipt</option>
+            <option value="./apps/resident/pickups.html">Resident: My Pickups List</option>
+            <option value="./apps/resident/receipts.html">Resident: Receipts Statements</option>
+            <option value="./apps/resident/account.html">Resident: Account &amp; Eco Points</option>
+            <option value="./apps/resident/onboarding.html">Resident: Onboarding Splash</option>
+            <option value="./apps/resident/login.html">Resident: Sign In</option>
+            <option value="./apps/resident/registration.html">Resident: Registration</option>
+            <option value="./apps/resident/otp.html">Resident: SMS OTP</option>
+          </optgroup>
+          <optgroup label="Collector Driver Partner">
+            <option value="./apps/collector/home.html">Collector: Duty Radar &amp; Dispatch</option>
+            <option value="./apps/collector/request-alert.html">Collector: 30s Request Alert</option>
+            <option value="./apps/collector/navigation.html">Collector: Turn-by-Turn GPS</option>
+            <option value="./apps/collector/arrived.html">Collector: Gate Arrived (Gate Fee)</option>
+            <option value="./apps/collector/jobs.html">Collector: My Jobs Log</option>
+            <option value="./apps/collector/ratings.html">Collector: Reputation &amp; Ratings</option>
+            <option value="./apps/collector/profile.html">Collector: Verified Profile</option>
+            <option value="./apps/collector/register.html">Collector: Vehicle Registration</option>
+            <option value="./apps/collector/id-upload.html">Collector: Ghana Card Upload</option>
+            <option value="./apps/collector/pending.html">Collector: Approval Pending</option>
+            <option value="./apps/collector/login.html">Collector: Sign In</option>
+          </optgroup>
+          <optgroup label="Municipal Admin Operations">
+            <option value="./apps/admin/dashboard.html">Admin: Executive Dashboard</option>
+            <option value="./apps/admin/live-map.html">Admin: Greater Accra GIS Radar</option>
+            <option value="./apps/admin/revenue.html">Admin: GH₵ 2.00 Revenue Ledger</option>
+            <option value="./apps/admin/users.html">Admin: Fleet &amp; User Directory</option>
+            <option value="./apps/admin/settings.html">Admin: Regulatory Settings</option>
+            <option value="./apps/admin/login.html">Admin: Secure Login</option>
+            <option value="./index.html">Public: Landing Portal</option>
+          </optgroup>
+        </select>
+        <span class="material-symbols-outlined absolute right-2 text-[14px] text-slate-400 pointer-events-none">expand_more</span>
+      </div>
+
+      <!-- Quick Role Pills -->
+      <div class="hidden sm:flex items-center gap-1 bg-slate-800/80 p-0.5 rounded-lg border border-slate-700/60">
+        <button id="btn-resident" onclick="switchApp('./apps/resident/home.html', this)" class="app-tab px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-600 text-white shadow-sm flex items-center gap-1 transition-all">
+          <span class="material-symbols-outlined text-[14px]">home</span>
+          <span>Resident</span>
+        </button>
+        <button id="btn-collector" onclick="switchApp('./apps/collector/home.html', this)" class="app-tab px-2.5 py-1 rounded-md text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-1 transition-all">
+          <span class="material-symbols-outlined text-[14px]">electric_rickshaw</span>
+          <span>Collector</span>
+        </button>
+        <button id="btn-admin" onclick="switchApp('./apps/admin/admin.html', this)" class="app-tab px-2.5 py-1 rounded-md text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-1 transition-all">
+          <span class="material-symbols-outlined text-[14px]">dashboard</span>
+          <span>Admin</span>
+        </button>
+      </div>
+
+      <!-- Device Frame Selector -->
+      <div class="hidden xl:flex items-center gap-1 bg-slate-800/80 p-0.5 rounded-lg border border-slate-700/60">
+        <button onclick="setDevice('iphone', this)" class="device-tab px-2 py-1 rounded-md text-[11px] font-semibold bg-slate-700 text-white transition-all">iPhone 15 Pro</button>
+        <button onclick="setDevice('pixel', this)" class="device-tab px-2 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-all">Pixel 8</button>
+        <button onclick="setDevice('galaxy', this)" class="device-tab px-2 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-all">Galaxy S24</button>
+      </div>
+
+      <!-- Zoom / Scale Selector -->
+      <div class="flex items-center gap-1">
+        <button onclick="adjustScale(-0.1)" title="Zoom Out" class="w-7 h-7 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs">
+          <span class="material-symbols-outlined text-[15px]">remove</span>
+        </button>
+        <span id="scale-label" class="text-[11px] font-mono text-slate-400 w-10 text-center font-semibold">100%</span>
+        <button onclick="adjustScale(0.1)" title="Zoom In" class="w-7 h-7 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs">
+          <span class="material-symbols-outlined text-[15px]">add</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Actions (Reload & External) -->
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button onclick="reloadFrame()" title="Reload Mobile Screen" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+        <span class="material-symbols-outlined text-[17px]">refresh</span>
+      </button>
+      <button onclick="openExternal()" title="Open Direct in New Tab" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+        <span class="material-symbols-outlined text-[17px]">open_in_new</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Workspace Area -->
+  <main class="flex-1 flex overflow-hidden relative">
+
+    <!-- Left: QR Code & Real Phone Connection Card -->
+    <aside class="hidden lg:flex w-80 p-5 flex-col justify-between border-r border-slate-800/80 bg-slate-900/40 shrink-0 overflow-y-auto">
+      <div class="flex flex-col gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">
+            <span class="material-symbols-outlined text-[16px]">qr_code_scanner</span>
+            <span>Scan with Real Phone</span>
+          </div>
+          <h2 class="font-display font-bold text-lg text-white">Preview on Physical Phone</h2>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Scan this QR code with your iPhone Camera or Android Chrome scanner to open the PWA on your device.
+          </p>
+        </div>
+
+        <!-- Generated QR Code Card -->
+        <div class="p-4 rounded-2xl bg-white flex flex-col items-center justify-center shadow-xl border border-slate-200">
+          <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=http://192.168.1.168:3000&color=072415" alt="QR Code to preview on phone" class="w-48 h-48 rounded-lg">
+          <span id="qr-url-text" class="mt-2.5 font-mono text-[11px] font-bold text-slate-800 text-center tracking-tight break-all">http://192.168.1.168:3000</span>
+          <button onclick="copyCurrentURL()" class="mt-2 text-[10px] text-emerald-700 hover:underline font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-[12px]">content_copy</span>
+            <span id="copy-feedback">Copy Address</span>
+          </button>
+        </div>
+
+        <!-- Wi-Fi Reassurance Note -->
+        <div class="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 flex flex-col gap-1 text-xs">
+          <div class="flex items-center gap-1.5 font-semibold text-emerald-400">
+            <span class="material-symbols-outlined text-[15px]">wifi</span>
+            <span>Same Wi-Fi Connection</span>
+          </div>
+          <p class="text-slate-400 text-[11px] leading-relaxed">
+            Ensure your phone is connected to the same Wi-Fi network as this computer (IP: <strong class="text-slate-200">192.168.1.168</strong>).
+          </p>
+        </div>
+
+        <!-- Cloud Tunnel Alternative -->
+        <div class="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 flex flex-col gap-1 text-xs">
+          <div class="flex items-center gap-1.5 font-semibold text-amber-400">
+            <span class="material-symbols-outlined text-[15px]">cloud_sync</span>
+            <span>Public HTTPS Tunnel</span>
+          </div>
+          <a href="https://small-stars-dream.loca.lt" target="_blank" class="font-mono text-[11px] text-amber-300 hover:underline break-all">
+            https://small-stars-dream.loca.lt
+          </a>
+          <span class="text-[10px] text-slate-400">Password if prompted: <code class="bg-slate-900 px-1 py-0.5 rounded text-amber-300 font-bold">154.163.149.1</code></span>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800 text-[11px] text-slate-500 flex items-center justify-between">
+        <span>AMA & EPA Municipal Core</span>
+        <span class="text-emerald-500 font-semibold">Online</span>
+      </div>
+    </aside>
+
+    <!-- Center: Interactive Mobile Phone Chassis (iPhone / Pixel Frame) -->
+    <div class="flex-1 flex flex-col items-center justify-center p-4 bg-radial from-slate-900 via-slate-950 to-slate-950 overflow-hidden relative">
+
+      <!-- Ambient Glow Behind Phone -->
+      <div class="absolute w-[450px] h-[750px] rounded-[60px] bg-emerald-500/10 blur-[80px] pointer-events-none"></div>
+
+      <!-- Scaler wrapper for responsive viewing -->
+      <div id="phone-scaler" class="phone-scaler flex items-center justify-center">
+
+        <!-- Phone Frame Container -->
+        <div id="phone-chassis" class="relative w-[393px] h-[852px] rounded-[52px] bg-[#1a1f26] p-3 shadow-[0_25px_70px_rgba(0,0,0,0.85),0_0_0_2px_rgba(255,255,255,0.1),0_0_0_8px_#27303f] flex flex-col transition-all duration-300">
+
+          <!-- Dynamic Island / Punch Hole Notch -->
+          <div id="phone-notch" class="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-40 flex items-center justify-between px-3 pointer-events-none shadow-md transition-all">
+            <div class="w-2.5 h-2.5 rounded-full bg-[#111] ring-1 ring-white/10"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/40 animate-pulse"></div>
+          </div>
+
+          <!-- Phone Screen Bezel -->
+          <div class="w-full h-full rounded-[42px] overflow-hidden bg-white relative flex flex-col shadow-inner">
+            <iframe id="mobile-viewport" src="./apps/resident/home.html" class="w-full h-full border-0 select-none"></iframe>
+          </div>
+
+          <!-- Bottom Home Indicator Bar -->
+          <div id="home-indicator" class="absolute bottom-4 left-1/2 -translate-x-1/2 w-36 h-1 rounded-full bg-white/40 pointer-events-none transition-all"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const iframe = document.getElementById('mobile-viewport');
+    const screenSelect = document.getElementById('screen-select');
+    const phoneScaler = document.getElementById('phone-scaler');
+    const phoneChassis = document.getElementById('phone-chassis');
+    const phoneNotch = document.getElementById('phone-notch');
+    const scaleLabel = document.getElementById('scale-label');
+    const qrImage = document.getElementById('qr-image');
+    const qrUrlText = document.getElementById('qr-url-text');
+
+    let currentScale = 0.9; // Default 90% fits standard laptop screens cleanly
+
+    function applyScale() {
+      phoneScaler.style.transform = `scale(${currentScale})`;
+      scaleLabel.textContent = `${Math.round(currentScale * 100)}%`;
+    }
+
+    function adjustScale(delta) {
+      currentScale = Math.min(1.2, Math.max(0.5, Math.round((currentScale + delta) * 10) / 10));
+      applyScale();
+    }
+
+    function switchApp(url, btn) {
+      iframe.src = url;
+      screenSelect.value = url;
+      document.querySelectorAll('.app-tab').forEach(t => {
+        t.className = 'app-tab px-2.5 py-1 rounded-md text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-1 transition-all';
+      });
+      if (btn) {
+        btn.className = 'app-tab px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-600 text-white shadow-sm flex items-center gap-1 transition-all';
+      }
+    }
+
+    function onScreenSelect(url) {
+      iframe.src = url;
+      // Sync quick tabs
+      document.querySelectorAll('.app-tab').forEach(t => {
+        t.className = 'app-tab px-2.5 py-1 rounded-md text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-1 transition-all';
+      });
+      if (url.includes('/resident/')) {
+        const tab = document.getElementById('btn-resident');
+        if (tab) tab.className = 'app-tab px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-600 text-white shadow-sm flex items-center gap-1 transition-all';
+      } else if (url.includes('/collector/')) {
+        const tab = document.getElementById('btn-collector');
+        if (tab) tab.className = 'app-tab px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-600 text-white shadow-sm flex items-center gap-1 transition-all';
+      } else if (url.includes('/admin/')) {
+        const tab = document.getElementById('btn-admin');
+        if (tab) tab.className = 'app-tab px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-600 text-white shadow-sm flex items-center gap-1 transition-all';
+      }
+    }
+
+    function setDevice(device, btn) {
+      document.querySelectorAll('.device-tab').forEach(b => {
+        b.className = 'device-tab px-2 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-all';
+      });
+      btn.className = 'device-tab px-2 py-1 rounded-md text-[11px] font-semibold bg-slate-700 text-white transition-all';
+
+      if (device === 'iphone') {
+        phoneChassis.style.width = '393px';
+        phoneChassis.style.height = '852px';
+        phoneChassis.style.borderRadius = '52px';
+        phoneNotch.className = 'absolute top-5 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-40 flex items-center justify-between px-3 pointer-events-none shadow-md transition-all';
+        phoneNotch.style.display = 'flex';
+      } else if (device === 'pixel') {
+        phoneChassis.style.width = '412px';
+        phoneChassis.style.height = '892px';
+        phoneChassis.style.borderRadius = '42px';
+        phoneNotch.className = 'absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-black rounded-full z-40 pointer-events-none shadow-md ring-1 ring-slate-800 transition-all';
+        phoneNotch.style.display = 'block';
+      } else if (device === 'galaxy') {
+        phoneChassis.style.width = '360px';
+        phoneChassis.style.height = '780px';
+        phoneChassis.style.borderRadius = '38px';
+        phoneNotch.className = 'absolute top-3.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-black rounded-full z-40 pointer-events-none shadow-md transition-all';
+        phoneNotch.style.display = 'block';
+      }
+    }
+
+    function reloadFrame() {
+      iframe.src = iframe.src;
+    }
+
+    function openExternal() {
+      window.open(iframe.src, '_blank');
+    }
+
+    function copyCurrentURL() {
+      const url = qrUrlText.textContent;
+      navigator.clipboard.writeText(url).then(() => {
+        const feedback = document.getElementById('copy-feedback');
+        feedback.textContent = 'Copied!';
+        setTimeout(() => feedback.textContent = 'Copy Address', 2000);
+      });
+    }
+
+    // Auto-detect optimal QR code endpoint based on browser location
+    (function initNetworkAddress() {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const targetUrl = isLocalhost ? 'http://192.168.1.168:3000' : window.location.origin;
+      qrUrlText.textContent = targetUrl;
+      qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(targetUrl)}&color=072415`;
+
+      // Auto-fit scale to user viewport
+      if (window.innerHeight < 950) {
+        currentScale = 0.85;
+      }
+      if (window.innerHeight < 820) {
+        currentScale = 0.75;
+      }
+      applyScale();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>My Pickup Requests — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 16px;
+      background: white;
+      border-bottom: 1px solid #e2e8e3;
+      scrollbar-width: none;
+    }
+    .filter-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-pill {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #5f6b62;
+      background: #f1f5f9;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      border: none;
+    }
+    .tab-pill.active {
+      background: #006b2c;
+      color: white;
+    }
+    .pickup-item {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8e3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon" style="background: #006b2c;">
+        <span class="material-symbols-outlined" style="font-size: 20px; color: white;">inventory_2</span>
+      </div>
+      <span class="nav-logo-text" style="color: #006b2c;">My Pickups</span>
+    </div>
+    
+    <div class="nav-actions">
+      <a href="./request.html" class="btn btn-primary btn-sm" style="height: 34px; padding: 0 12px; font-size: 12px; text-decoration: none; border-radius: 8px;">
+        <span class="material-symbols-outlined" style="font-size: 16px;">add</span>
+        <span>New Request</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-bottom: 84px;">
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs" role="tablist" aria-label="Filter Pickups">
+      <button class="tab-pill active" onclick="setFilter('all', this)" role="tab" aria-selected="true">All</button>
+      <button class="tab-pill" onclick="setFilter('active', this)" role="tab" aria-selected="false">Active / Assigned</button>
+      <button class="tab-pill" onclick="setFilter('completed', this)" role="tab" aria-selected="false">Completed</button>
+      <button class="tab-pill" onclick="setFilter('cancelled', this)" role="tab" aria-selected="false">Cancelled</button>
+    </div>
+
+    <!-- PICKUPS LIST CONTAINER -->
+    <div style="padding: 14px 16px;" id="pickups-container">
+      <!-- Populated dynamically via renderPickupsList() -->
+    </div>
+
+  </main>
+
+  <!-- RESIDENT BOTTOM NAVIGATION -->
+  <nav class="bottom-nav bottom-nav-4" aria-label="Main Navigation">
+    <a href="./home.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">home</span>
+      <span class="nav-tab-label">Home</span>
+    </a>
+    <a href="./pickups.html" class="nav-tab active" aria-current="page">
+      <span class="material-symbols-outlined nav-tab-icon" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+      <span class="nav-tab-label">Pickups</span>
+    </a>
+    <a href="./receipts.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">receipt_long</span>
+      <span class="nav-tab-label">Receipts</span>
+    </a>
+    <a href="./account.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">person</span>
+      <span class="nav-tab-label">Account</span>
+    </a>
+  </nav>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    let activeFilter = 'all';
+
+    function setFilter(filter, btn) {
+      activeFilter = filter;
+      document.querySelectorAll('.tab-pill').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      renderPickupsList();
+    }
+
+    function renderPickupsList() {
+      if (!window.BorlaStore) return;
+      const allPickups = window.BorlaStore.getPickups();
+      const container = document.getElementById('pickups-container');
+      if (!container) return;
+
+      const filtered = allPickups.filter(p => {
+        if (activeFilter === 'all') return true;
+        if (activeFilter === 'active') {
+          return p.status.includes('Assigned') || p.status.includes('Submitted') || p.status.includes('Draft') || p.status.includes('En Route');
+        }
+        if (activeFilter === 'completed') return p.status.includes('Completed');
+        if (activeFilter === 'cancelled') return p.status.includes('Cancelled');
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="card card-bordered" style="text-align: center; padding: 32px 16px; margin: 0; color: #5f6b62;">
+            <span class="material-symbols-outlined" style="font-size: 36px; color: #8b978e; margin-bottom: 8px;">inventory_2</span>
+            <div style="font-weight: 700; font-size: 14px; color: #17211b; margin-bottom: 4px;">No requests found</div>
+            <p style="font-size: 12px; margin-bottom: 14px;">No requests found in the "${activeFilter}" tab.</p>
+            <a href="./request.html" class="btn btn-primary btn-sm" style="display: inline-flex; width: auto; text-decoration: none;">
+              Create Pickup Request
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => {
+        const isCompleted = p.status.includes('Completed');
+        const isCancelled = p.status.includes('Cancelled');
+        const isActive = !isCompleted && !isCancelled;
+        const badgeClass = isCompleted ? 'badge-green' : (isCancelled ? 'badge-red' : 'badge-amber');
+        const borderLeft = isActive ? 'border-left: 4px solid #16a34a;' : (isCancelled ? 'border-left: 4px solid #dc2626;' : '');
+
+        return `
+          <div class="pickup-item" style="${borderLeft}">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span style="font-family: monospace; font-size: 10px; font-weight: 700; color: #5f6b62;">${p.id}</span>
+                <div style="font-family: 'Epilogue', sans-serif; font-size: 14.5px; font-weight: 700; color: #17211b; margin-top: 1px;">
+                  ${p.category || 'Household Waste'}
+                </div>
+                <div style="font-size: 11.5px; color: #5f6b62; margin-top: 2px;">
+                  ${p.date || 'Today'} • ${p.address || 'East Legon, Accra'}
+                </div>
+              </div>
+              <span class="badge ${badgeClass}" style="font-size: 10.5px;">
+                ${p.status}
+              </span>
+            </div>
+
+            <!-- Details Box -->
+            <div style="background: #f8faf7; border-radius: 8px; padding: 8px 10px; font-size: 11.5px; display: flex; justify-content: space-between; align-items: center;">
+              <span>Collector: <strong>${p.collectorName || 'Emmanuel Mensah'}</strong> (${p.collectorVehicle || 'Aboboyaa'})</span>
+              <span style="color: #15803d; font-weight: 700;">Platform: ${p.momoFee || 'GH₵ 2.00'}</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; justify-content: space-between; align-items: center; pt: 4px; border-top: 1px dashed #e2e8e3; font-size: 12px;">
+              ${isActive ? `
+                <a href="./tracking.html" class="btn btn-primary btn-sm" style="height: 32px; font-size: 11.5px; text-decoration: none; padding: 0 10px;">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">navigation</span>
+                  <span>Track Live</span>
+                </a>
+              ` : `
+                <span style="font-size: 11px; color: #5f6b62;">Carting fee: <strong>${p.cartingFee || 'GH₵ 15.00'}</strong> (at gate)</span>
+              `}
+              <a href="./receipt.html" style="font-weight: 600; color: #006b2c; text-decoration: none; display: flex; align-items: center; gap: 2px; margin-left: auto;">
+                Receipt →
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', renderPickupsList);
+    window.addEventListener('borlaStateChange', renderPickupsList);
+  </script>
+</body>
+</html>

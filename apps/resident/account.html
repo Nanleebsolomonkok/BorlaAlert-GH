@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>My Account — BorlaAlert GH</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+    }
+
+    /* Profile Hero */
+    .profile-hero {
+      background: linear-gradient(150deg, #004d1f 0%, #006b2c 50%, #00853a 100%);
+      color: white;
+      padding: 28px 16px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .profile-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+    .profile-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    /* Avatar with initials */
+    .profile-avatar-wrap {
+      position: relative;
+      width: 72px; height: 72px;
+      margin: 0 auto 12px;
+    }
+    .profile-avatar {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid rgba(255,255,255,0.45);
+      font-family: 'Epilogue', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+    .avatar-verified-badge {
+      position: absolute;
+      bottom: 2px; right: 2px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-verified-badge .material-symbols-outlined {
+      font-size: 11px;
+      color: white;
+      font-variation-settings: 'FILL' 1, 'wght' 700;
+    }
+
+    /* Account Rows */
+    .account-group {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e2e8e3;
+      overflow: hidden;
+      margin: 0 0 14px;
+    }
+    .account-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 14px;
+      border-bottom: 1px solid #f0f4f1;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      background: white;
+    }
+    .account-row:hover {
+      background: #f8faf7;
+    }
+    .account-row:last-child {
+      border-bottom: none;
+    }
+    .row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .row-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .row-text-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #17211b;
+    }
+    .row-text-value {
+      font-size: 11.5px;
+      color: #5f6b62;
+      margin-top: 1px;
+    }
+    .row-chevron {
+      color: #8b978e;
+      font-size: 18px;
+    }
+
+    /* Developer Options details toggle */
+    details > summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+    }
+    details > summary::-webkit-details-marker { display: none; }
+    .dev-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+    }
+    .dev-summary-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8b978e;
+    }
+    details[open] .dev-chevron { transform: rotate(180deg); }
+    .dev-chevron {
+      font-size: 18px;
+      color: #8b978e;
+      transition: transform 0.2s;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <h1 style="font-family: 'Epilogue', sans-serif; font-size: 16px; font-weight: 700; color: #17211b; margin: 0;">
+      My Account
+    </h1>
+    <span class="badge badge-green" style="font-size: 10.5px; display: flex; align-items: center; gap: 3px;">
+      <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: 'FILL' 1;">verified</span>
+      Verified Resident
+    </span>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content" style="padding-top: 60px; padding-bottom: 84px;">
+
+    <!-- PROFILE HEADER -->
+    <div class="profile-hero">
+      <div class="profile-avatar-wrap" style="position: relative; z-index: 1;">
+        <div class="profile-avatar" id="profile-avatar-el">
+          <!-- Initials or icon rendered by JS -->
+          <span class="material-symbols-outlined" style="font-size: 36px;" id="avatar-icon">person</span>
+        </div>
+        <div class="avatar-verified-badge" aria-label="Verified resident">
+          <span class="material-symbols-outlined">check</span>
+        </div>
+      </div>
+
+      <h2 id="prof-name" style="font-family: 'Epilogue', sans-serif; font-size: 20px; font-weight: 700; color: white; position: relative; z-index: 1;">
+        Akua Mensah
+      </h2>
+      <div id="prof-location" style="font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 2px; position: relative; z-index: 1;">
+        East Legon, Zone 3 • Accra Household
+      </div>
+
+      <!-- Quick Stats Pill -->
+      <div style="margin: 14px 0 12px; font-size: 11.5px; font-weight: 600; background: rgba(0,0,0,0.2); display: inline-flex; align-items: center; gap: 8px; padding: 5px 16px; border-radius: 20px; position: relative; z-index: 1;">
+        <span id="prof-pickups-count">0 Pickups</span>
+        <span style="opacity:0.5;">•</span>
+        <span style="display: inline-flex; align-items: center; gap: 3px;">
+          <span class="material-symbols-outlined" style="font-size: 13px;">eco</span>
+          <span id="prof-eco-points">0 Pts</span>
+        </span>
+        <span style="opacity:0.5;">•</span>
+        <span>Resident</span>
+      </div>
+
+      <div style="position: relative; z-index: 1;">
+        <a href="./registration.html" class="btn btn-outline btn-sm" style="color: white; border-color: rgba(255,255,255,0.6); margin: 0 auto; font-weight: 600; font-size: 12px; text-decoration: none; display: inline-flex;">
+          Edit Household Profile →
+        </a>
+      </div>
+    </div>
+
+    <!-- ECO POINTS CARD -->
+    <div style="margin: 14px 16px 12px;">
+      <div style="background: #fffdf5; border: 1px solid #fef08a; border-left: 4px solid #d97706; border-radius: 12px; padding: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #b45309; display: flex; align-items: center; gap: 4px;">
+              <span class="material-symbols-outlined" style="font-size: 15px;">eco</span> Your Eco-Points
+            </div>
+            <div style="font-family: 'Epilogue', sans-serif; font-size: 26px; font-weight: 800; color: #92400e; margin: 4px 0 2px;">
+              <span id="account-eco-balance">0</span> <span style="font-size: 15px;">Points</span>
+            </div>
+            <div style="font-size: 11.5px; color: #78350f;">Earned by segregating pure water sachets &amp; clean plastic.</div>
+          </div>
+          <button type="button" onclick="openEcoPointsExplainer()" class="btn btn-sm" style="background: #fef3c7; color: #92400e; border: 1px solid #fde68a; font-weight: 700; font-size: 11.5px;">
+            Details
+          </button>
+        </div>
+
+        <div style="margin-top: 10px; height: 6px; background: #fef3c7; border-radius: 4px; overflow: hidden;">
+          <div id="account-eco-fill" style="width: 0%; height: 100%; background: #d97706; transition: width 0.3s;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: 600; color: #92400e; margin-top: 4px;">
+          <span>Starting level</span>
+          <span>Milestone: 500 Pts → Reward</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: HOUSEHOLD DETAILS -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">HOUSEHOLD DETAILS</div>
+      <div class="account-group">
+        <div class="account-row" style="cursor: default;">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eef7ee;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">badge</span>
+            </div>
+            <div>
+              <div class="row-text-label">Resident Name</div>
+              <div class="row-text-value" id="row-user-name">Akua Mensah</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-row" style="cursor: default;">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eef7ee;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">phone</span>
+            </div>
+            <div>
+              <div class="row-text-label">Mobile Phone</div>
+              <div class="row-text-value" id="row-user-phone" style="font-family: monospace;">024 582 1928</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-row" style="cursor: default;">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eef7ee;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">explore</span>
+            </div>
+            <div>
+              <div class="row-text-label">GhanaPost GPS Digital Address</div>
+              <div class="row-text-value" id="row-user-gps" style="color: #006b2c; font-weight: 700; font-family: monospace;">GA-183-9021</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-row" style="cursor: default;">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eef7ee;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">location_on</span>
+            </div>
+            <div>
+              <div class="row-text-label">Gate Landmark &amp; Neighborhood</div>
+              <div class="row-text-value" id="row-user-address">House 14, Lagos Ave, East Legon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: SUPPORT -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">SUPPORT</div>
+      <div class="account-group">
+        <a href="https://wa.me/233000000000" class="account-row" target="_blank" rel="noopener">
+          <div class="row-left">
+            <div class="row-icon" style="background: #dcfce7;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #16a34a;">chat</span>
+            </div>
+            <div>
+              <div class="row-text-label">Chat Support (WhatsApp)</div>
+              <div class="row-text-value">Get help with pickups or account</div>
+            </div>
+          </div>
+          <span class="material-symbols-outlined" style="color: #8b978e; font-size: 18px;">open_in_new</span>
+        </a>
+
+        <a href="../../support.html" class="account-row">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eff6ff;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #3b82f6;">flag</span>
+            </div>
+            <div>
+              <div class="row-text-label">Report an Issue</div>
+              <div class="row-text-value">Missed pickups, collector complaints</div>
+            </div>
+          </div>
+          <span class="material-symbols-outlined row-chevron">chevron_right</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- SECTION 3: LEGAL -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">LEGAL &amp; POLICIES</div>
+      <div class="account-group">
+        <a href="../../terms.html" class="account-row">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eef7ee;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">description</span>
+            </div>
+            <div class="row-text-label">Terms of Service</div>
+          </div>
+          <span class="material-symbols-outlined row-chevron">chevron_right</span>
+        </a>
+
+        <a href="../../privacy.html" class="account-row">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eef7ee;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">lock</span>
+            </div>
+            <div class="row-text-label">Privacy Policy</div>
+          </div>
+          <span class="material-symbols-outlined row-chevron">chevron_right</span>
+        </a>
+
+        <a href="../../support.html" class="account-row">
+          <div class="row-left">
+            <div class="row-icon" style="background: #eef7ee;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">help_outline</span>
+            </div>
+            <div class="row-text-label">Help &amp; Municipal Information</div>
+          </div>
+          <span class="material-symbols-outlined row-chevron">chevron_right</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- SECTION 4: DEVELOPER OPTIONS (COLLAPSED) -->
+    <div style="padding: 4px 16px;">
+      <details>
+        <summary>
+          <div class="dev-summary">
+            <div class="dev-summary-left">
+              <span class="material-symbols-outlined" style="font-size: 16px;">code</span>
+              DEVELOPER OPTIONS
+            </div>
+            <span class="material-symbols-outlined dev-chevron">expand_more</span>
+          </div>
+        </summary>
+        <div class="account-group" style="margin-top: 6px;">
+          <button type="button" onclick="handleResetDemo()" class="account-row w-full text-left">
+            <div class="row-left">
+              <div class="row-icon" style="background: #fee2e2;">
+                <span class="material-symbols-outlined" style="font-size: 20px; color: #b91c1c;">refresh</span>
+              </div>
+              <div>
+                <div class="row-text-label" style="color: #b91c1c;">Reset App Data</div>
+                <div class="row-text-value">Clears localStorage to default state</div>
+              </div>
+            </div>
+            <span style="color: #b91c1c; font-size: 18px;">›</span>
+          </button>
+
+          <button type="button" onclick="handleSeedFresh()" class="account-row w-full text-left">
+            <div class="row-left">
+              <div class="row-icon" style="background: #eef7ee;">
+                <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">person_add</span>
+              </div>
+              <div>
+                <div class="row-text-label">Simulate New First-Time Resident</div>
+                <div class="row-text-value">Wipes profile to test registration flow</div>
+              </div>
+            </div>
+            <span style="color: #006b2c; font-size: 18px;">›</span>
+          </button>
+        </div>
+      </details>
+    </div>
+
+    <!-- SIGN OUT -->
+    <div style="text-align: center; margin: 8px 16px 24px;">
+      <a href="./login.html" style="color: #b91c1c; font-size: 13.5px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 10px; border: 1px solid #fee2e2; background: #fff5f5; transition: background 0.15s;">
+        <span class="material-symbols-outlined" style="font-size: 18px;">logout</span>
+        Sign Out
+      </a>
+      <div style="font-size: 11px; color: #8b978e; margin-top: 10px;">
+        BorlaAlert GH v1.0 — Greater Accra Civic Cleantech
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav bottom-nav-4" aria-label="Main Navigation">
+    <a href="./home.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">home</span>
+      <span class="nav-tab-label">Home</span>
+    </a>
+    <a href="./pickups.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">inventory_2</span>
+      <span class="nav-tab-label">Pickups</span>
+    </a>
+    <a href="./receipts.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">receipt_long</span>
+      <span class="nav-tab-label">Receipts</span>
+    </a>
+    <a href="./account.html" class="nav-tab active" aria-current="page">
+      <span class="material-symbols-outlined nav-tab-icon" style="font-variation-settings: 'FILL' 1;">person</span>
+      <span class="nav-tab-label">Account</span>
+    </a>
+  </nav>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    function renderProfile() {
+      if (!window.BorlaStore) return;
+      const s = window.BorlaStore.get();
+      const u = s.user || {};
+      const pickups = s.pickups || [];
+
+      const name = u.name || 'Accra Resident';
+      document.getElementById('prof-name').textContent = name;
+      document.getElementById('prof-location').textContent = `${u.zone || 'Greater Accra'} • Household`;
+      document.getElementById('prof-pickups-count').textContent = `${pickups.length} Pickup${pickups.length !== 1 ? 's' : ''}`;
+
+      const pts = typeof u.ecoPoints === 'number' ? u.ecoPoints : 0;
+      document.getElementById('prof-eco-points').textContent = `${pts} Pts`;
+      document.getElementById('account-eco-balance').textContent = pts;
+
+      const fill = document.getElementById('account-eco-fill');
+      if (fill) fill.style.width = `${Math.min(100, Math.round((pts / 500) * 100))}%`;
+
+      document.getElementById('row-user-name').textContent = u.name || 'Not set';
+      document.getElementById('row-user-phone').textContent = u.phone || 'Not set';
+      document.getElementById('row-user-gps').textContent = u.gpsAddress || 'GA-183-9021';
+      document.getElementById('row-user-address').textContent = u.address || 'House 14, Lagos Ave, East Legon';
+
+      // Update avatar with initials
+      const avatarEl = document.getElementById('profile-avatar-el');
+      const avatarIcon = document.getElementById('avatar-icon');
+      if (avatarEl && name && name !== 'Accra Resident') {
+        const initials = name.trim().split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+        if (avatarIcon) avatarIcon.remove();
+        avatarEl.textContent = initials;
+      }
+    }
+
+    function openEcoPointsExplainer() {
+      alert('Eco-Points:\n\n• +150 Points: Segregating clean water sachets\n• +200 Points: PET bottles & beverage containers\n• +50 Points: Prompt doorstep handoff\n\nPoints accumulate in your profile. Full redemption features launch with the live platform.');
+    }
+
+    function handleResetDemo() {
+      if (confirm('Reset app data back to default test profile?')) {
+        if (window.BorlaStore) {
+          window.BorlaStore.resetDemoData();
+        }
+        renderProfile();
+      }
+    }
+
+    function handleSeedFresh() {
+      if (confirm('Reset to a completely new household session (no prefilled profile)?')) {
+        if (window.BorlaStore) {
+          window.BorlaStore.seedFreshUser();
+        }
+        window.location.href = './registration.html';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', renderProfile);
+    window.addEventListener('borlaStateChange', renderProfile);
+  </script>
+</body>
+</html>

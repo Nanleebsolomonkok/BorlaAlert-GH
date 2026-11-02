@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#15803D">
+  <title>My Jobs — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      padding: 10px 16px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-tab {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-grey);
+      background: #F1F5F9;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-tab.active {
+      background: var(--green-primary);
+      color: white;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon" style="display: flex; align-items: center; justify-content: center;">
+        <span class="material-icons-round" style="font-size: 20px; color: var(--green-primary);">assignment</span>
+      </div>
+      <span class="nav-logo-text">My Jobs</span>
+    </div>
+
+    <button type="button" onclick="alert('Filtering jobs options')" class="nav-icon-btn" aria-label="Filter">
+      <span class="material-icons-round" style="font-size: 20px;">tune</span>
+    </button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-content">
+
+    <!-- FILTER TABS -->
+    <div class="filter-pills">
+      <span class="filter-tab active" onclick="setJobTab(this)">Today</span>
+      <span class="filter-tab" onclick="setJobTab(this)">This Week</span>
+      <span class="filter-tab" onclick="setJobTab(this)">All Time</span>
+    </div>
+
+    <!-- SUMMARY OPERATIONAL CARD (3 STATS - NO MONEY) -->
+    <div class="card card-bordered" style="margin-top: 14px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-grey); margin-bottom: 8px;">
+        Pickup Dispatch Performance
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-dark);">
+        <div style="display: flex; justify-content: space-between;">
+          <span>8 Pickups Today</span>
+          <span class="badge badge-green">East Legon Zone 3</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>47 Pickups This Week</span>
+          <span style="font-size: 12px; color: var(--text-grey);">Mon – Sat</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>342 Pickups All Time</span>
+          <span style="font-size: 12px; color: var(--text-grey);">Since Aug 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOBS LIST (NO MONEY AMOUNTS) -->
+    <div style="padding: 4px 16px;">
+      <div class="section-title" style="margin-bottom: 8px;">TODAY'S LOG (OCT 24, 2026)</div>
+
+      <!-- Job 1 Completed -->
+      <div class="job-card" style="border-left: 4px solid var(--green-primary);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: var(--text-dark);">
+              House 14, Lagos Ave
+            </div>
+            <div style="font-size: 12px; color: var(--text-grey); margin-top: 2px;">
+              Standard Aboboyaa • 10:32 AM — 18 mins
+            </div>
+          </div>
+          <span class="badge badge-green">Completed</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 6px; border-top: 1px dashed var(--border);">
+          <span style="font-size: 12px; font-weight: 700; color: var(--amber-dark); display: flex; align-items: center; gap: 3px;">
+            <span class="material-icons-round" style="font-size: 13px;">star</span> 5.0 Rated
+          </span>
+          <span style="font-size: 11px; color: var(--text-grey);">Gate settled directly</span>
+        </div>
+      </div>
+
+      <!-- Job 2 Completed -->
+      <div class="job-card" style="border-left: 4px solid var(--green-primary);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: var(--text-dark);">
+              Apt 4B, Boundary Road
+            </div>
+            <div style="font-size: 12px; color: var(--text-grey); margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+              <span>Water Sachet Rubber</span>
+              <span class="material-icons-round" style="font-size: 13px; color: var(--green-supporting);">recycling</span>
+              <span>• 09:05 AM — 12 mins</span>
+            </div>
+          </div>
+          <span class="badge badge-green">Completed</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 6px; border-top: 1px dashed var(--border);">
+          <span style="font-size: 12px; font-weight: 700; color: var(--amber-dark);">+150 Eco Pts collected</span>
+          <span style="font-size: 11px; color: var(--text-grey);">Depot recycled</span>
+        </div>
+      </div>
+
+      <!-- Job 3 Missed -->
+      <div class="job-card" style="border-left: 4px solid var(--red);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: var(--text-dark);">
+              7 Ring Road
+            </div>
+            <div style="font-size: 12px; color: var(--text-grey); margin-top: 2px;">
+              Standard Aboboyaa • 08:15 AM
+            </div>
+          </div>
+          <span class="badge badge-red">Missed</span>
+        </div>
+        <div style="margin-top: 8px; font-size: 11.5px; color: var(--red); font-weight: 600;">
+          Request expired (30-second window elapsed)
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- COLLECTOR BOTTOM NAVIGATION -->
+  <nav class="bottom-nav bottom-nav-4" aria-label="Collector navigation">
+    <a href="./home.html" class="nav-tab">
+      <span class="nav-tab-icon material-icons-round">home</span>
+      <span class="nav-tab-label">Home</span>
+    </a>
+    <a href="./jobs.html" class="nav-tab active">
+      <span class="nav-tab-icon material-icons-round">assignment</span>
+      <span class="nav-tab-label">Jobs</span>
+    </a>
+    <a href="./ratings.html" class="nav-tab">
+      <span class="nav-tab-icon material-icons-round">star</span>
+      <span class="nav-tab-label">Ratings</span>
+    </a>
+    <a href="./profile.html" class="nav-tab">
+      <span class="nav-tab-icon material-icons-round">person</span>
+      <span class="nav-tab-label">Profile</span>
+    </a>
+  </nav>
+
+  <script>
+    function setJobTab(el) {
+      document.querySelectorAll('.filter-pills .filter-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+  </script>
+</body>
+</html>

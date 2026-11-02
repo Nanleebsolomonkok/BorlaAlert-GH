@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Resident Dashboard — BorlaAlert GH</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      background-color: #f8faf7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+      margin: 0 auto;
+      color: #17211b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Coverage Status Bar */
+    .coverage-bar {
+      background: #f0fdf4;
+      border-bottom: 1px solid #dcfce7;
+      padding: 7px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #065f46;
+    }
+    .coverage-bar .left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .coverage-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #16a34a;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(22,163,74,0.2);
+      animation: coveragePulse 2.5s ease-in-out infinite;
+    }
+    @keyframes coveragePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.4); }
+      50% { box-shadow: 0 0 0 5px rgba(22,163,74,0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes btnPulse {
+      0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+      50% { box-shadow: 0 4px 20px rgba(255,255,255,0.35), 0 4px 14px rgba(0,0,0,0.15); }
+    }
+
+    /* Primary CTA Card */
+    .hero-request-card {
+      background: linear-gradient(135deg, #005a24 0%, #007a33 50%, #006228 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 22px 20px;
+      margin: 12px 16px 14px;
+      box-shadow: 0 12px 28px -6px rgba(0, 107, 44, 0.4), 0 4px 8px -2px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-request-card::before {
+      content: '';
+      position: absolute;
+      top: -50px; right: -50px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      pointer-events: none;
+    }
+    .hero-request-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: -20px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+    }
+
+    .btn-hero-request {
+      background: #ffffff;
+      color: #005a24;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      padding: 14px 20px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      animation: btnPulse 3s ease-in-out infinite;
+    }
+    .btn-hero-request:hover {
+      background: #f0fdf4;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    .btn-hero-request:active {
+      transform: scale(0.98);
+      animation: none;
+    }
+
+    /* Active Request Banner */
+    .active-request-banner {
+      background: #ffffff;
+      border: 1.5px solid #dcfce7;
+      border-left: 4px solid #16a34a;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 0 16px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* Category Cards */
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 16px 14px;
+    }
+    .category-tile {
+      background: #ffffff;
+      border: 1px solid #e2e8e3;
+      border-radius: 14px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .category-tile:hover {
+      border-color: #15803d;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 107, 44, 0.1);
+    }
+    .category-tile:active {
+      transform: scale(0.98);
+    }
+
+    /* How it Works Steps */
+    .how-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      padding: 0 16px;
+    }
+    .how-step {
+      background: white;
+      border: 1px solid #e2e8e3;
+      border-radius: 12px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      text-align: center;
+      position: relative;
+    }
+    .how-step::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: -12px;
+      width: 12px;
+      height: 2px;
+      background: #e2e8e3;
+    }
+    .how-step:last-child::after { display: none; }
+    .step-num {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #5f6b62;
+      background: #f8faf7;
+      border: 1px solid #e2e8e3;
+      border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 2px;
+    }
+    .step-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-chip {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP APP BAR -->
+  <header class="top-nav" style="height: 62px;">
+    <div class="nav-logo">
+      <div class="nav-logo-icon" style="background: #006b2c;">
+        <img src="../../packages/brand-assets/logo.svg" alt="BorlaAlert" style="width: 20px; height: 20px;">
+      </div>
+      <div style="display: flex; flex-direction: column; line-height: 1.1;">
+        <span class="nav-logo-text" style="color: #006b2c; font-size: 15px;">BorlaAlert<span style="color: #22c55e;">.</span></span>
+        <span style="font-size: 9.5px; font-weight: 700; color: #5f6b62; text-transform: uppercase; letter-spacing: 0.5px;">Household</span>
+      </div>
+    </div>
+
+    <!-- Location Chip -->
+    <button type="button" onclick="openLocationModal()" class="nav-location" style="max-width: 175px; text-align: left; background: #ffffff; border: 1px solid #e2e8e3; padding: 4px 10px;" aria-label="Current gate location">
+      <span class="material-symbols-outlined" style="font-size: 16px; color: #15803d;">location_on</span>
+      <span id="nav-location-label" style="font-weight: 600; font-size: 12px; color: #17211b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        House 14, East Legon
+      </span>
+      <span class="material-symbols-outlined" style="font-size: 14px; color: #8b978e;">expand_more</span>
+    </button>
+
+    <div class="nav-actions">
+      <a href="./account.html" class="nav-icon-btn" aria-label="Resident Profile" style="width: 38px; height: 38px; background: #eef2eb;">
+        <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">person</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-content" style="padding-top: 66px; padding-bottom: 84px;">
+
+    <!-- COVERAGE STATUS BAR -->
+    <div class="coverage-bar">
+      <div class="left">
+        <span class="coverage-dot"></span>
+        <span><strong>Coverage Active</strong> — East Legon &amp; 5 zones</span>
+      </div>
+      <a href="../../apps/admin/live-map.html" style="font-size: 11px; font-weight: 700; color: #047857; text-decoration: none; display: flex; align-items: center; gap: 2px;">
+        View Map <span class="material-symbols-outlined" style="font-size: 13px;">chevron_right</span>
+      </a>
+    </div>
+
+    <!-- 1. PRIMARY CTA CARD -->
+    <section class="hero-request-card" aria-labelledby="cta-heading">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; position: relative; z-index: 1;">
+        <div>
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #86efac; display: flex; align-items: center; gap: 4px;">
+            <span class="material-symbols-outlined" style="font-size: 14px;">electric_rickshaw</span>
+            Doorstep Collection
+          </span>
+          <h1 id="cta-heading" style="font-family: 'Epilogue', sans-serif; font-size: 21px; font-weight: 800; color: #ffffff; line-height: 1.2; margin-top: 3px;">
+            Need your borla cleared?
+          </h1>
+        </div>
+        <span class="badge-chip" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25);">
+          Accra Fleet
+        </span>
+      </div>
+
+      <p style="font-size: 13px; color: rgba(255,255,255,0.88); line-height: 1.45; margin-bottom: 16px; position: relative; z-index: 1;">
+        Request an aboboyaa motorized tricycle hauler to your gate. Transparent platform fee — no hidden charges.
+      </p>
+
+      <!-- PRIMARY CTA BUTTON -->
+      <div style="position: relative; z-index: 1;">
+        <a href="./request.html" class="btn-hero-request" id="primary-request-btn">
+          <span class="material-symbols-outlined" style="font-size: 22px; color: #006b2c;">delete_sweep</span>
+          <span>REQUEST PICKUP</span>
+          <span class="material-symbols-outlined" style="font-size: 20px; color: #006b2c;">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Trust Footnotes -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 12px; font-size: 11.5px; color: rgba(255,255,255,0.8); flex-wrap: wrap; position: relative; z-index: 1;">
+        <span>✓ Fixed platform fee</span>
+        <span>•</span>
+        <span>✓ Verified collector assigned</span>
+      </div>
+    </section>
+
+    <!-- 2. ACTIVE REQUEST STATUS -->
+    <section id="active-request-container" aria-label="Active Pickup Status" style="display: block;">
+      <div class="active-request-banner" id="active-banner-content">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+
+    <!-- 3. WASTE CATEGORIES -->
+    <section style="margin-top: 6px;" aria-labelledby="waste-categories-heading">
+      <div class="section-header">
+        <span id="waste-categories-heading" class="section-title">Waste Categories</span>
+        <a href="./request.html" class="section-link">Start Request →</a>
+      </div>
+
+      <div class="category-grid">
+        <!-- Category 1: Standard Rubbish -->
+        <a href="./request.html?category=standard" class="category-tile" aria-label="Request Standard Household Rubbish pickup">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #eef7ee; color: #166534; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
+            </div>
+            <span class="badge-chip" style="background: #eef7ee; color: #166534;">Most Common</span>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 13.5px; color: #17211b;">Standard Rubbish</div>
+            <div style="font-size: 11px; color: #5f6b62; margin-top: 2px;">Domestic household bins &amp; black bags</div>
+          </div>
+          <span style="font-size: 11px; font-weight: 600; color: #15803d; margin-top: auto; display: flex; align-items: center; gap: 2px;">
+            Select <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- Category 2: Water Sachets -->
+        <a href="./request.html?category=sachets" class="category-tile" aria-label="Request Water Sachet clean plastics pickup">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #ecfdf5; color: #059669; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined" style="font-size: 20px;">recycling</span>
+            </div>
+            <span class="badge-chip" style="background: #fef3c7; color: #92400e;">+150 Eco Pts</span>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 13.5px; color: #17211b;">Pure Water Sachets</div>
+            <div style="font-size: 11px; color: #5f6b62; margin-top: 2px;">Clean segregated LDPE &amp; PP plastics</div>
+          </div>
+          <span style="font-size: 11px; font-weight: 600; color: #059669; margin-top: auto; display: flex; align-items: center; gap: 2px;">
+            Earn Rewards <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- Category 3: Bulky & Yard -->
+        <a href="./request.html?category=bulky" class="category-tile" aria-label="Request Bulky and Yard waste pickup">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #fef3c7; color: #b45309; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined" style="font-size: 20px;">yard</span>
+            </div>
+            <span class="badge-chip" style="background: #f1f5f9; color: #475569;">Cart / Truck</span>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 13.5px; color: #17211b;">Bulky &amp; Yard Debris</div>
+            <div style="font-size: 11px; color: #5f6b62; margin-top: 2px;">Pruned tree cuttings &amp; heavy items</div>
+          </div>
+          <span style="font-size: 11px; font-weight: 600; color: #b45309; margin-top: auto; display: flex; align-items: center; gap: 2px;">
+            Select <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- Category 4: Special Handling -->
+        <a href="./request.html?category=special" class="category-tile" aria-label="Request Special handling guidance">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #fee2e2; color: #dc2626; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined" style="font-size: 20px;">medical_services</span>
+            </div>
+            <span class="badge-chip" style="background: #fee2e2; color: #991b1b;">Guidance</span>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 13.5px; color: #17211b;">Special Handling</div>
+            <div style="font-size: 11px; color: #5f6b62; margin-top: 2px;">Paints, e-waste, restricted municipal</div>
+          </div>
+          <span style="font-size: 11px; font-weight: 600; color: #dc2626; margin-top: auto; display: flex; align-items: center; gap: 2px;">
+            View Rules <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. ECO-POINTS BALANCE -->
+    <section class="card" style="margin-top: 4px; background: #fffdf5; border: 1px solid #fef08a;" aria-labelledby="eco-heading">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: #b45309; text-transform: uppercase;">
+            <span class="material-symbols-outlined" style="font-size: 16px;">eco</span>
+            <span id="eco-heading">Your Eco-Points Balance</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin: 4px 0 2px;">
+            <span id="user-eco-points" style="font-family: 'Epilogue', sans-serif; font-size: 28px; font-weight: 800; color: #92400e; line-height: 1;">0</span>
+            <span style="font-size: 13px; font-weight: 600; color: #b45309;">Points</span>
+          </div>
+          <p style="font-size: 12px; color: #78350f; line-height: 1.4;">
+            Earn points when segregating clean plastic &amp; water sachets for collection.
+          </p>
+        </div>
+        <button type="button" onclick="openEcoPointsInfoModal()" class="btn btn-sm" style="background: #fef3c7; color: #92400e; border: 1px solid #fde68a; font-weight: 700; font-size: 12px;">
+          How it Works
+        </button>
+      </div>
+
+      <div style="margin-top: 12px; background: #fef9c3; border-radius: 6px; height: 6px; overflow: hidden;">
+        <div id="eco-progress-fill" style="background: #d97706; height: 100%; width: 0%; transition: width 0.3s;"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #92400e; margin-top: 4px; font-weight: 600;">
+        <span>Starting level</span>
+        <span>Milestone: 500 Pts → Reward</span>
+      </div>
+    </section>
+
+    <!-- 5. RECENT REQUESTS -->
+    <section style="margin-top: 10px;" aria-labelledby="activity-heading">
+      <div class="section-header">
+        <span id="activity-heading" class="section-title">My Recent Requests</span>
+        <a href="./pickups.html" class="section-link">All Pickups →</a>
+      </div>
+      <div id="recent-pickups-list" style="display: flex; flex-direction: column; gap: 8px; padding: 0 16px;">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- 6. HOW BORLAALERT WORKS -->
+    <section style="margin-top: 14px;" aria-labelledby="how-heading">
+      <div class="section-header" style="margin-bottom: 10px;">
+        <span id="how-heading" class="section-title">How It Works</span>
+      </div>
+      <div class="how-steps">
+        <!-- Step 1 -->
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <div class="step-icon" style="background: #ecfdf5; color: #15803d;">
+            <span class="material-symbols-outlined" style="font-size: 22px;">delete_sweep</span>
+          </div>
+          <div style="font-size: 11px; font-weight: 700; color: #17211b;">Request</div>
+          <div style="font-size: 10px; color: #5f6b62;">Schedule gate pickup</div>
+        </div>
+        <!-- Step 2 -->
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <div class="step-icon" style="background: #eff6ff; color: #1d4ed8;">
+            <span class="material-symbols-outlined" style="font-size: 22px;">person_pin</span>
+          </div>
+          <div style="font-size: 11px; font-weight: 700; color: #17211b;">Matched</div>
+          <div style="font-size: 10px; color: #5f6b62;">Verified collector assigned</div>
+        </div>
+        <!-- Step 3 -->
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <div class="step-icon" style="background: #fef3c7; color: #b45309;">
+            <span class="material-symbols-outlined" style="font-size: 22px;">check_circle</span>
+          </div>
+          <div style="font-size: 11px; font-weight: 700; color: #17211b;">Collected</div>
+          <div style="font-size: 10px; color: #5f6b62;">Pay at gate, done</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. COVERAGE SECTORS -->
+    <section class="card card-bordered" style="margin-top: 14px; background: #ffffff;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <div style="font-weight: 700; font-size: 13px; color: #17211b; display: flex; align-items: center; gap: 6px;">
+          <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #16a34a;"></span>
+          Coverage &amp; Operational Sectors
+        </div>
+        <span class="badge badge-green" style="font-size: 10.5px;">Accra Metropolitan</span>
+      </div>
+
+      <p style="font-size: 12px; color: #5f6b62; line-height: 1.5; margin-bottom: 8px;">
+        BorlaAlert connects registered households with vetted local tricycle (aboboyaa) operators assigned by zone.
+      </p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+        <span style="font-size: 11px; font-weight: 600; background: #f0fdf4; color: #166534; padding: 3px 8px; border-radius: 6px; border: 1px solid #dcfce7;">East Legon</span>
+        <span style="font-size: 11px; font-weight: 600; background: #f0fdf4; color: #166534; padding: 3px 8px; border-radius: 6px; border: 1px solid #dcfce7;">Madina / Adenta</span>
+        <span style="font-size: 11px; font-weight: 600; background: #f0fdf4; color: #166534; padding: 3px 8px; border-radius: 6px; border: 1px solid #dcfce7;">Spintex</span>
+        <span style="font-size: 11px; font-weight: 600; background: #f0fdf4; color: #166534; padding: 3px 8px; border-radius: 6px; border: 1px solid #dcfce7;">Osu / Labone</span>
+        <span style="font-size: 11px; font-weight: 600; background: #f0fdf4; color: #166534; padding: 3px 8px; border-radius: 6px; border: 1px solid #dcfce7;">Dansoman</span>
+        <span style="font-size: 11px; font-weight: 600; background: #f0fdf4; color: #166534; padding: 3px 8px; border-radius: 6px; border: 1px solid #dcfce7;">Dzorwulu</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav bottom-nav-4" aria-label="Resident Navigation">
+    <a href="./home.html" class="nav-tab active" aria-current="page">
+      <span class="material-symbols-outlined nav-tab-icon" style="font-variation-settings: 'FILL' 1;">home</span>
+      <span class="nav-tab-label">Home</span>
+    </a>
+    <a href="./pickups.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">inventory_2</span>
+      <span class="nav-tab-label">Pickups</span>
+    </a>
+    <a href="./receipts.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">receipt_long</span>
+      <span class="nav-tab-label">Receipts</span>
+    </a>
+    <a href="./account.html" class="nav-tab">
+      <span class="material-symbols-outlined nav-tab-icon">person</span>
+      <span class="nav-tab-label">Account</span>
+    </a>
+  </nav>
+
+  <!-- Location Modal -->
+  <div id="locationModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl flex flex-col gap-4 text-slate-900" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[20px] text-[#006b2c]">location_on</span>
+          <h2 class="font-bold text-[16px] text-slate-900 font-['Epilogue']">Pickup Gate Location</h2>
+        </div>
+        <button type="button" onclick="closeLocationModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div class="text-xs text-slate-600 space-y-2">
+        <p>Your current pickup address:</p>
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col gap-1">
+          <strong id="modal-current-address" class="text-slate-900 text-sm">House 14, Lagos Ave, East Legon</strong>
+          <span id="modal-current-gps" class="text-xs font-mono text-emerald-800">GA-183-9021</span>
+        </div>
+        <p class="text-[11px] text-slate-500">
+          To update your permanent household address, zone, or GPS code:
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2 pt-1">
+        <a href="./registration.html" class="w-full h-11 rounded-xl bg-[#006b2c] hover:bg-[#005423] text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-colors" style="text-decoration:none;">
+          <span class="material-symbols-outlined text-[16px]">edit</span>
+          <span>Edit Address in Profile</span>
+        </a>
+        <button type="button" onclick="closeLocationModal()" class="w-full h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition-colors">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Eco-Points Modal -->
+  <div id="ecoPointsModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl flex flex-col gap-4 text-slate-900" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">eco</span>
+          </div>
+          <h2 class="font-bold text-[16px] text-slate-900 font-['Epilogue']">How Eco-Points Work</h2>
+        </div>
+        <button type="button" onclick="closeEcoPointsInfoModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <div class="text-xs text-slate-600 space-y-2.5 leading-relaxed">
+        <p>
+          Eco-Points is a civic cleantech incentive designed to promote waste segregation at Ghanaian households. Every point you earn helps track your contribution to a cleaner Accra.
+        </p>
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 flex flex-col gap-1.5 text-amber-950">
+          <strong>Ways to earn points:</strong>
+          <ul class="list-disc pl-4 space-y-1 text-xs">
+            <li><strong>+150 Points:</strong> Segregating pure water sachets into separate bags.</li>
+            <li><strong>+200 Points:</strong> Clean PET bottles &amp; beverage containers.</li>
+            <li><strong>+50 Points:</strong> Prompt doorstep handoff to your collector.</li>
+          </ul>
+        </div>
+        <p class="text-[11px] text-slate-500">
+          <em>Note:</em> Eco-Points accumulate in your profile. Full redemption options launch with the live platform.
+        </p>
+      </div>
+
+      <button type="button" onclick="closeEcoPointsInfoModal()" class="w-full h-11 rounded-xl bg-[#006b2c] text-white font-semibold text-xs flex items-center justify-center transition-colors">
+        Got it
+      </button>
+    </div>
+  </div>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    function renderDashboard() {
+      if (!window.BorlaStore) return;
+      const state = window.BorlaStore.get();
+      const user = state.user || {};
+      const active = state.activePickup;
+
+      // 1. Update Location Nav
+      const navLocation = document.getElementById('nav-location-label');
+      if (navLocation) {
+        if (user.address) {
+          navLocation.textContent = user.address;
+        } else if (user.zone) {
+          navLocation.textContent = user.zone;
+        } else {
+          navLocation.textContent = 'Accra Household';
+        }
+      }
+
+      // Update location modal strings
+      const modalAddr = document.getElementById('modal-current-address');
+      const modalGps = document.getElementById('modal-current-gps');
+      if (modalAddr) modalAddr.textContent = user.address || 'House 14, Lagos Ave, East Legon';
+      if (modalGps) modalGps.textContent = user.gpsAddress || 'GA-183-9021';
+
+      // 2. Update Eco-Points Balance
+      const pointsEl = document.getElementById('user-eco-points');
+      const progressEl = document.getElementById('eco-progress-fill');
+      const pts = typeof user.ecoPoints === 'number' ? user.ecoPoints : 0;
+      if (pointsEl) pointsEl.textContent = pts;
+      if (progressEl) {
+        const pct = Math.min(100, Math.round((pts / 500) * 100));
+        progressEl.style.width = `${pct}%`;
+      }
+
+      // 3. Render Active Request Status
+      const activeContainer = document.getElementById('active-banner-content');
+      if (activeContainer) {
+        if (active && active.status && active.status !== 'Completed (Demo)' && active.status !== 'Cancelled') {
+          activeContainer.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #16a34a; animation: pulse 1.5s infinite;"></span>
+                  <span style="font-size: 11px; font-weight: 700; color: #166534; text-transform: uppercase;">Active Pickup Status</span>
+                </div>
+                <div style="font-family: 'Epilogue', sans-serif; font-size: 15px; font-weight: 700; color: #17211b; margin-top: 2px;">
+                  ${active.category || 'Standard Household Borla'}
+                </div>
+              </div>
+              <span class="badge badge-green" style="font-size: 11px; font-weight: 700;">${active.status}</span>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #5f6b62; margin-bottom: 12px; background: #f8faf7; padding: 8px 12px; border-radius: 8px;">
+              <span>Collector: <strong>${active.collectorName || 'Emmanuel Mensah'}</strong> (${active.collectorVehicle || 'Aboboyaa'})</span>
+              <span style="font-weight: 700; color: #15803d;">ETA: ${active.collectorEta || '~4 mins'}</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <a href="./tracking.html" class="btn btn-primary btn-sm" style="height: 38px; text-decoration: none; font-size: 13px;">
+                <span class="material-symbols-outlined" style="font-size: 16px;">navigation</span>
+                <span>Track Driver</span>
+              </a>
+              <a href="./pickups.html" class="btn btn-grey btn-sm" style="height: 38px; text-decoration: none; font-size: 13px;">
+                <span>View Details</span>
+              </a>
+            </div>
+          `;
+        } else {
+          activeContainer.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: #eef2eb; display: flex; align-items: center; justify-content: center; color: #5f6b62;">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                </div>
+                <div>
+                  <div style="font-size: 13px; font-weight: 700; color: #17211b;">No active collection en-route</div>
+                  <div style="font-size: 11.5px; color: #5f6b62;">Your gate is clear • Ready for next request</div>
+                </div>
+              </div>
+              <a href="./request.html" class="btn btn-primary btn-sm" style="height: 34px; padding: 0 12px; font-size: 12px; text-decoration: none;">
+                Request Now
+              </a>
+            </div>
+          `;
+        }
+      }
+
+      // 4. Render Recent Pickups
+      const recentList = document.getElementById('recent-pickups-list');
+      if (recentList) {
+        const pickups = (state.pickups || []).slice(0, 3);
+        if (pickups.length === 0) {
+          recentList.innerHTML = `
+            <div class="card card-bordered" style="text-align: center; padding: 20px 16px; margin: 0; color: #5f6b62; font-size: 12.5px;">
+              <span class="material-symbols-outlined" style="font-size: 32px; color: #8b978e; margin-bottom: 4px; display: block;">inventory_2</span>
+              <p>No pickup records yet.</p>
+              <a href="./request.html" class="btn btn-primary btn-sm" style="display: inline-flex; width: auto; margin-top: 8px; text-decoration: none;">
+                Schedule First Pickup
+              </a>
+            </div>
+          `;
+        } else {
+          recentList.innerHTML = pickups.map(p => {
+            const isCompleted = p.status.includes('Completed');
+            const isCancelled = p.status.includes('Cancelled');
+            const badgeClass = isCompleted ? 'badge-green' : (isCancelled ? 'badge-red' : 'badge-amber');
+            return `
+              <div class="card card-bordered" style="padding: 12px 14px; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                  <div>
+                    <span style="font-size: 10px; font-family: monospace; font-weight: 700; color: #5f6b62;">${p.id}</span>
+                    <div style="font-weight: 700; font-size: 13.5px; color: #17211b;">${p.category || 'Household Waste'}</div>
+                    <div style="font-size: 11.5px; color: #5f6b62;">${p.date || 'Recently'} • ${p.address || 'East Legon'}</div>
+                  </div>
+                  <span class="badge ${badgeClass}" style="font-size: 10.5px;">${p.status}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #e2e8e3; padding-top: 8px; font-size: 11.5px;">
+                  <span style="color: #5f6b62;">Fee: <strong>${p.momoFee || 'GH₵ 2.00'}</strong> platform</span>
+                  <a href="./receipt.html" style="color: #15803d; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 2px;">
+                    Receipt →
+                  </a>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    // Modal controls
+    function openLocationModal() {
+      document.getElementById('locationModal')?.classList.remove('hidden');
+    }
+    function closeLocationModal() {
+      document.getElementById('locationModal')?.classList.add('hidden');
+    }
+    function openEcoPointsInfoModal() {
+      document.getElementById('ecoPointsModal')?.classList.remove('hidden');
+    }
+    function closeEcoPointsInfoModal() {
+      document.getElementById('ecoPointsModal')?.classList.add('hidden');
+    }
+
+    window.addEventListener('DOMContentLoaded', renderDashboard);
+    window.addEventListener('borlaStateChange', renderDashboard);
+  </script>
+</body>
+</html>

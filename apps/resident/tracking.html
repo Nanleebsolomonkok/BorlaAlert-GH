@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#006b2c">
+  <title>Live Dispatch Radar — BorlaAlert GH</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <style>
+    body {
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      max-width: 480px;
+      margin: 0 auto;
+      background: #e5ede6;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .tracking-map {
+      flex: 1;
+      width: 100%;
+      background: #e5ede6;
+      background-image: 
+        radial-gradient(circle at 60% 40%, rgba(22,163,74,0.15) 0%, transparent 65%),
+        linear-gradient(to right, #d5e5d8 1px, transparent 1px),
+        linear-gradient(to bottom, #d5e5d8 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .route-path {
+      stroke-dasharray: 8, 8;
+      animation: dashMove 1.5s linear infinite;
+    }
+    @keyframes dashMove {
+      from { stroke-dashoffset: 32; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    .tracking-sheet {
+      background: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+      border-top: 1px solid #e2e8e3;
+      display: flex;
+      flex-direction: column;
+      padding: 14px 16px;
+      z-index: 20;
+      max-height: 45vh;
+      overflow-y: auto;
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #cbd5e1;
+      border-radius: 2px;
+      margin: 0 auto 10px;
+    }
+
+    .step-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: #5f6b62;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .step-pill.active {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #dcfce7;
+    }
+    .step-pill.done {
+      color: #166534;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP BAR -->
+  <header class="top-nav" style="position: relative; z-index: 30; height: 58px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="./home.html" class="nav-icon-btn" aria-label="Back to dashboard" style="text-decoration: none; color: #17211b; width: 36px; height: 36px;">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <div>
+        <div style="font-family: 'Epilogue', sans-serif; font-size: 15px; font-weight: 700; color: #17211b; line-height: 1.1;">
+          Live Dispatch Radar
+        </div>
+        <div style="font-size: 11px; color: #5f6b62;" id="track-zone">Greater Accra Sector</div>
+      </div>
+    </div>
+
+    <span class="badge badge-green" style="font-size: 11px; font-weight: 700; padding: 4px 8px; display: inline-flex; align-items: center; gap: 4px;">
+      <span class="material-symbols-outlined" style="font-size: 13px;">schedule</span> ETA: ~4 mins
+    </span>
+  </header>
+
+  <!-- LIVE SIMULATED MAP -->
+  <section class="tracking-map" aria-label="Simulated collector map">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+      <!-- Street grid representation -->
+      <line x1="20" y1="180" x2="420" y2="180" stroke="#FFFFFF" stroke-width="16" />
+      <line x1="20" y1="180" x2="420" y2="180" stroke="#CBD5E1" stroke-width="12" />
+
+      <line x1="240" y1="20" x2="240" y2="380" stroke="#FFFFFF" stroke-width="18" />
+      <line x1="240" y1="20" x2="240" y2="380" stroke="#FFE082" stroke-width="14" />
+
+      <!-- Route connecting collector and gate -->
+      <path d="M 110,90 Q 240,110 240,180" fill="none" stroke="#16A34A" stroke-width="5" class="route-path" />
+    </svg>
+
+    <!-- Accra Street Labels -->
+    <div style="position: absolute; top: 185px; left: 24px; font-size: 10px; font-weight: 800; color: #475569; letter-spacing: 0.5px; text-transform: uppercase;">
+      Mensah Wood Road
+    </div>
+    <div style="position: absolute; top: 50px; right: 90px; font-size: 10px; font-weight: 800; color: #b45309; letter-spacing: 0.5px; text-transform: uppercase; transform: rotate(90deg);">
+      Lagos Avenue
+    </div>
+
+    <!-- GATE PIN -->
+    <div style="position: absolute; top: 165px; left: 220px; transform: translate(-50%, -100%); background: #111827; color: white; border: 2.5px solid #16a34a; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
+      <span class="material-symbols-outlined" style="font-size: 14px; color: #4ade80;">home</span>
+      <span id="pin-address">Your Gate</span>
+    </div>
+
+    <!-- COLLECTOR SIMULATED PIN -->
+    <div style="position: absolute; top: 90px; left: 110px; transform: translate(-50%, -50%); background: white; border: 2.5px solid #16a34a; border-radius: 50px; padding: 4px 10px; font-size: 11.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(22,163,74,0.35);">
+      <span class="material-symbols-outlined" style="font-size: 16px; color: #16a34a;">electric_rickshaw</span>
+      <span id="pin-collector-name" style="color: #16a34a;">Emmanuel</span>
+      <span class="badge badge-green" style="font-size: 10px; padding: 1px 5px;">0.3km</span>
+    </div>
+
+    <!-- TELEMETRY TAG -->
+    <div style="position: absolute; bottom: 12px; left: 14px; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); border: 1px solid #e2e8e3; border-radius: 8px; padding: 4px 10px; font-size: 11px; font-weight: 600; color: #17211b; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+      <span class="material-symbols-outlined" style="font-size: 14px; color: #16a34a;">sensors</span>
+      <span>Live Fleet Telemetry (Active)</span>
+    </div>
+  </section>
+
+  <!-- BOTTOM SHEET -->
+  <section class="tracking-sheet">
+    <div class="sheet-handle"></div>
+
+    <!-- Collector Details Row -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 46px; height: 46px; border-radius: 50%; background: #dcfce7; border: 2px solid #16a34a; display: flex; align-items: center; justify-content: center; shrink-0;">
+          <span class="material-symbols-outlined" style="font-size: 24px; color: #16a34a;">electric_rickshaw</span>
+        </div>
+        <div>
+          <div id="sheet-collector-name" style="font-family: 'Epilogue', sans-serif; font-size: 15px; font-weight: 700; color: #17211b;">
+            Emmanuel Mensah
+          </div>
+          <div style="font-size: 11.5px; color: #5f6b62; display: flex; align-items: center; gap: 3px;">
+            <span id="sheet-vehicle">GW-4921-24 • Aboboyaa</span>
+            <span>• ⭐ 4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" onclick="alert('Simulated phone call to collector Emmanuel Mensah (+233 24 123 4567)')" class="btn btn-outline btn-sm" style="height: 38px; border-radius: 8px; padding: 0 12px; font-weight: 700; display: flex; align-items: center; gap: 4px;">
+        <span class="material-symbols-outlined" style="font-size: 16px;">phone</span> Call
+      </button>
+    </div>
+
+    <!-- Progress Status Steps -->
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px; margin-bottom: 10px;">
+      <span class="step-pill done"><span class="material-symbols-outlined" style="font-size: 13px;">check_circle</span> Confirmed</span>
+      <span style="font-size: 10px; color: #94a3b8;">→</span>
+      <span class="step-pill active"><span class="material-symbols-outlined" style="font-size: 13px;">sync</span> En Route</span>
+      <span style="font-size: 10px; color: #94a3b8;">→</span>
+      <span class="step-pill">At Gate</span>
+      <span style="font-size: 10px; color: #94a3b8;">→</span>
+      <span class="step-pill">Complete</span>
+    </div>
+
+    <!-- Gate Carting Reminder -->
+    <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 12px; font-size: 11.5px; color: #92400e; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+      <span style="display: flex; align-items: center; gap: 4px;">
+        <span class="material-symbols-outlined" style="font-size: 15px; color: #b45309;">payments</span>
+        <span>Carting fee due at gate: <strong id="sheet-carting-fee">GH₵ 15.00</strong></span>
+      </span>
+      <span style="font-size: 10px; color: #b45309; font-weight: 600;">Cash / MoMo</span>
+    </div>
+
+    <!-- Action Buttons Row -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <button type="button" onclick="cancelDemoPickup()" class="btn btn-grey btn-sm" style="height: 42px; font-size: 12.5px; display: flex; align-items: center; justify-content: center; gap: 4px; border-radius: 10px;">
+        <span class="material-symbols-outlined" style="font-size: 16px;">cancel</span> Cancel Pickup
+      </button>
+
+      <!-- Completion trigger -->
+      <button type="button" onclick="completeDemoPickup()" class="btn btn-primary btn-sm" style="height: 42px; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; border-radius: 10px;">
+        <span>Arrival &amp; Complete</span>
+        <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+      </button>
+    </div>
+  </section>
+
+  <script src="../../shared-pwa.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        if (window.BorlaStore) {
+          const s = window.BorlaStore.get();
+          const active = s.activePickup;
+          if (active) {
+            if (active.collectorName) {
+              document.getElementById('pin-collector-name').textContent = active.collectorName.split(' ')[0];
+              document.getElementById('sheet-collector-name').textContent = active.collectorName;
+            }
+            if (active.address) {
+              document.getElementById('pin-address').textContent = active.address.split(',')[0] || 'Your Gate';
+            }
+            if (active.zone) {
+              document.getElementById('track-zone').textContent = `${active.zone} Sector`;
+            }
+            if (active.collectorVehicle) {
+              document.getElementById('sheet-vehicle').textContent = active.collectorVehicle;
+            }
+            if (active.cartingFee) {
+              document.getElementById('sheet-carting-fee').textContent = active.cartingFee;
+            }
+          }
+        }
+      } catch(e) {}
+    });
+
+    function completeDemoPickup() {
+      if (window.BorlaStore) {
+        window.BorlaStore.completePickup();
+      }
+      window.location.href = './complete.html';
+    }
+
+    function cancelDemoPickup() {
+      if (confirm('Cancel this demonstration pickup request?')) {
+        if (window.BorlaStore) {
+          window.BorlaStore.cancelActivePickup();
+        }
+        window.location.href = './pickups.html';
+      }
+    }
+  </script>
+</body>
+</html>
